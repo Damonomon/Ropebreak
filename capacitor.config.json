@@ -1,0 +1,13 @@
+{
+  "appId": "com.ropebreak.reviews",
+  "appName": "Ropebreak",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false,
+      "launchShowDuration": 0,
+      "backgroundColor": "#FAFAF6",
+      "showSpinner": false
+    }
+  }
+}

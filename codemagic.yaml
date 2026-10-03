@@ -1,0 +1,47 @@
+# Builds the iOS app in the cloud on Codemagic (no Mac needed) and sends it to
+# TestFlight / App Store Connect. Setup steps are in README.md, "iOS".
+workflows:
+  ios-release:
+    name: Ropebreak iOS
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    integrations:
+      # the name you give the App Store Connect API key in Codemagic
+      app_store_connect: Ropebreak ASC key
+    environment:
+      node: 22
+      xcode: latest
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.ropebreak.reviews
+      vars:
+        XCODE_PROJECT: ios/App/App.xcodeproj
+        XCODE_SCHEME: App
+        # the app's numeric "Apple ID", shown in App Store Connect > App Information
+        APP_STORE_APPLE_ID: "0000000000"
+    triggering:
+      events: [tag]
+      tag_patterns:
+        - pattern: "v*"
+    scripts:
+      - name: Install and sync
+        script: |
+          npm ci
+          npx cap sync ios
+      - name: Set up code signing
+        script: xcode-project use-profiles
+      - name: Set build number
+        script: |
+          cd ios/App
+          agvtool new-version -all $(($(app-store-connect get-latest-build-number "$APP_STORE_APPLE_ID" 2>/dev/null || echo 0) + 1))
+      - name: Build signed app
+        script: |
+          xcode-project build-ipa \
+            --project "$XCODE_PROJECT" \
+            --scheme "$XCODE_SCHEME"
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true

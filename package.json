@@ -1,0 +1,29 @@
+{
+  "name": "ropebreak",
+  "version": "1.0.0",
+  "description": "Ropebreak reviews — website and Android/iOS app",
+  "scripts": {
+    "serve": "npx --yes http-server www -p 8080 -c-1",
+    "sync": "npx cap sync",
+    "android": "npx cap sync android && npx cap open android",
+    "ios": "npx cap sync ios && npx cap open ios",
+    "assets": "npx capacitor-assets generate --iconBackgroundColor \"#E8622C\" --iconBackgroundColorDark \"#E8622C\" --splashBackgroundColor \"#FAFAF6\" --splashBackgroundColorDark \"#14151A\"",
+    "build:apk": "npx cap sync android && cd android && ./gradlew assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/browser": "^8.0.5",
+    "@capacitor/core": "^8.5.2",
+    "@capacitor/ios": "^8.5.2",
+    "@capacitor/share": "^8.0.3",
+    "@capacitor/splash-screen": "^8.0.2"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.5.2",
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource/karla": "^5.3.0"
+  },
+  "private": true
+}

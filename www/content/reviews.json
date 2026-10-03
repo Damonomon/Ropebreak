@@ -1,0 +1,350 @@
+{
+  "version": 1,
+  "updated": "2026-09-26",
+  "reviews": [
+    {
+      "slug": "black-sheep-coffee",
+      "category": "coffeeshop",
+      "title": "Black Sheep Coffee",
+      "date": "2026-09-08",
+      "teaser": "Ordered from a self-service iPad of Doom, watched only by its camera. We all make mistakes.",
+      "chips": [
+        "solo mission",
+        "over-engineered menu",
+        "mild spiral"
+      ],
+      "radar": [
+        2,
+        1,
+        1,
+        2
+      ],
+      "overall": "00",
+      "verdict": "A cautionary tale involving an iPad, a camera, and seven and a half thousand ways to go wrong.",
+      "characteristics": [
+        "Quick in-and-out"
+      ],
+      "map": "Black Sheep Coffee",
+      "body": [
+        {
+          "p": "This coffee was the worst thing I experienced this week, and that's coming from someone who has genuinely been really ill."
+        },
+        {
+          "p": "Human interaction was in short supply during my caffeinated experience — unless you count the camera watching me through the self-service iPad of Doom you order from. I estimate there were approximately seven and a half thousand combinations to choose from, each more artificial than the last. So I opted for the black, the noir, an Americano with whatever the hell cold foam is. We all make mistakes. If I could go back and change the past, I wouldn't — because this is an important lesson learned."
+        },
+        {
+          "quote": "\"And isn't that really the most tragic thing of all?\""
+        },
+        {
+          "p": "I'm trying to think of a pun to go with Bar Bar Black Sheep, but I can't think of any. So I'll just go for... I've got nothing. It's messed with my senses so much that I can't even come up with a sheep-based pun."
+        }
+      ],
+      "receipt": [
+        [
+          "1 Americano, noir",
+          "ordered"
+        ],
+        [
+          "1 cold foam, questionable",
+          "acquired"
+        ],
+        [
+          "Human interaction",
+          "0"
+        ],
+        [
+          "Dignity",
+          "1, lost"
+        ],
+        [
+          "Menu combinations offered",
+          "~7,500"
+        ]
+      ]
+    },
+    {
+      "slug": "millers-arms",
+      "category": "pub",
+      "title": "The Miller's Arms",
+      "date": "2026-09-10",
+      "teaser": "A pub so committed to its regulars that the bar stools have names. Mine's called Kevin now.",
+      "chips": [
+        "proper pint",
+        "regulars only",
+        "named bar stools"
+      ],
+      "radar": [
+        8,
+        10,
+        9,
+        6
+      ],
+      "overall": 10,
+      "verdict": "Perfect in every way. Every second I'm not there is a blight on my life.",
+      "characteristics": [
+        "Cosy",
+        "Dog-friendly",
+        "Good for groups"
+      ],
+      "map": "The Miller's Arms",
+      "body": [
+        {
+          "p": "A pub so committed to its regulars that the bar stools have names. Mine's called Kevin now."
+        },
+        {
+          "quote": "\"The bar stools have names.\""
+        },
+        {
+          "p": "Good pint, better company, and nobody looked twice when I sat alone with a notebook for two hours."
+        }
+      ],
+      "receipt": [
+        [
+          "Pints ordered",
+          "lost count"
+        ],
+        [
+          "Bar stools with names",
+          "all of them"
+        ],
+        [
+          "Hours intended to stay",
+          "1"
+        ],
+        [
+          "Hours actually stayed",
+          "4"
+        ],
+        [
+          "Regret",
+          "none"
+        ]
+      ]
+    },
+    {
+      "slug": "cherry-coke-newtown-brewery",
+      "category": "beer",
+      "title": "Cherry Coke, New Invention Brewery",
+      "date": "2026-09-26",
+      "teaser": "Ticks all the boxes. All two boxes. Three boxes, actually.",
+      "chips": [
+        "nostalgia bait",
+        "a bit tinny",
+        "unsure why I'd order it again"
+      ],
+      "radar": [
+        6,
+        5,
+        6,
+        7
+      ],
+      "overall": 5,
+      "verdict": "Underwhelming, and I'll definitely have another.",
+      "characteristics": [
+        "Fruity"
+      ],
+      "map": "New Invention Brewery",
+      "photo": {
+        "src": "images/cherry-coke-newtown-brewery.jpg",
+        "alt": "New Invention Brewery Cherry Cola Ice Cream Ale pump clip on the bar"
+      },
+      "body": [
+        {
+          "p": "This one's a bit weird, actually. Cherry coke is one of my favourite flavour combos — love it, whether it's the actual drink, one of the 2p sweets you can get, or, I don't know, a flavour of crisps that I'm pretty sure doesn't exist. I'd still love it. But this one's in beer form."
+        },
+        {
+          "p": "So it ticks all the boxes. All two boxes:"
+        },
+        {
+          "list": [
+            "Beer",
+            "Cherry",
+            "Coke"
+          ]
+        },
+        {
+          "p": "Three boxes. It ticks three whole boxes."
+        },
+        {
+          "p": "And as I sup upon it, it's definitely growing on me. But the astute among you will have noticed that if it's growing on me, it means it wasn't my favourite to begin with — because if it was, there'd be no room to grow."
+        },
+        {
+          "p": "What I found is that it tasted a little tinny. A bit metallic. A bit like the inside of a tin of beans. I thought for a second about not using beans as the simile, because of the beany vibe it conjures — but here we are, using it anyway. I think it's because I've got a tin of them at home, so it's at the forefront of my mind. I'm absolutely thinking about demolishing them when I get home. But back to the review."
+        },
+        {
+          "p": "I'm sniffing it as we speak. It smells faintly of cherry, which is good, obviously. It does taste like cherry coke, which is also good, because it is \"cherry coke\" flavoured — meaning this is no liar."
+        },
+        {
+          "p": "This is from New Invention Brewery, and they're some real saucy alchemists of beer, let me tell you. Wizards of beer. What's another term for magical things — mage? Warlock? What I'm saying is: they've got a lot of flavour entries, and they do them oh so well."
+        },
+        {
+          "p": "This one's just a bit different — a little bit bitter. The initial taste is just okay. The more you drink it, the better it gets. But only just."
+        },
+        {
+          "p": "It's underwhelming me, but I'd have it again, and I don't really know why. I'm so sweet-forward that I think I'll readily drink anything that appeals to my nostalgia-driven palate. The ten-year-old in me loves cherry coke."
+        },
+        {
+          "quote": "\"The ten-year-old in me should not be drinking beer.\""
+        },
+        {
+          "p": "For clarity: I do not have a ten-year-old in me."
+        },
+        {
+          "p": "The issue here is the bar was set too high — set as high as the cherries on a cherry tree. And as I say that, I'm immediately filled with doubt, because I: A, don't know how tall cherry trees actually are, and B, can't say with confidence that cherries grow on a tree rather than some kind of bush that grows parallel to the ground."
+        }
+      ],
+      "receipt": [
+        [
+          "Boxes ticked",
+          "3"
+        ],
+        [
+          "Tin-of-beans flashbacks",
+          "1"
+        ],
+        [
+          "Confidence re: cherry trees",
+          "low"
+        ],
+        [
+          "Ten-year-olds located within",
+          "0"
+        ]
+      ]
+    },
+    {
+      "slug": "gogo-juice-chip-coffee",
+      "category": "coffee",
+      "title": "Go-Go Juice, Chip Coffee",
+      "date": "2026-09-25",
+      "teaser": "Fresh, bright, and quietly bankrupting me one bag at a time.",
+      "chips": [
+        "chemex brew",
+        "subscription material",
+        "financially ruinous"
+      ],
+      "radar": [
+        9,
+        5,
+        7,
+        10
+      ],
+      "overall": 9,
+      "verdict": "Cripplingly good. Financially and otherwise.",
+      "characteristics": [
+        "Light",
+        "Smooth",
+        "Splurge-worthy"
+      ],
+      "map": "Chip Coffee, Leeds",
+      "body": [
+        {
+          "p": "I need to stop starting my reviews with the word \"so.\" Actually, I need to stop starting them at all — this is an awful way to begin what is, at its core, just a review about a coffee."
+        },
+        {
+          "p": "The coffee I'm trying today is called Go-Go Juice, from Chip Coffee — a roastery in Leeds run by Zach Chip. Brilliant man, brilliant roaster. Which, now that I've said it, makes it sound like I can't be trusted to critique this objectively, because obviously I have an affinity for the guy. We'll see. Maybe I'll hate it. Unlikely, because I've had it before — but I don't like it because I like Zach. I like the coffee because the coffee is good. I think I've just given away the ending of the review, haven't I. You've got no reason to keep reading now."
+        },
+        {
+          "p": "The coffee itself is spectacular. It's one of those with a full list of tasting notes — cherry's on there, apparently. I can't taste cherry. If I'm honest, if I could, it probably wouldn't be a very nice coffee. What I can tell you is that it's fresh as a daisy, and daisy is not one of the listed flavours. It's just bright — which is a pretentious word for it, but it's true. Thin, but in a good way. It's more of a non-harsh, lilting, ooh-la-la kind of beverage, which is what I want some mornings."
+        },
+        {
+          "quote": "\"I don't need a coffee that slaps me in the face and tells me to wake up.\""
+        },
+        {
+          "p": "I need one that'll... tickle me out of it, gently. Tickle's not the word. Coax, maybe. Actually there might not be a word for this. It's just inoffensive and drinkable, and that's what this is."
+        },
+        {
+          "p": "I'm using a Chemex for this one — which, not to patronise, is basically a fancy way of doing a pour-over. Carafe-shaped, curvy, like all the best things in life. Paper filter, grounds, water, bing bang boom, delicious coffee. There are rules — water temperature, timing, all that — but I don't fully understand them, and some ambient music might improve the flavour for all I know. You can apparently talk to plants and it helps them grow. Maybe coffee's the same. I wonder what mine would want sung to it. Probably Enrique Iglesias, \"Hero.\" I might try that."
+        },
+        {
+          "p": "Tangents will happen. That's something I should open these reviews with in future, rather than announce it after the ninth tangent, by which point the door's already locked and you're trapped in the building with me. I'm sorry. I promise I'll get back to the coffee."
+        },
+        {
+          "p": "Go-Go Juice isn't cheap — it's specialty coffee, so you're paying for genuinely good quality. About £14. But three mediocre coffees from a random high street chain — which I won't name, just in case — and you've already spent that anyway, for a fraction of the pleasure. Treat yourself. You're worth it. The risk with the £14 is that you'll want to spend it again immediately. I do. I've got a subscription — Roaster's Choice, a random bag every two weeks. I am crippled by coffee debt and, frankly, happy to be. My wife doesn't know."
+        },
+        {
+          "p": "So I suppose that's how I'd end it: this is a coffee I would happily let sink me further into a coffee-ground-encrusted hole of debt I'd conceal from my wife."
+        },
+        {
+          "quote": "\"And isn't that the sign of every good coffee?\""
+        }
+      ],
+      "receipt": [
+        [
+          "1 bag, Go-Go Juice",
+          "£14"
+        ],
+        [
+          "Tasting notes claimed",
+          "cherry"
+        ],
+        [
+          "Tasting notes detected",
+          "0"
+        ],
+        [
+          "Subscriptions started",
+          "1"
+        ],
+        [
+          "Marital transparency",
+          "reduced"
+        ]
+      ]
+    },
+    {
+      "slug": "wrestlemania-weekend",
+      "category": "wildcard",
+      "title": "WrestleMania Weekend, Wherever It Lands",
+      "shortTitle": "WrestleMania Weekend",
+      "date": "2026-09-16",
+      "teaser": "Not a pub, not a coffee shop — but if it's not getting reviewed here, where else is it going.",
+      "chips": [
+        "not technically a pub",
+        "worth the trip",
+        "chaotic good"
+      ],
+      "radar": [
+        9,
+        7,
+        9,
+        6
+      ],
+      "overall": 9,
+      "verdict": "Worth every hoarse, slightly singed moment.",
+      "characteristics": [
+        "Memorable",
+        "Worth the trip"
+      ],
+      "body": [
+        {
+          "p": "Not a pub, not a coffee shop — but if it's not getting reviewed here, where else is it going."
+        },
+        {
+          "quote": "\"Several questionable pyrotechnics.\""
+        },
+        {
+          "p": "Three days, one hoarse voice, several questionable pyrotechnics."
+        }
+      ],
+      "receipt": [
+        [
+          "Days attended",
+          "3"
+        ],
+        [
+          "Voice remaining",
+          "partial"
+        ],
+        [
+          "Pyrotechnics witnessed",
+          "several, questionable"
+        ],
+        [
+          "Would do again",
+          "immediately"
+        ]
+      ]
+    }
+  ]
+}
