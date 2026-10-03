@@ -4,7 +4,7 @@ window.ROPEBREAK_CONFIG = {
   // e.g. "https://yourname.github.io/ropebreak/".
   // While this is empty, the app shows the reviews it was built with, and
   // shared reviews go out without a link.
-  siteUrl: "",
+  siteUrl: "https://damonomon.github.io/ropebreak/",
 
   // Where the app looks for new reviews. Leave as-is: it follows siteUrl.
   contentPath: "content/reviews.json"
