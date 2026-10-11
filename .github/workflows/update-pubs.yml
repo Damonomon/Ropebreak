@@ -29,7 +29,7 @@ jobs:
       - name: Save the list
         id: save
         run: |
-          if git diff --quiet; then
+          if [ -z "$(git status --porcelain www/content/norwich-pubs.json)" ]; then
             echo "No changes to the pub list."
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
