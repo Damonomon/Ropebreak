@@ -326,7 +326,7 @@ html.on-map body { overflow: hidden; }
 .map-toolbar > * { pointer-events: auto; }
 .map-chip { --cat-pop: var(--pop-pub); box-shadow: 0 2px 8px rgba(20, 21, 26, 0.15); }
 .map-count { font-size: 0.78rem; font-weight: 700; color: var(--text-muted); background: var(--surface); border: 1px solid var(--line); border-radius: 100px; padding: 0.3rem 0.7rem; }
-.map-locate { position: absolute; right: 0.75rem; bottom: calc(1.5rem + var(--safe-area-inset-bottom, env(safe-area-inset-bottom))); width: 2.9rem; height: 2.9rem; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2; box-shadow: 0 2px 10px rgba(20, 21, 26, 0.18); }
+.map-locate { position: absolute; right: 0.75rem; bottom: calc(3rem + var(--safe-area-inset-bottom, env(safe-area-inset-bottom))); width: 2.9rem; height: 2.9rem; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2; box-shadow: 0 2px 10px rgba(20, 21, 26, 0.18); }
 .map-locate svg { width: 1.4rem; height: 1.4rem; fill: currentColor; }
 .map-locate:disabled { opacity: 0.6; }
 .map-message { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; margin: 0; color: var(--text-muted); z-index: 3; background: var(--bg); }
@@ -351,6 +351,11 @@ html.on-map body { overflow: hidden; }
 .map-card .share-row { margin-top: 0.9rem; }
 
 .maplibregl-ctrl-attrib { font-family: var(--font-body); }
+.map-page .maplibregl-ctrl-attrib, .map-page .maplibregl-ctrl-attrib.maplibregl-compact { background: color-mix(in srgb, var(--surface) 88%, transparent); color: var(--text-muted); }
+.map-page .maplibregl-ctrl-attrib a { color: var(--text-muted); }
+.map-page .maplibregl-ctrl-attrib-button { filter: var(--attrib-icon-filter, none); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --attrib-icon-filter: invert(1); } }
+:root[data-theme="dark"] { --attrib-icon-filter: invert(1); }
 .maplibregl-ctrl-bottom-right { bottom: 0; }
 html.on-map .maplibregl-ctrl-bottom-left, html.on-map .maplibregl-ctrl-bottom-right { margin-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom)); }
 
