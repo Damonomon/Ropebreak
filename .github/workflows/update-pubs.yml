@@ -1,0 +1,48 @@
+# Fetches every pub in Norwich from OpenStreetMap, saves the list into
+# www/content/norwich-pubs.json, then republishes the website.
+# Run it from the Actions tab whenever you want a fresh list.
+name: Update Norwich pub list
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch pubs from OpenStreetMap
+        run: node scripts/update-pubs.mjs
+
+      - name: Check content
+        run: node scripts/check-content.mjs
+
+      - name: Save the list
+        id: save
+        run: |
+          if git diff --quiet; then
+            echo "No changes to the pub list."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add www/content/norwich-pubs.json
+            git commit -m "Update Norwich pub list from OpenStreetMap"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Republish the website
+        if: steps.save.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run website.yml --ref main
