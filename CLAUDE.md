@@ -23,11 +23,14 @@ Ropebreak is a personal review blog (coffee, coffee shops, pubs, beer, wildcards
 
 ## Porting changes from the Project artifact
 The owner will paste a claude.ai artifact link. It's a **single self-contained HTML file** in the original structure: hand-written review sections, an inline `REVIEWS`/`RANKINGS` script, base64 photos. **Never paste it over `www/index.html`.** Instead:
-1. Read the artifact and diff it against the repo.
+1. Read the artifact and diff it against `docs/artifact-baseline.html` (the last version ported, with base64 data stripped to `<DATA>`): strip the new one the same way (`sed -E 's/base64,[A-Za-z0-9+\/=]{200,}/base64,<DATA>/g'`) and `diff`. Afterwards, replace the baseline and update the version noted below.
 2. New or edited reviews: update `content/reviews.json`, and extract any base64 images into `content/images/<slug>.jpg`.
 3. Design, CSS and copy changes: port them into `www/index.html`, `www/css/styles.css` or the render functions in `www/js/app.js`.
 4. New features: implement them in `app.js`, keeping them data-driven.
-5. Tell the owner which changes need a new app build: anything outside `content/` does. Content alone reaches installed apps automatically.
+5. Embedded media (base64 images and video) become files: photos in `content/images/`, site media in `www/media/`.
+6. Tell the owner which changes need a new app build: anything outside `content/` does. Content alone reaches installed apps automatically.
+
+Last ported artifact version: `1791628877-b707` (11 Oct 2026: hero video, tagline removed, card banners).
 
 ## Feature work in progress
 - Create-a-Crawl (Norwich pub crawls): see `docs/crawl-plan.md` for decisions and the topic order. The owner wants one topic at a time, with short replies under clear headings.

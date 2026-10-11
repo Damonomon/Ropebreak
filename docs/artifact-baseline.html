@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ropebreak</title>
+<meta name="description" content="Non-expert reviews from a non-expert — coffee, coffee shops, beer, and pubs, plus the occasional wildcard.">
+<meta property="og:title" content="Ropebreak">
+<meta property="og:description" content="Non-expert reviews from a non-expert — coffee, coffee shops, beer, and pubs, plus the occasional wildcard.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ropebreak">
+<meta name="twitter:description" content="Non-expert reviews from a non-expert — coffee, coffee shops, beer, and pubs, plus the occasional wildcard.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF6;
+    --surface: #FFFFFF;
+    --text: #14151A;
+    --text-muted: #5B5C63;
+    --orange: #B04A1D;
+    --orange-bright: #E8622C;
+    --navy: #1E3A5F;
+    --line: rgba(20, 21, 26, 0.13);
+    --pop-coffeeshop: #12784E;
+    --pop-coffee: #C2500E;
+    --pop-pub: #1D5FA8;
+    --pop-beer: #F5A623;
+    --pop-wildcard: #14151A;
+    --ink-on-beer: #14151A;
+    --font-display: 'Bricolage Grotesque', 'Trebuchet MS', sans-serif;
+    --font-body: 'Karla', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14151A; --surface: #1D1E24; --text: #F5F3EE; --text-muted: #A8A9B2;
+      --orange: #FF7A3D; --orange-bright: #FF7A3D; --navy: #7FA8D9;
+      --line: rgba(245, 243, 238, 0.14);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14151A; --surface: #1D1E24; --text: #F5F3EE; --text-muted: #A8A9B2;
+    --orange: #FF7A3D; --orange-bright: #FF7A3D; --navy: #7FA8D9;
+    --line: rgba(245, 243, 238, 0.14);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-body); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+
+  .skip-link { position: absolute; left: -999px; top: auto; background: var(--orange); color: #fff; padding: 0.6em 1em; z-index: 100; }
+  .skip-link:focus { left: 1em; top: 1em; }
+  a { color: var(--orange); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  header { border-bottom: 1px solid var(--line); border-top: 4px solid var(--text); }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; padding: 1.1rem 1.5rem; }
+  .logo { text-decoration: none; color: var(--text); display: inline-flex; flex-direction: column; gap: 0.2rem; }
+  .logo-row { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 5vw, 2.7rem); line-height: 1; letter-spacing: -0.01em; }
+  .logo-row svg { width: 1.3rem; height: 1.3rem; fill: var(--orange); flex-shrink: 0; }
+  nav[aria-label="Primary"] { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
+  nav[aria-label="Primary"] a { position: relative; text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem; padding-bottom: 8px; }
+  nav[aria-label="Primary"] a:hover, nav[aria-label="Primary"] a:focus-visible { color: var(--text); }
+  nav[aria-label="Primary"] summary { position: relative; text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem; padding-bottom: 8px; cursor: pointer; list-style: none; }
+  nav[aria-label="Primary"] summary::-webkit-details-marker { display: none; }
+  nav[aria-label="Primary"] summary::after { content: "\25BE"; margin-left: 0.3rem; font-size: 0.75em; }
+  nav[aria-label="Primary"] summary:hover, nav[aria-label="Primary"] summary:focus-visible,
+  .nav-dropdown[open] summary { color: var(--text); }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown-menu { position: absolute; top: 100%; left: 0; margin-top: 0.5rem; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0.4rem; display: flex; flex-direction: column; min-width: 9rem; box-shadow: 0 10px 24px rgba(20, 21, 26, 0.12); z-index: 20; }
+  .nav-dropdown-menu a { padding: 0.45rem 0.6rem; border-radius: 6px; font-size: 0.9rem; }
+  .nav-dropdown-menu a:hover { background: var(--bg); }
+  .mini-ropes { position: absolute; left: 0; bottom: 0; width: 100%; display: flex; flex-direction: column; gap: 2px; opacity: 0; transform: scaleX(0.4); transform-origin: left; transition: opacity 0.18s ease, transform 0.18s ease; }
+  nav[aria-label="Primary"] a:hover .mini-ropes, nav[aria-label="Primary"] a:focus-visible .mini-ropes,
+  nav[aria-label="Primary"] summary:hover .mini-ropes, nav[aria-label="Primary"] summary:focus-visible .mini-ropes { opacity: 1; transform: scaleX(1); }
+  .mini-ropes span { display: block; height: 2px; border-radius: 1px; }
+  .mini-ropes span:nth-child(1) { background: var(--orange); }
+  .mini-ropes span:nth-child(2) { background: var(--text); }
+  .mini-ropes span:nth-child(3) { background: var(--navy); }
+
+  .hero { padding: 4rem 1.5rem 3rem; position: relative; overflow: hidden; }
+  .hero-art { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .hero-art svg { width: 100%; height: 100%; }
+  .hero-art use { fill: none; stroke: var(--navy); stroke-width: 0.6; opacity: 0.1; }
+  .hero-grid { position: relative; z-index: 1; }
+
+  .hero-grid { display: flex; align-items: center; justify-content: space-between; gap: 2.5rem; flex-wrap: wrap; }
+  .hero-text { flex: 1 1 26rem; }
+  .hero .lede { max-width: 46ch; font-size: 1.15rem; color: var(--text-muted); margin: 0; }
+
+  .ropes { max-width: 68rem; margin: 0 auto; padding: 0 1.5rem 3rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .ropes span { display: block; height: 4px; border-radius: 2px; transform-origin: left; }
+  .ropes span:nth-child(1) { background: var(--orange-bright); }
+  .ropes span:nth-child(2) { background: var(--text-muted); height: 3px; }
+  .ropes span:nth-child(3) { background: var(--navy); height: 2px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .ropes span { animation: snap 0.7s cubic-bezier(0.2, 0.8, 0.2, 1.15) both; }
+    .ropes span:nth-child(2) { animation-delay: 0.08s; }
+    .ropes span:nth-child(3) { animation-delay: 0.16s; }
+    @keyframes snap { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  }
+
+  .mini-about { padding: 0 1.5rem 3rem; }
+  .mini-about .section-head { border-bottom: none; margin-bottom: 0.9rem; padding-bottom: 0; }
+  .mini-about-text { max-width: 46ch; font-size: 1.02rem; color: var(--text-muted); margin: 0; }
+  .mini-about-text a { color: var(--text-muted); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 2px; }
+  .mini-about-text a:hover { color: var(--orange); text-decoration-color: var(--orange); }
+
+  .reviews { padding: 0 1.5rem 5rem; }
+  .section-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.75rem; border-bottom: 1px solid var(--line); padding-bottom: 0.9rem; }
+  .section-head-title { display: flex; align-items: center; gap: 0.7rem; }
+  .section-head-title .stack { display: flex; flex-direction: column; gap: 3px; }
+  .section-head-title .stack span { display: block; width: 1.1rem; height: 3px; border-radius: 1.5px; }
+  .section-head-title .stack span:nth-child(1) { background: var(--orange-bright); }
+  .section-head-title .stack span:nth-child(2) { background: var(--text-muted); }
+  .section-head-title .stack span:nth-child(3) { background: var(--navy); }
+  .section-head h2 { font-family: var(--font-display); font-weight: 700; font-size: 2.2rem; margin: 0; }
+  .section-head .note { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
+
+  .char-filter { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .char-chip { font: inherit; font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 100px; border: 1px solid var(--line); background: var(--surface); color: var(--text-muted); cursor: pointer; }
+  .char-chip:hover { border-color: var(--cat-pop); }
+  .char-chip.active { background: var(--cat-pop); color: #fff; border-color: transparent; }
+  .char-filter[data-category="coffeeshop"] { --cat-pop: var(--pop-coffeeshop); }
+  .char-filter[data-category="coffee"] { --cat-pop: var(--pop-coffee); }
+  .char-filter[data-category="pub"] { --cat-pop: var(--pop-pub); }
+  .char-filter[data-category="beer"] { --cat-pop: var(--pop-beer); }
+  .char-filter[data-category="wildcard"] { --cat-pop: var(--pop-wildcard); }
+
+  .grid-controls { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.25rem; }
+  .control-label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+  .control-select { font: inherit; font-size: 0.85rem; padding: 0.4rem 0.6rem; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--text); }
+
+  .tt-photo-hero { position: relative; overflow: hidden; background: #0C0D10; }
+  .tt-photo-img { width: 100%; height: auto; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+  /* card banner image — chosen treatment for review-card thumbnails */
+  .ticket.has-banner { padding-top: 0; overflow: hidden; }
+  .card-banner-frame { position: relative; margin: 0 -1.3rem 1rem; }
+  .card-banner-img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+  .card-banner-placeholder { width: 100%; aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center; }
+  .card-banner-placeholder svg { width: 2.6rem; height: 2.6rem; fill: #fff; opacity: 0.35; }
+  .card-banner-tag { position: absolute; left: 0.9rem; bottom: 0.7rem; margin: 0; }
+
+  /* --- alternative treatment, kept in reserve, not in use ---
+  .ticket.opt-c { position: relative; background-image: linear-gradient(to bottom, rgba(20,21,26,0.6), rgba(20,21,26,0.8) 38%, rgba(20,21,26,0.96) 75%), var(--opt-c-photo); background-size: cover; background-position: center 30%; }
+  .ticket.opt-c h3, .ticket.opt-c p:not(.tag) { color: #F5F3EE; }
+  .ticket.opt-c .read-link { color: #FFB38A; }
+  .ticket.opt-c .tag, .ticket.opt-c .badge-stamp { filter: drop-shadow(0 2px 5px rgba(0,0,0,0.45)); }
+  --- end reserved treatment --- */
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.25rem; }
+  .ticket { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 1.4rem 1.3rem 1.2rem; background-image: radial-gradient(circle, var(--bg) 2.5px, transparent 2.6px); background-size: 14px 14px; background-position: top left; background-repeat: repeat-x; background-origin: border-box; }
+
+  .badge-stamp { position: absolute; top: -1rem; right: -1rem; width: 4.4rem; height: 4.4rem; border-radius: 50%; background: var(--cat-pop); color: #fff; display: flex; align-items: center; justify-content: center; white-space: nowrap; font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; transform: rotate(-8deg); border: 3px solid var(--bg); }
+  .ticket[data-category="beer"] .badge-stamp { color: var(--ink-on-beer); }
+  .badge-stamp.badge-glow { box-shadow: 0 0 0 4px color-mix(in srgb, var(--cat-pop) 22%, transparent); }
+  @media (prefers-reduced-motion: no-preference) {
+    .badge-stamp.badge-glow { animation: badge-pulse 2.6s ease-in-out infinite; }
+    @keyframes badge-pulse {
+      0%, 100% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--cat-pop) 22%, transparent); }
+      50% { box-shadow: 0 0 0 9px color-mix(in srgb, var(--cat-pop) 8%, transparent); }
+    }
+  }
+  .ticket h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.45rem; margin: 0.7rem 0 0.5rem; }
+  .ticket p:not(.tag) { margin: 0 0 1rem; color: var(--text-muted); font-size: 0.97rem; }
+  .read-link { font-size: 0.85rem; font-weight: 700; text-decoration: none; }
+  .read-link:hover { text-decoration: underline; }
+
+  .tag { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; font-weight: 700; padding: 0.25rem 0.7rem; border-radius: 100px; margin: 0; background: var(--cat-pop); color: #fff; }
+  .tag-beer { color: var(--ink-on-beer); }
+  .tag-icon { width: 0.85rem; height: 0.85rem; fill: currentColor; flex-shrink: 0; }
+  .tag-coffeeshop { --cat-pop: var(--pop-coffeeshop); }
+  .tag-coffee { --cat-pop: var(--pop-coffee); }
+  .tag-pub { --cat-pop: var(--pop-pub); }
+  .tag-beer { --cat-pop: var(--pop-beer); }
+  .tag-wildcard { --cat-pop: var(--pop-wildcard); }
+
+  .ticket[data-category="coffeeshop"] { --cat-pop: var(--pop-coffeeshop); }
+  .ticket[data-category="coffee"] { --cat-pop: var(--pop-coffee); }
+  .ticket[data-category="pub"] { --cat-pop: var(--pop-pub); }
+  .ticket[data-category="beer"] { --cat-pop: var(--pop-beer); }
+  .ticket[data-category="wildcard"] { --cat-pop: var(--pop-wildcard); }
+
+  .detail[data-category="coffeeshop"] { --cat-pop: var(--pop-coffeeshop); }
+  .detail[data-category="coffee"] { --cat-pop: var(--pop-coffee); }
+  .detail[data-category="pub"] { --cat-pop: var(--pop-pub); }
+  .detail[data-category="beer"] { --cat-pop: var(--pop-beer); }
+  .detail[data-category="wildcard"] { --cat-pop: var(--pop-wildcard); }
+
+  /* individual review pages */
+  .detail { padding: 2.5rem 1.5rem 5rem; }
+  .back-link { display: inline-block; margin-bottom: 1.25rem; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+  .back-link:hover { color: var(--text); }
+  .detail-head h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 5vw, 2.8rem); margin: 0.7rem 0 0.6rem; }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.7rem; }
+  .review-date { margin: 0.7rem 0 0; font-size: 0.85rem; color: var(--text-muted); }
+  .jump-to-score { margin: 0.3rem 0 0; font-size: 0.85rem; }
+  .jump-to-score a { color: var(--text-muted); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 2px; }
+  .jump-to-score a:hover { color: var(--orange); text-decoration-color: var(--orange); }
+  .chip { font-size: 0.78rem; padding: 0.2rem 0.65rem; border-radius: 100px; border: 1px solid var(--line); color: var(--text-muted); }
+
+  .media-slot { aspect-ratio: 16 / 9; border: 2px dashed var(--line); border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; color: var(--text-muted); background: var(--surface); margin-bottom: 1.75rem; }
+  .media-photo { width: 100%; height: auto; display: block; border-radius: 10px; margin-bottom: 1.75rem; }
+  .media-slot svg { width: 2rem; height: 2rem; fill: none; stroke: var(--text-muted); stroke-width: 1.5; }
+  .media-slot span { font-size: 0.85rem; }
+
+  .detail-body { display: grid; grid-template-columns: 1.6fr 1fr; gap: 2.5rem; margin-top: 1.75rem; }
+  .detail-text p { font-size: 1.05rem; color: var(--text); margin: 0 0 1.1rem; }
+  .pull-quote { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; line-height: 1.3; margin: 1.8rem 0; padding-left: 1.1rem; border-left: 4px solid var(--orange-bright); }
+
+  .detail-side { display: flex; flex-direction: column; gap: 1.5rem; align-self: start; }
+  .radar-box { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 1rem; }
+  .box-heading { text-align: center; font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; margin: 0 0 0.6rem; color: var(--text); }
+  .verdict-heading { font-size: 1.65rem; margin-top: 0.5rem; }
+  .mini-divider { display: flex; flex-direction: column; gap: 2px; width: 3rem; margin: 1.5rem auto 1rem; }
+  .mini-divider span { display: block; height: 2px; border-radius: 1px; }
+  .mini-divider span:nth-child(1) { background: var(--orange-bright); }
+  .mini-divider span:nth-child(2) { background: var(--text-muted); }
+  .mini-divider span:nth-child(3) { background: var(--navy); }
+  .radar-svg-holder { width: 100%; aspect-ratio: 1 / 1; margin: 0 auto; }
+  .radar-svg { width: 100%; height: 100%; display: block; }
+  .radar-grid { fill: none; stroke: var(--text-muted); stroke-opacity: 0.4; }
+  .radar-axis { stroke: var(--text-muted); stroke-opacity: 0.4; }
+  .radar-data { fill: var(--orange-bright); fill-opacity: 0.32; stroke: var(--orange); stroke-width: 2; }
+  .radar-label { font-size: 13px; font-weight: 700; fill: var(--text); font-family: var(--font-body); }
+
+  .box-heading-sub { margin-top: 2.2rem; font-size: 1.5rem; }
+
+  .score-hero { text-align: center; }
+  .score-circle { position: relative; display: flex; align-items: center; justify-content: center; width: 8.5rem; height: 8.5rem; margin: 0 auto; border-radius: 50%; background: var(--cat-pop); color: #fff; }
+  .detail[data-category="beer"] .score-circle { color: var(--ink-on-beer); }
+  .score-value { font-family: var(--font-display); font-weight: 800; font-size: 3.4rem; line-height: 1; }
+  .circle-max { font-size: 1.15rem; font-weight: 700; opacity: 0.85; margin-left: 0.1rem; }
+
+  .score-fx { position: absolute; inset: 0; pointer-events: none; }
+  .score-fx span { position: absolute; top: 50%; left: 50%; width: 8px; height: 8px; border-radius: 50%; opacity: 0; transform: translate(-50%, -50%) scale(0.6); animation: confetti-burst 0.8s ease-out forwards; }
+  @keyframes confetti-burst {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(0.6); }
+    100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1); }
+  }
+  .score-circle.celebrate { animation: score-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  @keyframes score-pop {
+    0% { transform: scale(0.4); opacity: 0; }
+    70% { transform: scale(1.12); opacity: 1; }
+    100% { transform: scale(1); }
+  }
+  .score-circle.commiserate { animation: score-wobble 0.6s ease both; }
+  @keyframes score-wobble {
+    0% { transform: rotate(0) translateY(0); }
+    20% { transform: rotate(-6deg); }
+    40% { transform: rotate(5deg); }
+    60% { transform: rotate(-3deg); }
+    80% { transform: rotate(2deg) translateY(2px); }
+    100% { transform: rotate(0) translateY(4px); }
+  }
+  .score-verdict { font-size: 0.92rem; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--text); margin: 1rem 0 0; line-height: 1.4; }
+
+  .share { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 1.2rem; }
+  .share-label { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.7rem; }
+  .share-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .share-btn { font: inherit; font-size: 0.85rem; padding: 0.5rem 0.85rem; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--text); text-decoration: none; cursor: pointer; }
+  .share-btn:hover { border-color: var(--orange); }
+
+  /* rankings ladder */
+  .ladder-teaser { margin-top: 2rem; text-align: center; }
+  .ladder-teaser a { font-weight: 700; text-decoration: none; }
+  .ladder-teaser a:hover { text-decoration: underline; }
+
+  .rankings { padding: 2.5rem 1.5rem 5rem; }
+  .rank-board { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+  .rank-category { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 1.3rem; }
+  .rank-cat-title { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; margin: 0 0 0.9rem; }
+  .rank-cat-title svg { width: 1.05rem; height: 1.05rem; fill: var(--text-muted); }
+  .rank-ladder { list-style: none; margin: 0; padding: 0; }
+  .rank-row { display: flex; align-items: baseline; gap: 0.7rem; padding: 0.32rem 0; border-bottom: 1px solid var(--line); font-size: 0.92rem; }
+  .rank-row:last-child { border-bottom: none; }
+  .rank-row.zero-zero { margin-top: 0.5rem; border-top: 2px dashed var(--line); padding-top: 0.6rem; }
+  .rank-score { font-family: var(--font-display); font-weight: 700; width: 3.6rem; flex-shrink: 0; color: var(--text-muted); }
+  .rank-row.filled .rank-score { color: var(--text); }
+  .rank-names { color: var(--text-muted); }
+  .rank-row.filled .rank-names { color: var(--text); }
+  .rank-names a { color: inherit; font-weight: 700; text-decoration: none; }
+  .rank-names a:hover { text-decoration: underline; }
+  .rank-empty { opacity: 0.5; }
+
+
+  .receipt-wrap { width: 100%; margin: 0 auto; }
+  .receipt {
+    --paper: #F4EEE1; --ink: #241B12; --ink-muted: #6B5F4E; --paper-line: rgba(36, 27, 18, 0.15);
+    background: var(--paper); color: var(--ink);
+    border: 1px solid var(--paper-line); border-radius: 10px 10px 0 0;
+    padding: 1.6rem 1.4rem 1.3rem;
+    background-image: radial-gradient(circle, var(--bg) 2.5px, transparent 2.6px);
+    background-size: 14px 14px; background-position: top left; background-repeat: repeat-x;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 90% calc(100% - 9px), 80% 100%, 70% calc(100% - 9px), 60% 100%, 50% calc(100% - 9px), 40% 100%, 30% calc(100% - 9px), 20% 100%, 10% calc(100% - 9px), 0 100%);
+  }
+  .receipt-header { text-align: center; }
+  .receipt-header .brand { font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; color: var(--ink); }
+  .receipt-header .sub { font-size: 0.9rem; color: var(--ink-muted); margin-top: 0.15rem; }
+  .receipt-header .date { font-size: 0.75rem; color: var(--ink-muted); margin-top: 0.1rem; }
+  .receipt-ropes { display: flex; flex-direction: column; gap: 2px; margin: 1rem 0; }
+  .receipt-ropes span { display: block; height: 2px; border-radius: 1px; }
+  .receipt-ropes span:nth-child(1) { background: var(--orange); }
+  .receipt-ropes span:nth-child(2) { background: var(--ink-muted); }
+  .receipt-ropes span:nth-child(3) { background: var(--navy); }
+  .receipt-line { display: flex; justify-content: space-between; gap: 1rem; padding: 0.3rem 0; font-size: 0.92rem; color: var(--ink); }
+  .receipt-line .val { color: var(--ink-muted); font-weight: 700; white-space: nowrap; }
+  .receipt-total { display: flex; justify-content: space-between; font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; margin-top: 0.7rem; padding-top: 0.7rem; border-top: 2px solid var(--ink); color: var(--ink); }
+  .receipt-footer { text-align: center; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; color: var(--ink-muted); margin-top: 1.1rem; }
+  .receipt-mark { display: block; width: 1.2rem; height: 1.2rem; margin: 0.6rem auto 0; fill: var(--ink-muted); }
+
+  .about { padding: 2.5rem 1.5rem 5rem; }
+  .about-body { max-width: 42rem; margin-top: 1.5rem; }
+  .about-body p { font-size: 1.05rem; color: var(--text); margin: 0 0 1.15rem; }
+
+  @media (max-width: 45rem) {
+    .detail-body { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 40rem) {
+    .hero { padding-top: 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="bell-icon" viewBox="0 0 24 24">
+    <path d="M12 2c-.6 0-1 .4-1 1v.4C8.7 3.9 7 6 7 8.5V13l-2 3v1h14v-1l-2-3V8.5c0-2.5-1.7-4.6-4-5.1V3c0-.6-.4-1-1-1z"/>
+    <path d="M9.5 19c0 1.4 1.1 2.5 2.5 2.5s2.5-1.1 2.5-2.5h-5z"/>
+  </symbol>
+  <symbol id="cup-icon" viewBox="0 0 24 24">
+    <path d="M4 3h13v9a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V3z"/>
+    <path d="M17 6h2.3a2.4 2.4 0 0 1 0 4.8H17V6z"/>
+    <rect x="3" y="19.4" width="15" height="1.6" rx="0.8"/>
+  </symbol>
+  <symbol id="glass-icon" viewBox="0 0 24 24">
+    <path d="M6 3h12l-1.7 15.6A2.2 2.2 0 0 1 14.1 20.6H9.9a2.2 2.2 0 0 1-2.2-2L6 3z"/>
+  </symbol>
+  <symbol id="shop-icon" viewBox="0 0 24 24">
+    <path d="M2 4h20l1.2 5.5a2 2 0 0 1-3.9.8L18.5 7l-.8 3.3a2 2 0 0 1-3.9 0L13 7l-.8 3.3a2 2 0 0 1-3.9 0L7.5 7l-.8 3.3a2 2 0 0 1-3.9-.8L2 4z"/>
+    <rect x="4" y="12" width="16" height="9" rx="1"/>
+  </symbol>
+  <symbol id="bottle-icon" viewBox="0 0 24 24">
+    <path d="M10 2h4v3.2l1.6 2.6V20a2 2 0 0 1-2 2h-3.2a2 2 0 0 1-2-2V7.8L10 5.2V2z"/>
+    <rect x="10" y="2" width="4" height="1.6"/>
+  </symbol>
+  <symbol id="image-icon" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="14" rx="2" fill="none"/>
+    <circle cx="8" cy="9.5" r="1.4" fill="currentColor" stroke="none"/>
+    <path d="M4 15.5l4.5-4.5 3 3 4-4.5L20 15" fill="none"/>
+  </symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header>
+  <div class="wrap header-inner">
+    <a class="logo" href="#top">
+      <span class="logo-row"><svg aria-hidden="true"><use href="#bell-icon"/></svg>Ropebreak</span>
+    </a>
+    <nav aria-label="Primary">
+      <details class="nav-dropdown">
+        <summary>Reviews<span class="mini-ropes" aria-hidden="true"><span></span><span></span><span></span></span></summary>
+        <div class="nav-dropdown-menu">
+          <a href="#reviews">All reviews</a>
+          <a href="#cat-coffeeshop">Coffee Shop</a>
+          <a href="#cat-coffee">Coffee</a>
+          <a href="#cat-pub">Pub</a>
+          <a href="#cat-beer">Beer</a>
+          <a href="#cat-wildcard">Wildcard</a>
+        </div>
+      </details>
+      <a href="#rankings">Rankings<span class="mini-ropes" aria-hidden="true"><span></span><span></span><span></span></span></a>
+      <a href="#about">About<span class="mini-ropes" aria-hidden="true"><span></span><span></span><span></span></span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<div id="home-intro">
+  <div class="tt-photo-hero">
+    <video class="tt-photo-img" autoplay muted playsinline preload="auto" src="data:video/mp4;base64,<DATA>"></video>
+  </div>
+    <section class="hero wrap">
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 700 420" preserveAspectRatio="xMaxYMid meet">
+          <use href="#cup-icon" x="360" y="30" width="150" height="150"/>
+          <use href="#glass-icon" x="500" y="160" width="130" height="190"/>
+          <use href="#bottle-icon" x="270" y="200" width="110" height="150"/>
+          <use href="#bell-icon" x="470" y="10" width="90" height="90"/>
+        </svg>
+      </div>
+      <div class="hero-grid">
+        <div class="hero-text">
+          <h1 class="sr-only">Ropebreak</h1>
+          <p class="lede">Beer, coffee, wrestling, pubs, food, dates with my wife — non-expert reviews from an expert in nothing. Apart from my wife/marriage. I really should be an expert in that.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="ropes" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    <section class="mini-about wrap">
+      <div class="section-head">
+        <div class="section-head-title">
+          <span class="stack" aria-hidden="true"><span></span><span></span><span></span></span>
+          <h2>About</h2>
+        </div>
+      </div>
+      <p class="mini-about-text">Not a coffee expert. Not a beer critic. Just a normal guy who craves a creative outlet and picked reviewing over anything requiring actual talent. My imposter syndrome hopes you'll like what I have to say. <a href="#about">Full story &rarr;</a></p>
+    </section>
+
+    <div class="ropes" aria-hidden="true"><span></span><span></span><span></span></div>
+  </div>
+
+  <section class="reviews wrap" id="reviews">
+    <div class="section-head">
+      <div class="section-head-title">
+        <span class="stack" aria-hidden="true"><span></span><span></span><span></span></span>
+        <h2 id="reviews-heading">Latest entries</h2>
+      </div>
+      <p class="note" id="reviews-note">First few on the card — swap these for your own whenever you're ready.</p>
+      <p class="note" id="filter-back" hidden><a href="#reviews">&larr; All reviews</a></p>
+    </div>
+
+    <div class="grid-controls">
+      <label class="control-label">Sort
+        <select id="sort-select" class="control-select">
+          <option value="latest">Latest</option>
+          <option value="high">Highest rated</option>
+          <option value="low">Lowest rated</option>
+        </select>
+      </label>
+      <label class="control-label">Minimum rating
+        <select id="min-rating-select" class="control-select">
+          <option value="0">Any</option>
+          <option value="5">5+</option>
+          <option value="7">7+</option>
+          <option value="9">9+</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="char-filter" id="char-filter" hidden></div>
+
+    <div class="grid">
+      <article class="ticket has-banner" data-category="coffeeshop" data-review="black-sheep-coffee">
+        <div class="card-banner-frame">
+          <div class="card-banner-placeholder" style="background:var(--cat-pop);"><svg aria-hidden="true"><use href="#shop-icon"/></svg></div>
+          <p class="tag tag-coffeeshop card-banner-tag"><svg class="tag-icon" aria-hidden="true"><use href="#shop-icon"/></svg>Coffee Shop</p>
+        </div>
+        <div class="badge-stamp" data-badge="black-sheep-coffee"></div>
+        <h3>Black Sheep Coffee</h3>
+        <p>Ordered from a self-service iPad of Doom, watched only by its camera. We all make mistakes.</p>
+        <p><a class="read-link" href="#review-black-sheep-coffee">Read the review &rarr;</a></p>
+      </article>
+
+      <article class="ticket has-banner" data-category="pub" data-review="millers-arms">
+        <div class="card-banner-frame">
+          <div class="card-banner-placeholder" style="background:var(--cat-pop);"><svg aria-hidden="true"><use href="#glass-icon"/></svg></div>
+          <p class="tag tag-pub card-banner-tag"><svg class="tag-icon" aria-hidden="true"><use href="#glass-icon"/></svg>Pub</p>
+        </div>
+        <div class="badge-stamp" data-badge="millers-arms"></div>
+        <h3>The Miller's Arms</h3>
+        <p>A pub so committed to its regulars that the bar stools have names. Mine's called Kevin now.</p>
+        <p><a class="read-link" href="#review-millers-arms">Read the review &rarr;</a></p>
+      </article>
+
+      <article class="ticket has-banner" data-category="beer" data-review="cherry-coke-newtown-brewery">
+        <div class="card-banner-frame">
+          <img class="card-banner-img" src="data:image/jpeg;base64,<DATA>" alt="">
+          <p class="tag tag-beer card-banner-tag"><svg class="tag-icon" aria-hidden="true"><use href="#bottle-icon"/></svg>Beer</p>
+        </div>
+        <div class="badge-stamp" data-badge="cherry-coke-newtown-brewery"></div>
+        <h3>Cherry Coke, New Invention Brewery</h3>
+        <p>Ticks all the boxes. All two boxes. Three boxes, actually.</p>
+        <p><a class="read-link" href="#review-cherry-coke-newtown-brewery">Read the review &rarr;</a></p>
+      </article>
+
+      <article class="ticket has-banner" data-category="coffee" data-review="gogo-juice-chip-coffee">
+        <div class="card-banner-frame">
+          <div class="card-banner-placeholder" style="background:var(--cat-pop);"><svg aria-hidden="true"><use href="#cup-icon"/></svg></div>
+          <p class="tag tag-coffee card-banner-tag"><svg class="tag-icon" aria-hidden="true"><use href="#cup-icon"/></svg>Coffee</p>
+        </div>
+        <div class="badge-stamp" data-badge="gogo-juice-chip-coffee"></div>
+        <h3>Go-Go Juice, Chip Coffee</h3>
+        <p>Fresh, bright, and quietly bankrupting me one bag at a time.</p>
+        <p><a class="read-link" href="#review-gogo-juice-chip-coffee">Read the review &rarr;</a></p>
+      </article>
+
+      <article class="ticket has-banner" data-category="wildcard" data-review="wrestlemania-weekend">
+        <div class="card-banner-frame">
+          <div class="card-banner-placeholder" style="background:var(--cat-pop);"><svg aria-hidden="true"><use href="#bell-icon"/></svg></div>
+          <p class="tag tag-wildcard card-banner-tag"><svg class="tag-icon" aria-hidden="true"><use href="#bell-icon"/></svg>Wildcard</p>
+        </div>
+        <div class="badge-stamp" data-badge="wrestlemania-weekend"></div>
+        <h3>WrestleMania Weekend, Wherever It Lands</h3>
+        <p>Not a pub, not a coffee shop — but if it's not getting reviewed here, where else is it going.</p>
+        <p><a class="read-link" href="#review-wrestlemania-weekend">Read the review &rarr;</a></p>
+      </article>
+    </div>
+
+    <p class="note" id="no-reviews-msg" hidden>Nothing filed under this yet — check back soon.</p>
+
+    <p class="ladder-teaser" id="ladder-teaser"><a href="#rankings">See the full rankings ladder &rarr;</a></p>
+  </section>
+
+  <section class="rankings wrap" id="rankings" hidden>
+    <a class="back-link" href="#reviews">&larr; Back home</a>
+    <div class="section-head">
+      <div class="section-head-title">
+        <span class="stack" aria-hidden="true"><span></span><span></span><span></span></span>
+        <h2>The Rankings</h2>
+      </div>
+      <p class="note">Every review, ranked. Empty rows are just waiting their turn.</p>
+    </div>
+
+    <div class="rank-board">
+      <div class="rank-category">
+        <h3 class="rank-cat-title"><svg aria-hidden="true"><use href="#shop-icon"/></svg>Coffee Shop</h3>
+        <ol class="rank-ladder" id="ladder-coffeeshop"></ol>
+      </div>
+      <div class="rank-category">
+        <h3 class="rank-cat-title"><svg aria-hidden="true"><use href="#cup-icon"/></svg>Coffee</h3>
+        <ol class="rank-ladder" id="ladder-coffee"></ol>
+      </div>
+      <div class="rank-category">
+        <h3 class="rank-cat-title"><svg aria-hidden="true"><use href="#glass-icon"/></svg>Pub</h3>
+        <ol class="rank-ladder" id="ladder-pub"></ol>
+      </div>
+      <div class="rank-category">
+        <h3 class="rank-cat-title"><svg aria-hidden="true"><use href="#bottle-icon"/></svg>Beer</h3>
+        <ol class="rank-ladder" id="ladder-beer"></ol>
+      </div>
+      <div class="rank-category">
+        <h3 class="rank-cat-title"><svg aria-hidden="true"><use href="#bell-icon"/></svg>Wildcard</h3>
+        <ol class="rank-ladder" id="ladder-wildcard"></ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="about wrap" id="about" hidden>
+    <a class="back-link" href="#reviews">&larr; Back home</a>
+    <div class="section-head">
+      <div class="section-head-title">
+        <span class="stack" aria-hidden="true"><span></span><span></span><span></span></span>
+        <h2>About Ropebreak</h2>
+      </div>
+    </div>
+    <div class="about-body">
+      <p>I'm not a coffee expert. I'm not a beer critic. I've never worked a single shift behind a bar, and my only wrestling qualification is watching an unreasonable amount of it since I was a kid.</p>
+      <p>What I am is someone who spends most of his week in meetings, ticking boxes, and generally functioning like a very tired spreadsheet. Ropebreak is what happens on the other side of that — coffee shops, pubs, the odd pint, and whatever wildcard thing manages to grab my attention along the way.</p>
+      <p>No jargon, no tasting notes borrowed from a textbook, no pretending I know more than I do. Just honest, occasionally unhinged opinions from a normal guy who likes writing more than he probably should.</p>
+      <p>I crave a creative outlet, but have very few creative skills. It's a conundrum. "How did you solve this riddle?!" I hear you cry. Writing things. Reviewing things. From someone who just enjoys things without being a pro in them, whilst also being okay at articulating things in ways people enjoy. My imposter syndrome wants you to enjoy this more than you know.</p>
+      <p>No monetisation plan. Just a break from the 9-to-5, written down.</p>
+    </div>
+  </section>
+
+  <!-- ===== individual review pages ===== -->
+
+  <section class="detail wrap" id="review-black-sheep-coffee" data-category="coffeeshop" hidden>
+    <a class="back-link" href="#reviews">&larr; All reviews</a>
+    <div class="detail-head">
+      <p class="tag tag-coffeeshop"><svg class="tag-icon" aria-hidden="true"><use href="#shop-icon"/></svg>Coffee Shop</p>
+      <h2>Black Sheep Coffee</h2>
+      <div class="chip-row">
+        <span class="chip">solo mission</span>
+        <span class="chip">over-engineered menu</span>
+        <span class="chip">mild spiral</span>
+      </div>
+      <p class="review-date" data-date="black-sheep-coffee"></p>
+      <p class="jump-to-score"><a href="#score-black-sheep-coffee" data-jump="score-black-sheep-coffee">Just here for the number? Jump to the score &rarr;</a></p>
+    </div>
+    <div class="detail-body">
+      <div class="detail-text">
+        <div class="media-slot" aria-hidden="true">
+          <svg><use href="#image-icon"/></svg>
+          <span>Photo or video goes here — drop one in when you've got it</span>
+        </div>
+        <p>This coffee was the worst thing I experienced this week, and that's coming from someone who has genuinely been really ill.</p>
+        <p>Human interaction was in short supply during my caffeinated experience — unless you count the camera watching me through the self-service iPad of Doom you order from. I estimate there were approximately seven and a half thousand combinations to choose from, each more artificial than the last. So I opted for the black, the noir, an Americano with whatever the hell cold foam is. We all make mistakes. If I could go back and change the past, I wouldn't — because this is an important lesson learned.</p>
+        <blockquote class="pull-quote">"And isn't that really the most tragic thing of all?"</blockquote>
+        <p>I'm trying to think of a pun to go with Bar Bar Black Sheep, but I can't think of any. So I'll just go for... I've got nothing. It's messed with my senses so much that I can't even come up with a sheep-based pun.</p>
+      </div>
+      <div class="detail-side">
+        <div class="radar-box">
+          <div class="score-hero" id="score-black-sheep-coffee" data-overall="black-sheep-coffee"></div>
+        </div>
+        <div class="radar-box">
+          <h4 class="box-heading box-heading-sub">How it breaks down</h4>
+          <div class="radar-svg-holder" data-radar="black-sheep-coffee"></div>
+        </div>
+        <div class="receipt-wrap">
+          <div class="receipt">
+            <div class="receipt-header">
+              <div class="brand">ROPEBREAK</div>
+              <div class="sub">Black Sheep Coffee</div>
+              <div class="date" data-receipt-date="black-sheep-coffee"></div>
+            </div>
+            <div class="receipt-ropes" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="receipt-line"><span>1 Americano, noir</span><span class="val">ordered</span></div>
+            <div class="receipt-line"><span>1 cold foam, questionable</span><span class="val">acquired</span></div>
+            <div class="receipt-line"><span>Human interaction</span><span class="val">0</span></div>
+            <div class="receipt-line"><span>Dignity</span><span class="val">1, lost</span></div>
+            <div class="receipt-line"><span>Menu combinations offered</span><span class="val">~7,500</span></div>
+            <div class="receipt-total"><span>Verdict</span><span data-receipt-total="black-sheep-coffee"></span></div>
+            <div class="receipt-footer">NO REFUNDS</div>
+            <svg class="receipt-mark" aria-hidden="true"><use href="#bell-icon"/></svg>
+          </div>
+        </div>
+        <div class="share">
+          <span class="share-label">Share this</span>
+          <div class="share-row">
+            <a class="share-btn" data-share="whatsapp" data-title="Black Sheep Coffee — Ropebreak" href="#">WhatsApp</a>
+            <a class="share-btn" data-share="email" data-title="Black Sheep Coffee — Ropebreak" href="#">Email</a>
+            <button class="share-btn" data-copy="true">Copy link</button>
+            <a class="share-btn" data-map="Black Sheep Coffee" href="#" target="_blank" rel="noopener">View on map</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="detail wrap" id="review-millers-arms" data-category="pub" hidden>
+    <a class="back-link" href="#reviews">&larr; All reviews</a>
+    <div class="detail-head">
+      <p class="tag tag-pub"><svg class="tag-icon" aria-hidden="true"><use href="#glass-icon"/></svg>Pub</p>
+      <h2>The Miller's Arms</h2>
+      <div class="chip-row">
+        <span class="chip">proper pint</span>
+        <span class="chip">regulars only</span>
+        <span class="chip">named bar stools</span>
+      </div>
+      <p class="review-date" data-date="millers-arms"></p>
+      <p class="jump-to-score"><a href="#score-millers-arms" data-jump="score-millers-arms">Just here for the number? Jump to the score &rarr;</a></p>
+    </div>
+    <div class="detail-body">
+      <div class="detail-text">
+        <div class="media-slot" aria-hidden="true">
+          <svg><use href="#image-icon"/></svg>
+          <span>Photo or video goes here — drop one in when you've got it</span>
+        </div>
+        <p>A pub so committed to its regulars that the bar stools have names. Mine's called Kevin now.</p>
+        <blockquote class="pull-quote">"The bar stools have names."</blockquote>
+        <p>Good pint, better company, and nobody looked twice when I sat alone with a notebook for two hours.</p>
+      </div>
+      <div class="detail-side">
+        <div class="radar-box">
+          <div class="score-hero" id="score-millers-arms" data-overall="millers-arms"></div>
+        </div>
+        <div class="radar-box">
+          <h4 class="box-heading box-heading-sub">How it breaks down</h4>
+          <div class="radar-svg-holder" data-radar="millers-arms"></div>
+        </div>
+        <div class="receipt-wrap">
+          <div class="receipt">
+            <div class="receipt-header">
+              <div class="brand">ROPEBREAK</div>
+              <div class="sub">The Miller's Arms</div>
+              <div class="date" data-receipt-date="millers-arms"></div>
+            </div>
+            <div class="receipt-ropes" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="receipt-line"><span>Pints ordered</span><span class="val">lost count</span></div>
+            <div class="receipt-line"><span>Bar stools with names</span><span class="val">all of them</span></div>
+            <div class="receipt-line"><span>Hours intended to stay</span><span class="val">1</span></div>
+            <div class="receipt-line"><span>Hours actually stayed</span><span class="val">4</span></div>
+            <div class="receipt-line"><span>Regret</span><span class="val">none</span></div>
+            <div class="receipt-total"><span>Verdict</span><span data-receipt-total="millers-arms"></span></div>
+            <div class="receipt-footer">NO REFUNDS</div>
+            <svg class="receipt-mark" aria-hidden="true"><use href="#bell-icon"/></svg>
+          </div>
+        </div>
+        <div class="share">
+          <span class="share-label">Share this</span>
+          <div class="share-row">
+            <a class="share-btn" data-share="whatsapp" data-title="The Miller's Arms — Ropebreak" href="#">WhatsApp</a>
+            <a class="share-btn" data-share="email" data-title="The Miller's Arms — Ropebreak" href="#">Email</a>
+            <button class="share-btn" data-copy="true">Copy link</button>
+            <a class="share-btn" data-map="The Miller's Arms" href="#" target="_blank" rel="noopener">View on map</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="detail wrap" id="review-gogo-juice-chip-coffee" data-category="coffee" hidden>
+    <a class="back-link" href="#reviews">&larr; All reviews</a>
+    <div class="detail-head">
+      <p class="tag tag-coffee"><svg class="tag-icon" aria-hidden="true"><use href="#cup-icon"/></svg>Coffee</p>
+      <h2>Go-Go Juice, Chip Coffee</h2>
+      <div class="chip-row">
+        <span class="chip">chemex brew</span>
+        <span class="chip">subscription material</span>
+        <span class="chip">financially ruinous</span>
+      </div>
+      <p class="review-date" data-date="gogo-juice-chip-coffee"></p>
+      <p class="jump-to-score"><a href="#score-gogo-juice-chip-coffee" data-jump="score-gogo-juice-chip-coffee">Just here for the number? Jump to the score &rarr;</a></p>
+    </div>
+    <div class="detail-body">
+      <div class="detail-text">
+        <div class="media-slot" aria-hidden="true">
+          <svg><use href="#image-icon"/></svg>
+          <span>Photo or video goes here — drop one in when you've got it</span>
+        </div>
+        <p>I need to stop starting my reviews with the word "so." Actually, I need to stop starting them at all — this is an awful way to begin what is, at its core, just a review about a coffee.</p>
+        <p>The coffee I'm trying today is called Go-Go Juice, from Chip Coffee — a roastery in Leeds run by Zach Chip. Brilliant man, brilliant roaster. Which, now that I've said it, makes it sound like I can't be trusted to critique this objectively, because obviously I have an affinity for the guy. We'll see. Maybe I'll hate it. Unlikely, because I've had it before — but I don't like it because I like Zach. I like the coffee because the coffee is good. I think I've just given away the ending of the review, haven't I. You've got no reason to keep reading now.</p>
+        <p>The coffee itself is spectacular. It's one of those with a full list of tasting notes — cherry's on there, apparently. I can't taste cherry. If I'm honest, if I could, it probably wouldn't be a very nice coffee. What I can tell you is that it's fresh as a daisy, and daisy is not one of the listed flavours. It's just bright — which is a pretentious word for it, but it's true. Thin, but in a good way. It's more of a non-harsh, lilting, ooh-la-la kind of beverage, which is what I want some mornings.</p>
+        <blockquote class="pull-quote">"I don't need a coffee that slaps me in the face and tells me to wake up."</blockquote>
+        <p>I need one that'll... tickle me out of it, gently. Tickle's not the word. Coax, maybe. Actually there might not be a word for this. It's just inoffensive and drinkable, and that's what this is.</p>
+        <p>I'm using a Chemex for this one — which, not to patronise, is basically a fancy way of doing a pour-over. Carafe-shaped, curvy, like all the best things in life. Paper filter, grounds, water, bing bang boom, delicious coffee. There are rules — water temperature, timing, all that — but I don't fully understand them, and some ambient music might improve the flavour for all I know. You can apparently talk to plants and it helps them grow. Maybe coffee's the same. I wonder what mine would want sung to it. Probably Enrique Iglesias, "Hero." I might try that.</p>
+        <p>Tangents will happen. That's something I should open these reviews with in future, rather than announce it after the ninth tangent, by which point the door's already locked and you're trapped in the building with me. I'm sorry. I promise I'll get back to the coffee.</p>
+        <p>Go-Go Juice isn't cheap — it's specialty coffee, so you're paying for genuinely good quality. About £14. But three mediocre coffees from a random high street chain — which I won't name, just in case — and you've already spent that anyway, for a fraction of the pleasure. Treat yourself. You're worth it. The risk with the £14 is that you'll want to spend it again immediately. I do. I've got a subscription — Roaster's Choice, a random bag every two weeks. I am crippled by coffee debt and, frankly, happy to be. My wife doesn't know.</p>
+        <p>So I suppose that's how I'd end it: this is a coffee I would happily let sink me further into a coffee-ground-encrusted hole of debt I'd conceal from my wife.</p>
+        <blockquote class="pull-quote">"And isn't that the sign of every good coffee?"</blockquote>
+      </div>
+      <div class="detail-side">
+        <div class="radar-box">
+          <div class="score-hero" id="score-gogo-juice-chip-coffee" data-overall="gogo-juice-chip-coffee"></div>
+        </div>
+        <div class="radar-box">
+          <h4 class="box-heading box-heading-sub">How it breaks down</h4>
+          <div class="radar-svg-holder" data-radar="gogo-juice-chip-coffee"></div>
+        </div>
+        <div class="receipt-wrap">
+          <div class="receipt">
+            <div class="receipt-header">
+              <div class="brand">ROPEBREAK</div>
+              <div class="sub">Go-Go Juice, Chip Coffee</div>
+              <div class="date" data-receipt-date="gogo-juice-chip-coffee"></div>
+            </div>
+            <div class="receipt-ropes" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="receipt-line"><span>1 bag, Go-Go Juice</span><span class="val">&pound;14</span></div>
+            <div class="receipt-line"><span>Tasting notes claimed</span><span class="val">cherry</span></div>
+            <div class="receipt-line"><span>Tasting notes detected</span><span class="val">0</span></div>
+            <div class="receipt-line"><span>Subscriptions started</span><span class="val">1</span></div>
+            <div class="receipt-line"><span>Marital transparency</span><span class="val">reduced</span></div>
+            <div class="receipt-total"><span>Verdict</span><span data-receipt-total="gogo-juice-chip-coffee"></span></div>
+            <div class="receipt-footer">NO REFUNDS</div>
+            <svg class="receipt-mark" aria-hidden="true"><use href="#bell-icon"/></svg>
+          </div>
+        </div>
+        <div class="share">
+          <span class="share-label">Share this</span>
+          <div class="share-row">
+            <a class="share-btn" data-share="whatsapp" data-title="Go-Go Juice, Chip Coffee — Ropebreak" href="#">WhatsApp</a>
+            <a class="share-btn" data-share="email" data-title="Go-Go Juice, Chip Coffee — Ropebreak" href="#">Email</a>
+            <button class="share-btn" data-copy="true">Copy link</button>
+            <a class="share-btn" data-map="Chip Coffee, Leeds" href="#" target="_blank" rel="noopener">View on map</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="detail wrap" id="review-wrestlemania-weekend" data-category="wildcard" hidden>
+    <a class="back-link" href="#reviews">&larr; All reviews</a>
+    <div class="detail-head">
+      <p class="tag tag-wildcard"><svg class="tag-icon" aria-hidden="true"><use href="#bell-icon"/></svg>Wildcard</p>
+      <h2>WrestleMania Weekend, Wherever It Lands</h2>
+      <div class="chip-row">
+        <span class="chip">not technically a pub</span>
+        <span class="chip">worth the trip</span>
+        <span class="chip">chaotic good</span>
+      </div>
+      <p class="review-date" data-date="wrestlemania-weekend"></p>
+      <p class="jump-to-score"><a href="#score-wrestlemania-weekend" data-jump="score-wrestlemania-weekend">Just here for the number? Jump to the score &rarr;</a></p>
+    </div>
+    <div class="detail-body">
+      <div class="detail-text">
+        <div class="media-slot" aria-hidden="true">
+          <svg><use href="#image-icon"/></svg>
+          <span>Photo or video goes here — drop one in when you've got it</span>
+        </div>
+        <p>Not a pub, not a coffee shop — but if it's not getting reviewed here, where else is it going.</p>
+        <blockquote class="pull-quote">"Several questionable pyrotechnics."</blockquote>
+        <p>Three days, one hoarse voice, several questionable pyrotechnics.</p>
+      </div>
+      <div class="detail-side">
+        <div class="radar-box">
+          <div class="score-hero" id="score-wrestlemania-weekend" data-overall="wrestlemania-weekend"></div>
+        </div>
+        <div class="radar-box">
+          <h4 class="box-heading box-heading-sub">How it breaks down</h4>
+          <div class="radar-svg-holder" data-radar="wrestlemania-weekend"></div>
+        </div>
+        <div class="receipt-wrap">
+          <div class="receipt">
+            <div class="receipt-header">
+              <div class="brand">ROPEBREAK</div>
+              <div class="sub">WrestleMania Weekend</div>
+              <div class="date" data-receipt-date="wrestlemania-weekend"></div>
+            </div>
+            <div class="receipt-ropes" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="receipt-line"><span>Days attended</span><span class="val">3</span></div>
+            <div class="receipt-line"><span>Voice remaining</span><span class="val">partial</span></div>
+            <div class="receipt-line"><span>Pyrotechnics witnessed</span><span class="val">several, questionable</span></div>
+            <div class="receipt-line"><span>Would do again</span><span class="val">immediately</span></div>
+            <div class="receipt-total"><span>Verdict</span><span data-receipt-total="wrestlemania-weekend"></span></div>
+            <div class="receipt-footer">NO REFUNDS</div>
+            <svg class="receipt-mark" aria-hidden="true"><use href="#bell-icon"/></svg>
+          </div>
+        </div>
+        <div class="share">
+          <span class="share-label">Share this</span>
+          <div class="share-row">
+            <a class="share-btn" data-share="whatsapp" data-title="WrestleMania Weekend — Ropebreak" href="#">WhatsApp</a>
+            <a class="share-btn" data-share="email" data-title="WrestleMania Weekend — Ropebreak" href="#">Email</a>
+            <button class="share-btn" data-copy="true">Copy link</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="detail wrap" id="review-cherry-coke-newtown-brewery" data-category="beer" hidden>
+    <a class="back-link" href="#reviews">&larr; All reviews</a>
+    <div class="detail-head">
+      <p class="tag tag-beer"><svg class="tag-icon" aria-hidden="true"><use href="#bottle-icon"/></svg>Beer</p>
+      <h2>Cherry Coke, New Invention Brewery</h2>
+      <div class="chip-row">
+        <span class="chip">nostalgia bait</span>
+        <span class="chip">a bit tinny</span>
+        <span class="chip">unsure why I'd order it again</span>
+      </div>
+      <p class="review-date" data-date="cherry-coke-newtown-brewery"></p>
+      <p class="jump-to-score"><a href="#score-cherry-coke-newtown-brewery" data-jump="score-cherry-coke-newtown-brewery">Just here for the number? Jump to the score &rarr;</a></p>
+    </div>
+    <div class="detail-body">
+      <div class="detail-text">
+        <img class="media-photo" src="data:image/jpeg;base64,<DATA>" alt="New Invention Brewery Cherry Cola Ice Cream Ale pump clip on the bar">
+        <p>This one's a bit weird, actually. Cherry coke is one of my favourite flavour combos — love it, whether it's the actual drink, one of the 2p sweets you can get, or, I don't know, a flavour of crisps that I'm pretty sure doesn't exist. I'd still love it. But this one's in beer form.</p>
+        <p>So it ticks all the boxes. All two boxes:</p>
+        <ul>
+          <li>Beer</li>
+          <li>Cherry</li>
+          <li>Coke</li>
+        </ul>
+        <p>Three boxes. It ticks three whole boxes.</p>
+        <p>And as I sup upon it, it's definitely growing on me. But the astute among you will have noticed that if it's growing on me, it means it wasn't my favourite to begin with — because if it was, there'd be no room to grow.</p>
+        <p>What I found is that it tasted a little tinny. A bit metallic. A bit like the inside of a tin of beans. I thought for a second about not using beans as the simile, because of the beany vibe it conjures — but here we are, using it anyway. I think it's because I've got a tin of them at home, so it's at the forefront of my mind. I'm absolutely thinking about demolishing them when I get home. But back to the review.</p>
+        <p>I'm sniffing it as we speak. It smells faintly of cherry, which is good, obviously. It does taste like cherry coke, which is also good, because it is "cherry coke" flavoured — meaning this is no liar.</p>
+        <p>This is from New Invention Brewery, and they're some real saucy alchemists of beer, let me tell you. Wizards of beer. What's another term for magical things — mage? Warlock? What I'm saying is: they've got a lot of flavour entries, and they do them oh so well.</p>
+        <p>This one's just a bit different — a little bit bitter. The initial taste is just okay. The more you drink it, the better it gets. But only just.</p>
+        <p>It's underwhelming me, but I'd have it again, and I don't really know why. I'm so sweet-forward that I think I'll readily drink anything that appeals to my nostalgia-driven palate. The ten-year-old in me loves cherry coke.</p>
+        <blockquote class="pull-quote">"The ten-year-old in me should not be drinking beer."</blockquote>
+        <p>For clarity: I do not have a ten-year-old in me.</p>
+        <p>The issue here is the bar was set too high — set as high as the cherries on a cherry tree. And as I say that, I'm immediately filled with doubt, because I: A, don't know how tall cherry trees actually are, and B, can't say with confidence that cherries grow on a tree rather than some kind of bush that grows parallel to the ground.</p>
+      </div>
+      <div class="detail-side">
+        <div class="radar-box">
+          <div class="score-hero" id="score-cherry-coke-newtown-brewery" data-overall="cherry-coke-newtown-brewery"></div>
+        </div>
+        <div class="radar-box">
+          <h4 class="box-heading box-heading-sub">How it breaks down</h4>
+          <div class="radar-svg-holder" data-radar="cherry-coke-newtown-brewery"></div>
+        </div>
+        <div class="receipt-wrap">
+          <div class="receipt">
+            <div class="receipt-header">
+              <div class="brand">ROPEBREAK</div>
+              <div class="sub">Cherry Coke, New Invention Brewery</div>
+              <div class="date" data-receipt-date="cherry-coke-newtown-brewery"></div>
+            </div>
+            <div class="receipt-ropes" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="receipt-line"><span>Boxes ticked</span><span class="val">3</span></div>
+            <div class="receipt-line"><span>Tin-of-beans flashbacks</span><span class="val">1</span></div>
+            <div class="receipt-line"><span>Confidence re: cherry trees</span><span class="val">low</span></div>
+            <div class="receipt-line"><span>Ten-year-olds located within</span><span class="val">0</span></div>
+            <div class="receipt-total"><span>Verdict</span><span data-receipt-total="cherry-coke-newtown-brewery"></span></div>
+            <div class="receipt-footer">NO REFUNDS</div>
+            <svg class="receipt-mark" aria-hidden="true"><use href="#bell-icon"/></svg>
+          </div>
+        </div>
+        <div class="share">
+          <span class="share-label">Share this</span>
+          <div class="share-row">
+            <a class="share-btn" data-share="whatsapp" data-title="Cherry Coke, New Invention Brewery — Ropebreak" href="#">WhatsApp</a>
+            <a class="share-btn" data-share="email" data-title="Cherry Coke, New Invention Brewery — Ropebreak" href="#">Email</a>
+            <button class="share-btn" data-copy="true">Copy link</button>
+            <a class="share-btn" data-map="New Invention Brewery" href="#" target="_blank" rel="noopener">View on map</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <p>Ropebreak</p>
+    <p>&copy; 2026</p>
+  </div>
+</footer>
+
+<script>
+  // ---- radar chart data: each category gets its own set of axes ----
+  var CATEGORY_AXES = {
+    coffeeshop: ["Atmosphere", "Human interaction", "Would go back?", "Value for money"],
+    coffee: ["Taste", "Caffeine hit", "Value for money", "Would order again?"],
+    pub: ["Pint quality", "Atmosphere", "Would bring a mate?", "Toilet cleanliness"],
+    beer: ["Taste", "Drinkability", "Value for money", "Would order again?"],
+    wildcard: ["Would recommend?", "Felt illicit?", "Mental health boost?", "Felt attractive?"]
+  };
+
+  // one entry per review: which category (decides its radar axes),
+  // its four scores against those axes, and the big overall verdict
+  var REVIEWS = {
+    "black-sheep-coffee": {
+      category: "coffeeshop",
+      date: "2026-09-08",
+      radar: [2, 1, 1, 2],
+      overall: "00",
+      verdict: "A cautionary tale involving an iPad, a camera, and seven and a half thousand ways to go wrong.",
+      characteristics: ["Quick in-and-out"]
+    },
+    "millers-arms": {
+      category: "pub",
+      date: "2026-09-10",
+      radar: [8, 10, 9, 6],
+      overall: 10,
+      verdict: "Perfect in every way. Every second I'm not there is a blight on my life.",
+      characteristics: ["Cosy", "Dog-friendly", "Good for groups"]
+    },
+    "cherry-coke-newtown-brewery": {
+      category: "beer",
+      date: "2026-09-26",
+      radar: [6, 5, 6, 7],
+      overall: 5,
+      verdict: "Underwhelming, and I'll definitely have another.",
+      characteristics: ["Fruity"]
+    },
+    "wrestlemania-weekend": {
+      category: "wildcard",
+      date: "2026-09-16",
+      radar: [9, 7, 9, 6],
+      overall: 9,
+      verdict: "Worth every hoarse, slightly singed moment.",
+      characteristics: ["Memorable", "Worth the trip"]
+    },
+    "gogo-juice-chip-coffee": {
+      category: "coffee",
+      date: "2026-09-25",
+      radar: [9, 5, 7, 10],
+      overall: 9,
+      verdict: "Cripplingly good. Financially and otherwise.",
+      characteristics: ["Light", "Smooth", "Splurge-worthy"]
+    }
+  };
+
+  // controlled vocabulary of selectable characteristics, per category —
+  // keeps them consistent and filterable, unlike the freeform chip tags
+  var CHARACTERISTIC_OPTIONS = {
+    coffeeshop: ["Cosy", "Good for laptops", "Quick in-and-out", "Great atmosphere", "Quiet", "Dog-friendly", "Good value"],
+    coffee: ["Light", "Bold", "Sweet", "Bitter", "Fruity", "Smooth", "Budget-friendly", "Splurge-worthy"],
+    pub: ["Cosy", "Lively", "Dog-friendly", "Good for groups", "Quiet pint", "Beer garden", "Good food"],
+    beer: ["Light", "Strong", "Hoppy", "Malty", "Sessionable", "Fruity", "Budget-friendly", "Splurge-worthy"],
+    wildcard: ["Memorable", "Chaotic", "Worth the trip", "One-time thing", "Would repeat"]
+  };
+  var selectedCharacteristics = new Set();
+
+  function wrapLabel(text, maxChars) {
+    var words = text.split(" ");
+    var lines = [], current = "";
+    words.forEach(function (w) {
+      var test = current ? current + " " + w : w;
+      if (test.length > maxChars && current) {
+        lines.push(current);
+        current = w;
+      } else {
+        current = test;
+      }
+    });
+    if (current) lines.push(current);
+    return lines;
+  }
+
+  function renderRadar(container, axesLabels, scores) {
+    var size = 380, cx = size / 2, cy = size / 2, radius = 82;
+    var n = axesLabels.length;
+    var step = (2 * Math.PI) / n;
+    var start = -Math.PI / 2;
+    var lineHeight = 12;
+    function pt(i, r) {
+      var a = start + i * step;
+      return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+    }
+    var grid = "";
+    [0.25, 0.5, 0.75, 1].forEach(function (f) {
+      var pts = [];
+      for (var i = 0; i < n; i++) pts.push(pt(i, radius * f).join(","));
+      grid += '<polygon points="' + pts.join(" ") + '" class="radar-grid"/>';
+    });
+    var axes = "";
+    for (var i = 0; i < n; i++) {
+      var p = pt(i, radius);
+      axes += '<line x1="' + cx + '" y1="' + cy + '" x2="' + p[0] + '" y2="' + p[1] + '" class="radar-axis"/>';
+    }
+    var dataPts = [];
+    for (var i = 0; i < n; i++) dataPts.push(pt(i, radius * (scores[i] / 10)).join(","));
+    var labels = "";
+    for (var i = 0; i < n; i++) {
+      var lp = pt(i, radius + 26);
+      var lines = wrapLabel(axesLabels[i], 12);
+      var anchor = i === 1 ? "start" : i === 3 ? "end" : "middle";
+      var startDy;
+      if (i === 0) startDy = -(lines.length - 1) * lineHeight;
+      else if (i === 2) startDy = 0;
+      else startDy = -((lines.length - 1) * lineHeight) / 2;
+      lines.forEach(function (line, li) {
+        var y = lp[1] + startDy + li * lineHeight;
+        labels += '<text x="' + lp[0] + '" y="' + y + '" class="radar-label" text-anchor="' + anchor + '">' + line + "</text>";
+      });
+    }
+    container.innerHTML =
+      '<svg viewBox="0 0 ' + size + ' ' + size + '" width="' + size + '" height="' + size + '" class="radar-svg" role="img" aria-label="Score radar">' +
+      grid + axes +
+      '<polygon points="' + dataPts.join(" ") + '" class="radar-data"/>' +
+      labels + "</svg>";
+  }
+
+  function renderAllRadars() {
+    document.querySelectorAll("[data-radar]").forEach(function (el) {
+      var key = el.getAttribute("data-radar");
+      var rev = REVIEWS[key];
+      if (rev) renderRadar(el, CATEGORY_AXES[rev.category], rev.radar);
+    });
+  }
+
+  function formatReviewDate(iso) {
+    if (!iso) return "";
+    var parts = iso.split("-");
+    var d = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
+    var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    return d.getUTCDate() + " " + months[d.getUTCMonth()] + " " + d.getUTCFullYear();
+  }
+
+  function renderAllDates() {
+    document.querySelectorAll("[data-date]").forEach(function (el) {
+      var key = el.getAttribute("data-date");
+      var rev = REVIEWS[key];
+      if (!rev || !rev.date) return;
+      el.textContent = "Reviewed " + formatReviewDate(rev.date);
+    });
+  }
+
+  function renderAllReceipts() {
+    document.querySelectorAll("[data-receipt-date]").forEach(function (el) {
+      var rev = REVIEWS[el.getAttribute("data-receipt-date")];
+      if (rev && rev.date) el.textContent = formatReviewDate(rev.date);
+    });
+    document.querySelectorAll("[data-receipt-total]").forEach(function (el) {
+      var rev = REVIEWS[el.getAttribute("data-receipt-total")];
+      if (rev) el.textContent = rev.overall === "00" ? "00" : rev.overall + " / 10";
+    });
+  }
+
+  function renderAllRatings() {
+    document.querySelectorAll("[data-badge]").forEach(function (el) {
+      var key = el.getAttribute("data-badge");
+      var rev = REVIEWS[key];
+      if (!rev) return;
+      el.textContent = rev.overall === "00" ? "00" : rev.overall + "/10";
+      el.setAttribute("aria-label", rev.overall + " out of 10");
+      el.classList.toggle("badge-glow", rev.overall === 10);
+    });
+  }
+
+  function confettiHTML() {
+    var colors = ["var(--orange-bright)", "var(--navy)", "var(--pop-beer)", "var(--pop-coffeeshop)", "var(--orange-bright)", "var(--navy)"];
+    var spans = "";
+    for (var i = 0; i < 6; i++) {
+      var angle = (i / 6) * Math.PI * 2;
+      var dx = Math.round(Math.cos(angle) * 46) + "px";
+      var dy = Math.round(Math.sin(angle) * 46) + "px";
+      spans += '<span style="--dx:' + dx + ';--dy:' + dy + ';background:' + colors[i] + ';animation-delay:' + (i * 0.03) + 's"></span>';
+    }
+    return '<div class="score-fx" aria-hidden="true">' + spans + '</div>';
+  }
+
+  function renderAllOverallScores() {
+    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.querySelectorAll("[data-overall]").forEach(function (el) {
+      var key = el.getAttribute("data-overall");
+      var rev = REVIEWS[key];
+      if (!rev) return;
+      var circleClass = "score-circle";
+      var fx = "";
+      if (rev.overall === 10) {
+        circleClass += reduceMotion ? "" : " celebrate";
+        fx = reduceMotion ? "" : confettiHTML();
+      } else if (rev.overall === 0 || rev.overall === "00") {
+        circleClass += reduceMotion ? "" : " commiserate";
+      }
+      var maxSpan = rev.overall === "00" ? "" : '<span class="circle-max">/10</span>';
+      el.innerHTML =
+        '<h4 class="box-heading verdict-heading">The verdict</h4>' +
+        '<div class="' + circleClass + '">' + fx + '<span class="score-value">' + rev.overall + maxSpan + '</span></div>' +
+        '<p class="score-verdict">' + rev.verdict + "</p>";
+    });
+  }
+
+  function setupShareLinks() {
+    document.querySelectorAll("[data-share]").forEach(function (el) {
+      var detail = el.closest(".detail");
+      if (!detail) return;
+      var url = location.origin + location.pathname + "#" + detail.id;
+      var title = el.getAttribute("data-title") || "Ropebreak";
+      if (el.getAttribute("data-share") === "whatsapp") {
+        el.href = "https://wa.me/?text=" + encodeURIComponent(title + " — " + url);
+        el.target = "_blank";
+        el.rel = "noopener";
+      } else if (el.getAttribute("data-share") === "email") {
+        el.href = "mailto:?subject=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(url);
+      }
+    });
+    // "View on map" — searches by venue name for now; swap in a full address
+    // per review once you've got one, for a link that points at the exact spot
+    document.querySelectorAll("[data-map]").forEach(function (el) {
+      var place = el.getAttribute("data-map");
+      el.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(place);
+    });
+    document.querySelectorAll("[data-copy]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var detail = btn.closest(".detail");
+        var url = location.origin + location.pathname + "#" + detail.id;
+        var original = btn.textContent;
+        try {
+          navigator.clipboard.writeText(url).then(function () {
+            btn.textContent = "Copied!";
+            setTimeout(function () { btn.textContent = original; }, 1500);
+          }).catch(function () {
+            btn.textContent = "Couldn't copy";
+            setTimeout(function () { btn.textContent = original; }, 1500);
+          });
+        } catch (e) {
+          btn.textContent = "Couldn't copy";
+          setTimeout(function () { btn.textContent = original; }, 1500);
+        }
+      });
+    });
+  }
+
+  var CATEGORY_LABELS = { coffeeshop: "Coffee Shop", coffee: "Coffee", pub: "Pub", beer: "Beer", wildcard: "Wildcard" };
+  var currentCategory = null;
+  var originalCardOrder = null;
+
+  function filterGrid(categoryKey) {
+    currentCategory = categoryKey;
+    selectedCharacteristics.clear();
+    renderCharFilter(categoryKey);
+    updateGridDisplay();
+  }
+
+  function renderCharFilter(categoryKey) {
+    var container = document.getElementById("char-filter");
+    var options = categoryKey ? CHARACTERISTIC_OPTIONS[categoryKey] : null;
+    if (!options) {
+      container.hidden = true;
+      container.innerHTML = "";
+      container.removeAttribute("data-category");
+      return;
+    }
+    container.hidden = false;
+    container.setAttribute("data-category", categoryKey);
+    container.innerHTML = options.map(function (opt) {
+      var active = selectedCharacteristics.has(opt) ? " active" : "";
+      return '<button type="button" class="char-chip' + active + '" data-char="' + opt + '">' + opt + "</button>";
+    }).join("");
+    container.querySelectorAll(".char-chip").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var val = btn.getAttribute("data-char");
+        if (selectedCharacteristics.has(val)) selectedCharacteristics.delete(val);
+        else selectedCharacteristics.add(val);
+        renderCharFilter(categoryKey);
+        updateGridDisplay();
+      });
+    });
+  }
+
+  function updateGridDisplay() {
+    var grid = document.querySelector("#reviews .grid");
+    if (!originalCardOrder) originalCardOrder = Array.prototype.slice.call(grid.querySelectorAll(".ticket"));
+
+    var sortSelect = document.getElementById("sort-select");
+    var minSelect = document.getElementById("min-rating-select");
+    var sortMode = sortSelect ? sortSelect.value : "latest";
+    var minRating = minSelect ? parseInt(minSelect.value, 10) : 0;
+
+    var cards = originalCardOrder.slice();
+    if (sortMode === "high" || sortMode === "low") {
+      cards.sort(function (a, b) {
+        var ra = (REVIEWS[a.getAttribute("data-review")] || {}).overall || 0;
+        var rb = (REVIEWS[b.getAttribute("data-review")] || {}).overall || 0;
+        return sortMode === "high" ? rb - ra : ra - rb;
+      });
+    } else {
+      // "latest" — genuinely sorted by each review's date, newest first
+      cards.sort(function (a, b) {
+        var da = (REVIEWS[a.getAttribute("data-review")] || {}).date || "";
+        var db = (REVIEWS[b.getAttribute("data-review")] || {}).date || "";
+        return da < db ? 1 : da > db ? -1 : 0;
+      });
+    }
+    cards.forEach(function (card) { grid.appendChild(card); });
+
+    var visibleCount = 0;
+    cards.forEach(function (card) {
+      var rev = REVIEWS[card.getAttribute("data-review")];
+      var matchesCategory = !currentCategory || card.getAttribute("data-category") === currentCategory;
+      var matchesRating = !rev || rev.overall >= minRating;
+      var matchesChar = selectedCharacteristics.size === 0 || Array.from(selectedCharacteristics).every(
+        function (c) { return rev && rev.characteristics && rev.characteristics.indexOf(c) !== -1; }
+      );
+      var show = matchesCategory && matchesRating && matchesChar;
+      card.hidden = !show;
+      if (show) visibleCount++;
+    });
+
+    var heading = document.getElementById("reviews-heading");
+    var note = document.getElementById("reviews-note");
+    var backLink = document.getElementById("filter-back");
+    var noResults = document.getElementById("no-reviews-msg");
+    var teaser = document.getElementById("ladder-teaser");
+    if (currentCategory) {
+      heading.textContent = CATEGORY_LABELS[currentCategory] + " reviews";
+      note.hidden = true;
+      backLink.hidden = false;
+      teaser.hidden = true;
+    } else {
+      heading.textContent = "Latest entries";
+      note.hidden = false;
+      backLink.hidden = true;
+      teaser.hidden = false;
+    }
+    noResults.hidden = visibleCount !== 0;
+  }
+
+  function showView() {
+    var hash = location.hash.replace("#", "");
+    var details = document.querySelectorAll(".detail");
+    var homeIntro = document.getElementById("home-intro");
+    var grid = document.getElementById("reviews");
+    var rankings = document.getElementById("rankings");
+    var about = document.getElementById("about");
+    var match = hash && document.getElementById(hash);
+    var isReview = hash.indexOf("review-") === 0 && match;
+    var categoryKey = hash.indexOf("cat-") === 0 ? hash.slice(4) : null;
+    var isCategory = categoryKey && CATEGORY_LABELS[categoryKey];
+    var isFullPage = isReview || hash === "rankings" || hash === "about";
+    var isSubPage = isFullPage || isCategory;
+
+    details.forEach(function (s) { s.hidden = !(isReview && s.id === hash); });
+    rankings.hidden = hash !== "rankings";
+    about.hidden = hash !== "about";
+    homeIntro.hidden = isSubPage;
+    grid.hidden = isFullPage;
+    filterGrid(isCategory ? categoryKey : null);
+
+    if (isSubPage) window.scrollTo(0, 0);
+  }
+
+  // ---- rankings ladder: one fixed 10-to-00 scale per category ----
+  var LADDER_ORDER = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, "00"];
+  var RANKINGS = {
+    coffeeshop: [
+      { score: "00", name: "Black Sheep Coffee", slug: "black-sheep-coffee" }
+    ],
+    coffee: [
+      { score: 9, name: "Go-Go Juice, Chip Coffee", slug: "gogo-juice-chip-coffee" }
+    ],
+    pub: [
+      { score: 10, name: "The Miller's Arms", slug: "millers-arms" }
+    ],
+    beer: [
+      { score: 5, name: "Cherry Coke, New Invention Brewery", slug: "cherry-coke-newtown-brewery" }
+    ],
+    wildcard: [
+      { score: 9, name: "WrestleMania Weekend", slug: "wrestlemania-weekend" }
+    ]
+  };
+
+  function scoreLabel(s) { return s === 10 ? "Perfect 10" : String(s); }
+
+  function renderLadder(containerId, entries) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    var byScore = {};
+    entries.forEach(function (e) {
+      (byScore[e.score] = byScore[e.score] || []).push(e);
+    });
+    var html = "";
+    LADDER_ORDER.forEach(function (s) {
+      var items = byScore[s];
+      var cls = "rank-row" + (items ? " filled" : "") + (s === "00" ? " zero-zero" : "");
+      var names = items
+        ? items.map(function (e) { return '<a href="#review-' + e.slug + '">' + e.name + "</a>"; }).join(", ")
+        : '<span class="rank-empty">—</span>';
+      html += '<li class="' + cls + '"><span class="rank-score">' + scoreLabel(s) + '</span><span class="rank-names">' + names + "</span></li>";
+    });
+    el.innerHTML = html;
+  }
+
+  function renderAllRankings() {
+    renderLadder("ladder-coffeeshop", RANKINGS.coffeeshop);
+    renderLadder("ladder-coffee", RANKINGS.coffee);
+    renderLadder("ladder-pub", RANKINGS.pub);
+    renderLadder("ladder-beer", RANKINGS.beer);
+    renderLadder("ladder-wildcard", RANKINGS.wildcard);
+  }
+
+  renderAllRadars();
+  var sortSelectEl = document.getElementById("sort-select");
+  var minRatingSelectEl = document.getElementById("min-rating-select");
+  if (sortSelectEl) sortSelectEl.addEventListener("change", updateGridDisplay);
+  if (minRatingSelectEl) minRatingSelectEl.addEventListener("change", updateGridDisplay);
+
+  document.querySelectorAll("[data-jump]").forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      var target = document.getElementById(link.getAttribute("data-jump"));
+      if (!target) return;
+      var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+    });
+  });
+
+  document.querySelectorAll(".nav-dropdown-menu a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      var dropdown = link.closest(".nav-dropdown");
+      if (dropdown) dropdown.open = false;
+    });
+  });
+
+  renderAllRatings();
+  renderAllReceipts();
+  renderAllDates();
+  renderAllOverallScores();
+  setupShareLinks();
+  renderAllRankings();
+  showView();
+  window.addEventListener("hashchange", showView);
+</script>
+
+</body>
+</html>

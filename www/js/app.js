@@ -248,14 +248,24 @@
   function renderGrid() {
     var grid = document.getElementById("review-grid");
     grid.innerHTML = REVIEW_LIST.map(function (r) {
-      return '<article class="ticket" data-category="' + r.category + '" data-review="' + esc(r.slug) + '">' +
+      // banner: the review's photo, or a block in the category colour with its icon
+      var banner = r.photo && r.photo.src
+        ? '<img class="card-banner-img" src="' + esc(resolveMedia(r.photo.src)) + '" data-fallback="' + esc(resolveMedia(r.photo.src, BUNDLED_BASE)) + '" alt="" loading="lazy">'
+        : '<div class="card-banner-placeholder" style="background:var(--cat-pop);"><svg aria-hidden="true"><use href="#' + CATEGORY_ICONS[r.category] + '"/></svg></div>';
+      return '<article class="ticket has-banner" data-category="' + r.category + '" data-review="' + esc(r.slug) + '">' +
+        '<div class="card-banner-frame">' + banner + tagHTML(r.category).replace('class="tag ', 'class="tag card-banner-tag ') + "</div>" +
         '<div class="badge-stamp' + (r.overall === 10 ? " badge-glow" : "") + '" aria-label="' + esc(r.overall) + ' out of 10">' + scoreText(r.overall) + "</div>" +
-        tagHTML(r.category) +
         "<h3>" + esc(r.title) + "</h3>" +
         "<p>" + esc(r.teaser) + "</p>" +
         '<p><a class="read-link" href="#review-' + esc(r.slug) + '">Read the review &rarr;</a></p>' +
         "</article>";
     }).join("");
+    grid.querySelectorAll(".card-banner-img").forEach(function (img) {
+      img.addEventListener("error", function () {
+        var fb = img.getAttribute("data-fallback");
+        if (fb && img.getAttribute("src") !== fb) img.setAttribute("src", fb);
+      });
+    });
     updateGridDisplay();
   }
 

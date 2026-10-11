@@ -50,7 +50,6 @@ header { border-bottom: 1px solid var(--line); border-top: 4px solid var(--text)
 .logo { text-decoration: none; color: var(--text); display: inline-flex; flex-direction: column; gap: 0.2rem; }
 .logo-row { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 5vw, 2.7rem); line-height: 1; letter-spacing: -0.01em; }
 .logo-row svg { width: 1.3rem; height: 1.3rem; fill: var(--orange); flex-shrink: 0; }
-.logo-tagline { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--text-muted); }
 nav[aria-label="Primary"] { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
 nav[aria-label="Primary"] a { position: relative; text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem; padding-bottom: 8px; }
 nav[aria-label="Primary"] a:hover, nav[aria-label="Primary"] a:focus-visible { color: var(--text); }
@@ -79,7 +78,6 @@ nav[aria-label="Primary"] summary:hover .mini-ropes, nav[aria-label="Primary"] s
 
 .hero-grid { display: flex; align-items: center; justify-content: space-between; gap: 2.5rem; flex-wrap: wrap; }
 .hero-text { flex: 1 1 26rem; }
-.hero h1 { display: inline-block; font-family: var(--font-display); font-weight: 700; font-size: clamp(2.6rem, 6.5vw, 4.6rem); line-height: 1.15; margin: 0 0 1.3rem; max-width: 15ch; background: var(--orange-bright); color: #fff; padding: 0.15em 0.35em; border-radius: 10px; transform: rotate(-1.5deg); }
 .hero .lede { max-width: 46ch; font-size: 1.15rem; color: var(--text-muted); margin: 0; }
 
 .ropes { max-width: 68rem; margin: 0 auto; padding: 0 1.5rem 3rem; display: flex; flex-direction: column; gap: 0.4rem; }
@@ -124,6 +122,18 @@ nav[aria-label="Primary"] summary:hover .mini-ropes, nav[aria-label="Primary"] s
 .grid-controls { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.25rem; }
 .control-label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
 .control-select { font: inherit; font-size: 0.85rem; padding: 0.4rem 0.6rem; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--text); }
+
+.tt-photo-hero { position: relative; overflow: hidden; background: #0C0D10; }
+.tt-photo-img { width: 100%; height: auto; display: block; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* card banner image — chosen treatment for review-card thumbnails */
+.ticket.has-banner { padding-top: 0; overflow: hidden; }
+.card-banner-frame { position: relative; margin: 0 -1.3rem 1rem; }
+.card-banner-img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+.card-banner-placeholder { width: 100%; aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center; }
+.card-banner-placeholder svg { width: 2.6rem; height: 2.6rem; fill: #fff; opacity: 0.35; }
+.card-banner-tag { position: absolute; left: 0.9rem; bottom: 0.7rem; margin: 0; }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.25rem; }
 .ticket { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 1.4rem 1.3rem 1.2rem; background-image: radial-gradient(circle, var(--bg) 2.5px, transparent 2.6px); background-size: 14px 14px; background-position: top left; background-repeat: repeat-x; background-origin: border-box; }
