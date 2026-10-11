@@ -1,0 +1,36 @@
+# Photographs the live site on a phone-sized screen (light and dark) and saves
+# the images to the "screenshots" branch. Used to check visual changes.
+name: Screenshot site
+
+on:
+  workflow_dispatch:
+    inputs:
+      pages:
+        description: "Pages to capture (space-separated hashes)"
+        default: "reviews map"
+
+permissions:
+  contents: write
+
+jobs:
+  shoot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Take screenshots
+        run: |
+          npm install --no-save playwright@1
+          npx playwright install --with-deps chromium
+          node scripts/screenshot.mjs "$RUNNER_TEMP/shots" ${{ inputs.pages }}
+      - name: Save to the screenshots branch
+        run: |
+          cd "$RUNNER_TEMP/shots"
+          git init -q -b screenshots
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -qm "Screenshots of ${{ github.sha }}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" screenshots

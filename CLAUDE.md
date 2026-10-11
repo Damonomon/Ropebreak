@@ -13,6 +13,7 @@ Ropebreak is a personal review blog (coffee, coffee shops, pubs, beer, wildcards
   - `content/attributes.json` defines the standard tags per category (types, allowed values, order). Reviews store theirs under `"attributes"`. Run `node scripts/check-content.mjs` after any content edit; the website workflow runs it too and refuses to publish on errors.
   - `content/images/` holds review photos as separate files. Never inline base64.
   - `js/app.js` renders everything from the JSON: grid, filters, review pages, rankings (derived automatically), sharing, offline cache, Android back button.
+  - `js/map.js` is the pub map (ES module, imported lazily by app.js on `#map`). `vendor/maplibre/` holds MapLibre; see its README before upgrading.
   - `js/config.js`: `siteUrl` is `https://damonomon.github.io/Ropebreak/` (case-sensitive). The app fetches `siteUrl + content/reviews.json` on launch and resume.
 - `android/`, `ios/`: Capacitor 8 native projects (iOS uses SPM). App ID `com.ropebreak.reviews`; it can't change once in a store.
 - `.github/workflows/website.yml` deploys `www/` to Pages on every push to `main` that touches `www/`.
@@ -32,6 +33,7 @@ The owner will paste a claude.ai artifact link. It's a **single self-contained H
 
 ## Before pushing
 - Validate content: `node scripts/check-content.mjs`.
+- Map images (tiles.openfreemap.org) and OpenStreetMap's API are blocked in cloud sessions. In Playwright, stub the style URL with a background-only style.
 - Preview: `python3 -m http.server -d www 8765`, then check it with Playwright on a phone viewport in light and dark mode (Chromium is at `/opt/pw-browsers`).
 - After changing `www/`, run `npx cap sync` so the native projects pick it up.
 - The Android SDK host (`dl.google.com`) may be blocked in cloud sessions. Build APKs through the GitHub Actions workflow instead.

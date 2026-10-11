@@ -1,5 +1,6 @@
 {
   "version": 1,
+  "updated": "2026-10-11",
   "notes": "Standard attributes per review category. Types: yesno; scale (ordered best/biggest first, so rules like 'at least X' work); choice (one answer, no order); multi (several answers, no order). A field missing from a review means unknown. showIf hides a field unless another field has the given value.",
   "pub": [
     {

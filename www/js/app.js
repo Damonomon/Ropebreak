@@ -118,6 +118,7 @@
     renderGrid();
     renderRankings();
     showView(true);
+    if (pubMap) pubMap.update(mergedPubs());
     return true;
   }
 
@@ -426,7 +427,8 @@
     var review = slug && REVIEWS[slug];
     var categoryKey = hash.indexOf("cat-") === 0 ? hash.slice(4) : null;
     var isCategory = !!(categoryKey && CATEGORY_LABELS[categoryKey]);
-    var isFullPage = !!review || hash === "rankings" || hash === "about";
+    var isMap = hash === "map";
+    var isFullPage = !!review || hash === "rankings" || hash === "about" || isMap;
     var isSubPage = isFullPage || isCategory;
     var view = review ? "review:" + slug : (isFullPage || isCategory) ? hash : "home";
 
@@ -437,6 +439,9 @@
     detail.hidden = !review;
     document.getElementById("rankings").hidden = hash !== "rankings";
     document.getElementById("about").hidden = hash !== "about";
+    document.getElementById("map-page").hidden = !isMap;
+    document.documentElement.classList.toggle("on-map", isMap);
+    if (isMap && view !== lastView) openMapPage();
     document.getElementById("home-intro").hidden = isSubPage;
     document.getElementById("reviews").hidden = isFullPage;
     filterGrid(isCategory ? categoryKey : null);
@@ -510,6 +515,161 @@
   window.addEventListener("hashchange", function () { navigatedInApp = true; showView(); });
   document.getElementById("sort-select").addEventListener("change", updateGridDisplay);
   document.getElementById("min-rating-select").addEventListener("change", updateGridDisplay);
+
+  // ---- standout tags: a review's most notable attributes ----
+  var ATTRIBUTES = {};
+  var YES_WEIGHTS = { beerGarden: 3, sport: 2, dogFriendly: 2, heaters: 1, darts: 1, pool: 1, stepFree: 1, accessibleToilet: 1 };
+  var PLAIN_CHOICES = { ideal: true, normal: true }; // unremarkable temp/lighting
+
+  // Picks the n most notable attributes. A review can choose its own with
+  // "highlights": ["toilets", "beerGarden", "vibe"].
+  function highlights(review, n) {
+    var groups = ATTRIBUTES[review.category];
+    var values = review.attributes || {};
+    if (!groups) return [];
+    var picks = [];
+    groups.forEach(function (g) {
+      g.fields.forEach(function (f) {
+        var v = values[f.id];
+        if (v == null || (Array.isArray(v) && !v.length)) return;
+        var label = function (id) { var o = (f.options || []).filter(function (x) { return x.id === id; })[0]; return o ? o.label : id; };
+        var weight = 0, text;
+        if (f.type === "yesno") { weight = v === "yes" ? (YES_WEIGHTS[f.id] || 1) : 0; text = f.label; }
+        else if (f.type === "scale") {
+          var i = f.options.map(function (o) { return o.id; }).indexOf(v);
+          weight = i === 0 || i === f.options.length - 1 ? 3 : 0;
+          text = f.label + ": " + label(v);
+        } else if (f.type === "choice") { weight = PLAIN_CHOICES[v] ? 0 : 1.5; text = f.label + ": " + label(v); }
+        else {
+          var labels = [].concat(v).map(label).join(", ");
+          weight = f.id === "vibe" ? 2 : 1;
+          text = f.id === "vibe" ? labels : f.label + ": " + labels;
+        }
+        picks.push({ id: f.id, weight: weight, text: text, order: picks.length });
+      });
+    });
+    if (Array.isArray(review.highlights) && review.highlights.length) {
+      return review.highlights.map(function (id) { return picks.filter(function (p) { return p.id === id; })[0]; })
+        .filter(Boolean).slice(0, n).map(function (p) { return p.text; });
+    }
+    return picks.filter(function (p) { return p.weight > 0; })
+      .sort(function (a, b) { return b.weight - a.weight || a.order - b.order; })
+      .slice(0, n).map(function (p) { return p.text; });
+  }
+
+  // ---- opening times ----
+  var DAY_KEYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+  function todayHours(hours, hoursText) {
+    if (hours) {
+      var v = hours[DAY_KEYS[new Date().getDay()]];
+      if (!v) return "";
+      return v === "closed" ? "Closed today" : "Open today " + v.replace(/-/g, "–").replace(/,/g, ", ").replace(/24:00/g, "midnight");
+    }
+    return hoursText ? "Hours: " + hoursText : "";
+  }
+
+  // ---- other content files (pub list, attributes): bundled copy, cached copy, live site ----
+  function cacheKey(file) { return "ropebreak." + file; }
+  function loadContentFile(file) {
+    return fetch(BUNDLED_BASE + file, { cache: "no-cache" })
+      .then(function (res) { if (!res.ok) throw new Error(file + " missing"); return res.json(); })
+      .then(function (bundled) {
+        var cached = null;
+        if (isNative()) { try { cached = JSON.parse(localStorage.getItem(cacheKey(file))); } catch (e) { /* none */ } }
+        return cached && (cached.updated || "") >= (bundled.updated || "") ? cached : bundled;
+      }, function (err) {
+        try { var c = JSON.parse(localStorage.getItem(cacheKey(file))); if (c) return c; } catch (e) { /* none */ }
+        throw err;
+      });
+  }
+  function refreshContentFile(file) {
+    if (!isNative() || !siteUrl()) return Promise.resolve(null);
+    return fetch(siteUrl() + "content/" + file + "?t=" + Date.now(), { cache: "no-store" })
+      .then(function (res) { if (!res.ok) throw new Error("HTTP " + res.status); return res.json(); })
+      .then(function (data) {
+        try { localStorage.setItem(cacheKey(file), JSON.stringify(data)); } catch (e) { /* storage unavailable */ }
+        return data;
+      }, function () { return null; });
+  }
+  var attributesReady = loadContentFile("attributes.json").then(function (a) { ATTRIBUTES = a; }, function () {});
+  refreshContentFile("attributes.json").then(function (a) { if (a && a.pub) ATTRIBUTES = a; });
+
+  // ---- pub map page ----
+  var pubMap = null, pubListData = null;
+
+  function mergedPubs() {
+    var byOsm = {};
+    var list = (pubListData && pubListData.pubs || []).map(function (p) {
+      var copy = Object.assign({}, p, { hoursConfirmed: false });
+      byOsm[p.osm] = copy;
+      return copy;
+    });
+    REVIEW_LIST.forEach(function (r) {
+      if (r.category !== "pub" || !r.place) return;
+      var base = r.place.osm && byOsm[r.place.osm];
+      var merged = Object.assign({}, base || {}, r.place, { name: r.title, review: r, hoursConfirmed: !!r.place.hours });
+      if (!r.place.hours && base) { merged.hours = base.hours; merged.hoursText = base.hoursText; }
+      if (typeof merged.lat !== "number" || typeof merged.lng !== "number") return;
+      if (base) list[list.indexOf(base)] = merged;
+      else list.push(merged);
+    });
+    return list;
+  }
+
+  function setHeaderHeight() {
+    document.documentElement.style.setProperty("--header-h", document.querySelector("header").offsetHeight + "px");
+  }
+
+  function openMapPage() {
+    setHeaderHeight();
+    var page = document.getElementById("map-page");
+    Promise.all([
+      pubListData ? null : loadContentFile("norwich-pubs.json").then(function (d) { pubListData = d; }),
+      attributesReady,
+      pubMap ? null : import("./map.js").then(function (m) { pubMap = m.createPubMap(page, mapHelpers); })
+    ]).then(function () {
+      return pubMap.show(mergedPubs());
+    }).catch(function (err) {
+      if (window.console) console.error("map:", err);
+      var msg = page.querySelector(".map-message");
+      msg.textContent = "Couldn't load the map just now.";
+      msg.hidden = false;
+    });
+    refreshContentFile("norwich-pubs.json").then(function (d) {
+      if (d && d.pubs && pubMap) { pubListData = d; pubMap.update(mergedPubs()); }
+    });
+  }
+  window.addEventListener("resize", function () { if (lastView === "map") setHeaderHeight(); });
+
+  function getPosition() {
+    var Geo = plugin("Geolocation");
+    if (Geo) {
+      return Geo.requestPermissions({ permissions: ["location"] }).then(function (p) {
+        if (p && p.location === "denied") { var err = new Error("denied"); err.denied = true; throw err; }
+        return Geo.getCurrentPosition({ enableHighAccuracy: true, timeout: 10000 });
+      });
+    }
+    return new Promise(function (resolve, reject) {
+      if (!navigator.geolocation) { reject(new Error("unsupported")); return; }
+      navigator.geolocation.getCurrentPosition(resolve, function (e) {
+        var err = new Error(e.message); err.denied = e.code === 1; reject(err);
+      }, { enableHighAccuracy: true, timeout: 10000 });
+    });
+  }
+
+  var toastTimer = null;
+  function toast(text) {
+    var el = document.getElementById("toast");
+    el.textContent = text;
+    el.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { el.hidden = true; }, 3500);
+  }
+
+  var mapHelpers = {
+    esc: esc, scoreText: scoreText, reduceMotion: reduceMotion,
+    highlights: highlights, todayHours: todayHours, getPosition: getPosition, toast: toast
+  };
 
   // ---- native app wiring ----
   if (isNative()) {
