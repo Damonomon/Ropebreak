@@ -114,7 +114,7 @@ export function createCrawlPage(section, rb) {
       `<div class="section-head crawl-result-head"><h3>Your crawl ${demo ? '<span class="crawl-demo-tag">DEMO</span>' : ""}</h3>` +
       `<p class="crawl-summary">${s.length} pubs · ${clock(s[0].arrive)} – ${clock(s[s.length - 1].leave)} · <strong>${total} min</strong> walking in total</p></div>` +
       (warnings.length ? `<div class="crawl-warning">${warnings.map((w) => `<p>${esc(w)}</p>`).join("")}</div>` : "") +
-      `<p class="crawl-flag-note">Based on ${ASSUMPTIONS.minutesPerPub} minutes per pub and a relaxed walking pace. See "Our assumptions" below.</p>` +
+      `<p class="crawl-flag-note">Based on ${ASSUMPTIONS.minutesPerPub} minutes per pub. See "Our assumptions" below.</p>` +
       (unknownHours ? `<p class="crawl-flag-note">${unknownHours} of these pubs ${unknownHours === 1 ? "has" : "have"} no opening times on record, so ${unknownHours === 1 ? "it's" : "they're"} assumed open.</p>` : "") +
       `<ol class="crawl-stops">${stops}</ol>` +
       '<div class="share-row crawl-actions">' +
@@ -156,8 +156,8 @@ export function createCrawlPage(section, rb) {
   section.querySelector(".crawl-assumptions ul").innerHTML = [
     "Only pubs Ropebreak has reviewed and put on the map are used.",
     `You spend ${ASSUMPTIONS.minutesPerPub} minutes in each pub.`,
-    `Walking times assume a relaxed ${Math.round(ASSUMPTIONS.walkingMetresPerMinute * 60 / 100) / 10} km/h, using straight-line distance plus ${Math.round((ASSUMPTIONS.streetFactor - 1) * 100)}% for streets. Real routes can be longer.`,
-    "Every pub must be open for your whole visit. Opening times come from our reviews where we've checked them, otherwise from OpenStreetMap, which can be out of date. Pubs with no times on record are assumed open and flagged.",
+    "Walking times are estimates. Real routes can be a little longer.",
+    "Opening times come from our reviews where we've checked them, otherwise from OpenStreetMap, which can be out of date. Pubs with no times on record are flagged.",
     "The route starts at whichever pub gives the shortest total walk.",
     '"At least half" rounds up, so half of 5 pubs is 3.',
     'Levels like "Toilets: at least What you\'d expect" also include anything better.',
