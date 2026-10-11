@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "notes": "Standard attributes per review category. Types: yesno; scale (ordered best/biggest first, so rules like 'at least X' work); choice (one answer, no order); multi (several answers, no order). A field missing from a review means unknown. showIf hides a field unless another field has the given value.",
+  "pub": [
+    {
+      "group": "Outside",
+      "fields": [
+        { "id": "beerGarden", "label": "Beer garden", "type": "yesno" },
+        { "id": "gardenSize", "label": "Garden size", "type": "scale", "showIf": { "beerGarden": "yes" },
+          "options": [
+            { "id": "football-pitch", "label": "Football pitch" },
+            { "id": "small-park", "label": "Small park" },
+            { "id": "average", "label": "Average" },
+            { "id": "postage-stamp", "label": "Postage stamp" }
+          ] },
+        { "id": "heaters", "label": "Heaters", "type": "yesno", "showIf": { "beerGarden": "yes" } },
+        { "id": "outsideSeating", "label": "Outside seating", "type": "scale", "showIf": { "beerGarden": "yes" },
+          "options": [
+            { "id": "stadium", "label": "Stadium" },
+            { "id": "good", "label": "Good" },
+            { "id": "decent", "label": "Decent" },
+            { "id": "none", "label": "What seating?!" }
+          ] }
+      ]
+    },
+    {
+      "group": "Inside",
+      "fields": [
+        { "id": "space", "label": "Space", "type": "scale",
+          "options": [
+            { "id": "massive", "label": "Massive" },
+            { "id": "good", "label": "Good" },
+            { "id": "average", "label": "Average" },
+            { "id": "cramped", "label": "Cramped" },
+            { "id": "cupboard", "label": "Cupboard" }
+          ] },
+        { "id": "insideSeating", "label": "Seating", "type": "scale",
+          "options": [
+            { "id": "stadium", "label": "Stadium" },
+            { "id": "good", "label": "Good" },
+            { "id": "decent", "label": "Decent" },
+            { "id": "none", "label": "What seating?!" }
+          ] },
+        { "id": "temp", "label": "Temp", "type": "choice",
+          "options": [
+            { "id": "ideal", "label": "Ideal" },
+            { "id": "arctic", "label": "Arctic" },
+            { "id": "nippy", "label": "Nippy" },
+            { "id": "sauna", "label": "Sauna" },
+            { "id": "help", "label": "Help" }
+          ] },
+        { "id": "lighting", "label": "Lighting", "type": "choice",
+          "options": [
+            { "id": "atmospheric", "label": "Atmospheric" },
+            { "id": "normal", "label": "Normal" },
+            { "id": "floodlights", "label": "Floodlights" },
+            { "id": "pitch-black", "label": "Who said that?!" }
+          ] }
+      ]
+    },
+    {
+      "group": "Sport",
+      "fields": [
+        { "id": "sport", "label": "Sportage on TV", "type": "yesno" }
+      ]
+    },
+    {
+      "group": "Food",
+      "fields": [
+        { "id": "food", "label": "Food", "type": "multi",
+          "options": [
+            { "id": "gastro", "label": "Gastro" },
+            { "id": "small-menu", "label": "Small menu" },
+            { "id": "sausage-rolls", "label": "Sausage rolls and such" },
+            { "id": "bar-snacks", "label": "Bar snacks" }
+          ] }
+      ]
+    },
+    {
+      "group": "Drink",
+      "fields": [
+        { "id": "drinks", "label": "Notable drinks", "type": "multi",
+          "options": [
+            { "id": "beer", "label": "Beer" },
+            { "id": "wine", "label": "Wine" },
+            { "id": "spirits", "label": "Spirits (not ghosts)" },
+            { "id": "cocktails", "label": "Cocktails" },
+            { "id": "soft-drinks", "label": "Soft drinks" }
+          ] }
+      ]
+    },
+    {
+      "group": "Vibe",
+      "fields": [
+        { "id": "vibe", "label": "Vibe", "type": "multi",
+          "options": [
+            { "id": "cosy", "label": "Cosy" },
+            { "id": "lively", "label": "Lively" },
+            { "id": "unique", "label": "Unique" },
+            { "id": "scary", "label": "Scary" },
+            { "id": "quiet-pint", "label": "Quiet pint" },
+            { "id": "good-for-groups", "label": "Good for groups" },
+            { "id": "dank", "label": "Dank" }
+          ] }
+      ]
+    },
+    {
+      "group": "Extra",
+      "fields": [
+        { "id": "toilets", "label": "Toilets", "type": "scale",
+          "options": [
+            { "id": "spotless", "label": "Spotless" },
+            { "id": "expected", "label": "What you'd expect from a toilet" },
+            { "id": "hell", "label": "Hell on earth" },
+            { "id": "hole", "label": "Hole in the ground" }
+          ] },
+        { "id": "stepFree", "label": "Step-free entrance", "type": "yesno" },
+        { "id": "accessibleToilet", "label": "Accessible toilet", "type": "yesno" },
+        { "id": "darts", "label": "Darts", "type": "yesno" },
+        { "id": "pool", "label": "Pool", "type": "yesno" },
+        { "id": "dogFriendly", "label": "Dog friendly", "type": "yesno" }
+      ]
+    }
+  ]
+}

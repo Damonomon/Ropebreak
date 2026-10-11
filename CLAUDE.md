@@ -10,6 +10,7 @@ Ropebreak is a personal review blog (coffee, coffee shops, pubs, beer, wildcards
 ## How it fits together
 - `www/` is the whole site and the app's screens. Plain HTML/CSS/JS, no bundler.
   - `content/reviews.json` holds **all reviews** (schema and radar-axis order in README). Bump its top-level `"updated"` date on every content change. The app compares this date to decide whether its cached copy is newer than the built-in one.
+  - `content/attributes.json` defines the standard tags per category (types, allowed values, order). Reviews store theirs under `"attributes"`. Run `node scripts/check-content.mjs` after any content edit; the website workflow runs it too and refuses to publish on errors.
   - `content/images/` holds review photos as separate files. Never inline base64.
   - `js/app.js` renders everything from the JSON: grid, filters, review pages, rankings (derived automatically), sharing, offline cache, Android back button.
   - `js/config.js`: `siteUrl` is `https://damonomon.github.io/Ropebreak/` (case-sensitive). The app fetches `siteUrl + content/reviews.json` on launch and resume.
@@ -26,8 +27,11 @@ The owner will paste a claude.ai artifact link. It's a **single self-contained H
 4. New features: implement them in `app.js`, keeping them data-driven.
 5. Tell the owner which changes need a new app build: anything outside `content/` does. Content alone reaches installed apps automatically.
 
+## Feature work in progress
+- Create-a-Crawl (Norwich pub crawls): see `docs/crawl-plan.md` for decisions and the topic order. The owner wants one topic at a time, with short replies under clear headings.
+
 ## Before pushing
-- Validate the JSON (`node -e "require('./www/content/reviews.json')"`).
+- Validate content: `node scripts/check-content.mjs`.
 - Preview: `python3 -m http.server -d www 8765`, then check it with Playwright on a phone viewport in light and dark mode (Chromium is at `/opt/pw-browsers`).
 - After changing `www/`, run `npx cap sync` so the native projects pick it up.
 - The Android SDK host (`dl.google.com`) may be blocked in cloud sessions. Build APKs through the GitHub Actions workflow instead.

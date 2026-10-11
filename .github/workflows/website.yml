@@ -5,7 +5,7 @@ name: Publish website
 on:
   push:
     branches: [main]
-    paths: ["www/**"]
+    paths: ["www/**", "scripts/**"]
   workflow_dispatch:
 
 permissions:
@@ -25,6 +25,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Check reviews file
+        run: node scripts/check-content.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
