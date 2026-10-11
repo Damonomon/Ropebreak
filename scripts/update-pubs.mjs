@@ -13,7 +13,7 @@ const AREAS = [
   { label: "Norwich (city boundary)", filter: 'area["boundary"="administrative"]["name"~"^(City of )?Norwich$"]->.city;', scope: "(area.city)" },
   { label: "Norwich (approximate box)", filter: "", scope: "(52.595,1.205,52.665,1.355)" }
 ];
-const queryFor = (a) => `[out:json][timeout:90];${a.filter}nwr["amenity"="pub"]${a.scope};out center tags;`;
+const queryFor = (a) => `[out:json][timeout:25];${a.filter}nwr["amenity"="pub"]${a.scope};out center tags;`;
 // GitHub shows these lines as notes on the run, which keeps failures readable
 const note = (level, msg) => console.log(process.env.GITHUB_ACTIONS ? `::${level}::${msg}` : msg);
 const ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.private.coffee/api/interpreter", "https://overpass.kumi.systems/api/interpreter"];
