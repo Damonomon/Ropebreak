@@ -459,3 +459,6 @@ html.on-map .maplibregl-ctrl-bottom-left, html.on-map .maplibregl-ctrl-bottom-ri
 :root[data-theme="dark"] .crawl-pick-score { color: #7FA8D9; }
 .map-card-crawl-link { display: inline-block; margin-top: 0.8rem; }
 .map-card-crawl-link[hidden] { display: none; }
+.crawl-map-add { align-self: flex-start; font-weight: 700; }
+.map-pick-hint { position: absolute; top: 3.4rem; left: 0.75rem; right: 0.75rem; z-index: 2; margin: 0; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--pop-pub); border-radius: 8px; padding: 0.55rem 0.8rem; font-size: 0.88rem; box-shadow: 0 2px 8px rgba(20, 21, 26, 0.15); }
+.map-pick-hint[hidden] { display: none; }

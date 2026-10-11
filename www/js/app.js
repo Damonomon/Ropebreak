@@ -453,6 +453,8 @@
     document.getElementById("map-page").hidden = !isMap;
     document.documentElement.classList.toggle("on-map", isMap);
     if (isMap && view !== lastView) openMapPage();
+    document.querySelector(".map-pick-hint").hidden = !(isMap && pickingOnMap);
+    if (!isMap) pickingOnMap = false;
     document.getElementById("crawl-page").hidden = !isCrawl;
     if (isCrawl && view !== lastView) openCrawlPage();
     document.getElementById("home-intro").hidden = isSubPage;
@@ -698,6 +700,12 @@
       toast("Couldn't load Create a Crawl just now.");
     });
   }
+
+  // "Add pubs from the map" on the crawl page shows a how-to hint on the map
+  var pickingOnMap = false;
+  document.addEventListener("click", function (e) {
+    if (e.target.closest("[data-pick-on-map]")) pickingOnMap = true;
+  }, true);
 
   // ---- "your crawl": pubs picked on the map or the crawl page (kept on this device) ----
   var SELECTION_KEY = "ropebreak.crawlSelection";

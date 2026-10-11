@@ -185,6 +185,7 @@
       <button type="button" class="char-chip map-chip" data-map-toggle aria-pressed="false">Reviewed only</button>
       <span class="map-count"></span>
     </div>
+    <p class="map-pick-hint" hidden>Tap a pub, then <strong>Add to crawl</strong>. Use the button below to go back to your crawl.</p>
     <button type="button" class="map-locate" data-map-locate aria-label="Show my location">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
     </button>
@@ -212,9 +213,10 @@
       <div class="crawl-field" data-for="own">
         <span class="crawl-label">Your pubs</span>
         <ol class="crawl-picked" hidden></ol>
-        <p class="crawl-picked-empty">No pubs yet. Search below, or tap pubs on the <a href="#map">map</a> and choose "Add to crawl".</p>
+        <p class="crawl-picked-empty">No pubs yet. Search by name, or add them from the map.</p>
         <input type="search" class="control-select crawl-search" placeholder="Search Norwich pubs" aria-label="Search Norwich pubs" autocomplete="off">
         <ul class="crawl-search-results" hidden></ul>
+        <a class="share-btn crawl-map-add" href="#map" data-pick-on-map>+ Add pubs from the map</a>
         <label class="crawl-check"><input type="checkbox" name="keepOrder"> Keep the order I picked</label>
       </div>
       <div class="crawl-field" data-for="picks surprise">

@@ -46,3 +46,4 @@ Pub crawl planner for Norwich (coffee crawls later, same engine). Topics are wor
 - The generator prefers pubs with known opening times (unknown counts as +8 min walk when choosing).
 - Assumptions wording: no walking speed; opening times are stated as information, not rules. Each mode has its own assumption list (`renderAssumptions()` in crawl.js).
 - OSM tags for unreviewed pubs (beer garden etc.): owner said not needed.
+- Plan my own has a permanent "+ Add pubs from the map" button; arriving on the map that way shows a how-to hint (`.map-pick-hint`), and the map's main button returns to the crawl.
