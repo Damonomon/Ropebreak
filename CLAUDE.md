@@ -14,6 +14,7 @@ Ropebreak is a personal review blog (coffee, coffee shops, pubs, beer, wildcards
   - `content/images/` holds review photos as separate files. Never inline base64.
   - `js/app.js` renders everything from the JSON: grid, filters, review pages, rankings (derived automatically), sharing, offline cache, Android back button.
   - `js/map.js` is the pub map (ES module, imported lazily by app.js on `#map`). `vendor/maplibre/` holds MapLibre; see its README before upgrading.
+  - `js/crawl.js` (page) and `js/crawl-engine.js` (pure generator logic, testable in Node) are Create-a-Crawl on `#crawl`, lazily imported. `content/demo-pubs.json` is made-up demo data.
   - `js/config.js`: `siteUrl` is `https://damonomon.github.io/Ropebreak/` (case-sensitive). The app fetches `siteUrl + content/reviews.json` on launch and resume.
 - `android/`, `ios/`: Capacitor 8 native projects (iOS uses SPM). App ID `com.ropebreak.reviews`; it can't change once in a store.
 - `.github/workflows/website.yml` deploys `www/` to Pages on every push to `main` that touches `www/`.

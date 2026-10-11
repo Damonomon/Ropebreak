@@ -361,3 +361,58 @@ html.on-map .maplibregl-ctrl-bottom-left, html.on-map .maplibregl-ctrl-bottom-ri
 
 .toast { position: fixed; left: 50%; bottom: calc(1.5rem + var(--safe-area-inset-bottom, env(safe-area-inset-bottom))); transform: translateX(-50%); max-width: calc(100% - 2rem); background: var(--text); color: var(--bg); padding: 0.7rem 1rem; border-radius: 8px; font-size: 0.9rem; z-index: 50; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); }
 .toast[hidden] { display: none; }
+
+/* ---- Create a Crawl ---- */
+.map-crawl-btn { position: absolute; left: 0.75rem; bottom: calc(3rem + var(--safe-area-inset-bottom, env(safe-area-inset-bottom))); z-index: 2; background: var(--orange-bright); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; text-decoration: none; padding: 0.8rem 1.2rem; border-radius: 100px; box-shadow: 0 4px 14px rgba(20, 21, 26, 0.25); }
+.map-crawl-btn:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+
+.crawl { padding: 2rem 1.5rem 5rem; max-width: 44rem; }
+.crawl-demo-banner { background: color-mix(in srgb, var(--pop-beer) 18%, var(--surface)); border: 1px solid color-mix(in srgb, var(--pop-beer) 50%, transparent); border-radius: 8px; padding: 0.7rem 0.9rem; font-size: 0.9rem; margin: 0 0 1.25rem; }
+.link-btn { font: inherit; font-weight: 700; color: var(--orange); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.crawl-form { display: flex; flex-direction: column; gap: 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 1.2rem; }
+.crawl-field { display: flex; flex-direction: column; gap: 0.45rem; }
+.crawl-label { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); }
+.crawl-field .control-select { font-size: 1rem; padding: 0.55rem 0.6rem; }
+.crawl-when { display: flex; gap: 0.5rem; }
+.crawl-when select { flex: 1; }
+.stepper { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; width: max-content; }
+.stepper button { font: inherit; font-size: 1.3rem; width: 2.8rem; height: 2.6rem; border: 0; background: var(--bg); color: var(--text); cursor: pointer; }
+.stepper output { min-width: 2.6rem; text-align: center; font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; }
+.crawl-rules { display: flex; flex-direction: column; gap: 0.5rem; }
+.crawl-rules:empty { display: none; }
+.crawl-rule { display: grid; grid-template-columns: minmax(8.2rem, auto) minmax(0, 1fr) auto; gap: 0.4rem; align-items: center; }
+.crawl-rule .control-select { width: 100%; font-size: 0.9rem; }
+.crawl-rule-remove { border: 0; background: none; color: var(--text-muted); font-size: 1.5rem; line-height: 1; padding: 0.2rem 0.3rem; cursor: pointer; }
+.crawl-field-rules .link-btn { align-self: flex-start; }
+.crawl-go { font: inherit; font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; background: var(--orange-bright); color: #fff; border: 0; border-radius: 8px; padding: 0.85rem; cursor: pointer; }
+
+.crawl-result { margin-top: 2rem; scroll-margin-top: 1rem; }
+.crawl-result-head { flex-direction: column; align-items: flex-start; }
+.crawl-result-head h3 { font-family: var(--font-display); font-size: 1.8rem; margin: 0; display: flex; align-items: center; gap: 0.6rem; }
+.crawl-summary { margin: 0; color: var(--text-muted); }
+.crawl-summary strong { color: var(--text); }
+.crawl-demo-tag { font-family: var(--font-body); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; background: var(--pop-beer); color: var(--ink-on-beer); padding: 0.2rem 0.5rem; border-radius: 4px; }
+.crawl-warning { border-left: 4px solid var(--orange-bright); background: var(--surface); padding: 0.7rem 0.9rem; border-radius: 0 8px 8px 0; margin: 0 0 1rem; font-size: 0.92rem; }
+.crawl-warning p { margin: 0.2rem 0; }
+.crawl-flag-note { font-size: 0.85rem; color: var(--text-muted); }
+.crawl-stops { list-style: none; margin: 0; padding: 0; }
+.crawl-stop { display: grid; grid-template-columns: 2.2rem 1fr; gap: 0.8rem; position: relative; padding-bottom: 1rem; }
+.crawl-stop:not(:last-child)::before { content: ""; position: absolute; left: 1.05rem; top: 2.2rem; bottom: 0; width: 2px; background: repeating-linear-gradient(var(--line) 0 6px, transparent 6px 10px); }
+.crawl-num { width: 2.2rem; height: 2.2rem; border-radius: 50%; background: var(--pop-pub); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; }
+.crawl-stop-body { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 0.8rem 0.9rem; }
+.crawl-walk { margin: 0 0 0.4rem; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.crawl-stop-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.6rem; }
+.crawl-stop-head h4 { margin: 0; font-family: var(--font-display); font-size: 1.2rem; }
+.crawl-score { font-family: var(--font-display); font-weight: 800; color: var(--pop-pub); white-space: nowrap; }
+.crawl-time { margin: 0.25rem 0 0; font-size: 0.9rem; }
+.crawl-flag { font-size: 0.78rem; color: var(--text-muted); margin-left: 0.3rem; }
+.crawl-stop-body .chip-row { margin-top: 0.5rem; }
+.crawl-stop-body .read-link { display: inline-block; margin-top: 0.5rem; }
+.crawl-actions { margin-top: 0.5rem; }
+.crawl-assumptions { margin-top: 2rem; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 0.9rem 1.1rem; }
+.crawl-assumptions summary { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; cursor: pointer; }
+.crawl-assumptions ul { margin: 0.7rem 0 0; padding-left: 1.2rem; font-size: 0.9rem; color: var(--text-muted); }
+.crawl-assumptions li { margin-bottom: 0.4rem; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .crawl-num { background: #3B7BC4; } :root:not([data-theme="light"]) .crawl-score { color: #7FA8D9; } }
+:root[data-theme="dark"] .crawl-num { background: #3B7BC4; }
+:root[data-theme="dark"] .crawl-score { color: #7FA8D9; }

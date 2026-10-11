@@ -428,7 +428,8 @@
     var categoryKey = hash.indexOf("cat-") === 0 ? hash.slice(4) : null;
     var isCategory = !!(categoryKey && CATEGORY_LABELS[categoryKey]);
     var isMap = hash === "map";
-    var isFullPage = !!review || hash === "rankings" || hash === "about" || isMap;
+    var isCrawl = hash === "crawl";
+    var isFullPage = !!review || hash === "rankings" || hash === "about" || isMap || isCrawl;
     var isSubPage = isFullPage || isCategory;
     var view = review ? "review:" + slug : (isFullPage || isCategory) ? hash : "home";
 
@@ -442,6 +443,8 @@
     document.getElementById("map-page").hidden = !isMap;
     document.documentElement.classList.toggle("on-map", isMap);
     if (isMap && view !== lastView) openMapPage();
+    document.getElementById("crawl-page").hidden = !isCrawl;
+    if (isCrawl && view !== lastView) openCrawlPage();
     document.getElementById("home-intro").hidden = isSubPage;
     document.getElementById("reviews").hidden = isFullPage;
     filterGrid(isCategory ? categoryKey : null);
@@ -664,6 +667,25 @@
     el.hidden = false;
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function () { el.hidden = true; }, 3500);
+  }
+
+  // ---- Create-a-Crawl page ----
+  var crawlPage = null, demoPubs = null;
+  function openCrawlPage() {
+    var section = document.getElementById("crawl-page");
+    Promise.all([
+      pubListData ? null : loadContentFile("norwich-pubs.json").then(function (d) { pubListData = d; }),
+      demoPubs ? null : loadContentFile("demo-pubs.json").then(function (d) {
+        demoPubs = d.pubs.map(function (p) { return Object.assign({}, p, { hoursConfirmed: true }); });
+      }),
+      attributesReady,
+      crawlPage ? null : import("./crawl.js").then(function (m) { crawlPage = m.createCrawlPage(section, mapHelpers); })
+    ]).then(function () {
+      crawlPage.show({ pubs: mergedPubs(), demoPubs: demoPubs, attributes: ATTRIBUTES.pub || [] });
+    }).catch(function (err) {
+      if (window.console) console.error("crawl:", err);
+      toast("Couldn't load Create a Crawl just now.");
+    });
   }
 
   var mapHelpers = {

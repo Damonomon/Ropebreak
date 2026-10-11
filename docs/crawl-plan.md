@@ -7,8 +7,8 @@ Pub crawl planner for Norwich (coffee crawls later, same engine). Topics are wor
 | 1 | Standardising tags | **Done:** `www/content/attributes.json` |
 | 2 | Pub data: location, opening times, unreviewed pubs | **Done** (pub list fills in when the owner runs the GitHub workflow) |
 | 3 | Pub map | **Done:** `#map`, `www/js/map.js` |
-| 4 | Create-a-Crawl inputs (MVP = auto-generate) | Next |
-| 5 | Route: start/end points, "Overall route travel time on foot" | |
+| 4 | Create-a-Crawl inputs (MVP = auto-generate) | **Done:** `#crawl`, `www/js/crawl.js` + `crawl-engine.js` |
+| 5 | Route: start/end points, "Overall route travel time on foot" | Next (basic total walk time and a Google Maps link exist already) |
 | 6 | Sharing: what a shared crawl link shows | |
 | 7 | Caveats: check it's open, drink responsibly, HYDRATE | |
 | 8 | Crawl receipt | Later |
@@ -34,3 +34,9 @@ Pub crawl planner for Norwich (coffee crawls later, same engine). Topics are wor
 - Pins: reviewed pubs are blue with their score; unreviewed pubs are small grey dots. A "Reviewed only" toggle hides the grey ones.
 - Preview card: score, verdict, top 3 standout tags (`highlights()` in app.js; a review can pin its own with `"highlights": [fieldIds]`), today's hours (marked unconfirmed unless from the owner's review), Read review / Directions (Google Maps walking link) / Website.
 - "Show my location" uses @capacitor/geolocation in the app and browser geolocation on the web. The privacy page covers it.
+- Map page intro text: the owner wants a short explainer above the map later.
+- Create-a-Crawl is reached from a big button on the Map page (not in the top menu, for now).
+- Inputs: number of pubs (3–8, default 4), minimum rating, day and start time (default now), must-have rules: All / At least half / At least one / None × any tag. Scale tags mean "at least this level".
+- **Assumptions must be stated clearly in the UI** ("Our assumptions" box, open by default). They live in `ASSUMPTIONS` in crawl-engine.js plus the list in crawl.js; keep both in sync. Currently: 45 min per pub; 4.5 km/h; straight line +30%; each pub open for the whole visit; unknown hours assumed open and flagged; route starts wherever gives the shortest walk; half rounds up; scale levels include better; unrecorded tags don't count.
+- Generator: greedy nearest-open-pub from every start, protecting counted rules, then the best order (every order up to 6 stops, 2-opt above that). Ranked by stops, then unmet rules, then walk. Shuffle cycles through near-equal options. When rules can't be met, the best effort is shown with warnings.
+- Demo mode: `content/demo-pubs.json` has 24 made-up pubs (invented names on purpose; never real pubs). It's offered while fewer than 8 reviewed pubs are mapped.

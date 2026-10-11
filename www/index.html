@@ -186,8 +186,59 @@
     <button type="button" class="map-locate" data-map-locate aria-label="Show my location">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
     </button>
+    <a class="map-crawl-btn" href="#crawl">Create a Crawl &rarr;</a>
     <p class="map-message" hidden></p>
     <div class="map-card" hidden></div>
+  </section>
+
+  <section class="crawl wrap" id="crawl-page" hidden>
+    <a class="back-link" href="#map">&larr; Back to the map</a>
+    <div class="section-head">
+      <div class="section-head-title">
+        <span class="stack" aria-hidden="true"><span></span><span></span><span></span></span>
+        <h2>Create a Crawl</h2>
+      </div>
+      <p class="note">Tell us what you're after. We'll pick the pubs and the route.</p>
+    </div>
+    <p class="crawl-demo-banner" hidden></p>
+    <form class="crawl-form">
+      <div class="crawl-field">
+        <span class="crawl-label">How many pubs</span>
+        <div class="stepper">
+          <button type="button" data-count-down aria-label="Fewer pubs">&minus;</button>
+          <output data-count aria-live="polite">4</output>
+          <button type="button" data-count-up aria-label="More pubs">+</button>
+        </div>
+      </div>
+      <label class="crawl-field">
+        <span class="crawl-label">Minimum rating</span>
+        <select name="minRating" class="control-select">
+          <option value="0">Any</option>
+          <option value="5">5+</option>
+          <option value="7">7+</option>
+          <option value="8">8+</option>
+          <option value="9">9+</option>
+        </select>
+      </label>
+      <div class="crawl-field">
+        <span class="crawl-label">When</span>
+        <div class="crawl-when">
+          <select name="day" class="control-select" aria-label="Day"></select>
+          <input type="time" name="time" class="control-select" aria-label="Start time" step="900" required>
+        </div>
+      </div>
+      <div class="crawl-field crawl-field-rules">
+        <span class="crawl-label">Must-haves</span>
+        <div class="crawl-rules"></div>
+        <button type="button" class="link-btn" data-add-rule>+ Add a must-have</button>
+      </div>
+      <button type="submit" class="crawl-go">Create my crawl</button>
+    </form>
+    <div class="crawl-result" hidden aria-live="polite"></div>
+    <details class="crawl-assumptions" open>
+      <summary>Our assumptions</summary>
+      <ul></ul>
+    </details>
   </section>
 
   <!-- the open review is rendered here from content/reviews.json -->
