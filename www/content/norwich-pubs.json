@@ -1,0 +1,1696 @@
+{
+  "source": "© OpenStreetMap contributors (ODbL), openstreetmap.org/copyright",
+  "area": "Norwich (city boundary)",
+  "updated": "2026-10-11",
+  "pubs": [
+    {
+      "osm": "way/135775323",
+      "name": "Alexandra Tavern",
+      "lat": 52.632464,
+      "lng": 1.276361,
+      "address": "16 Stafford Street, NR2 3BB",
+      "website": "http://www.alexandratavern.co.uk/",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-00:00",
+        "fri": "10:30-00:00",
+        "sat": "10:30-00:00",
+        "sun": "12:00-23:00"
+      }
+    },
+    {
+      "osm": "way/168155454",
+      "name": "Bar 19",
+      "lat": 52.629661,
+      "lng": 1.299215,
+      "address": "19 Upper King Street, NR3 1RB"
+    },
+    {
+      "osm": "way/169965356",
+      "name": "Bedfords",
+      "lat": 52.629887,
+      "lng": 1.29487,
+      "address": "1 Old Post Office Yard, NR2 1SL",
+      "website": "https://www.bedfordsbar.co.uk/",
+      "hoursText": "We-Th 18:00+; Fr-Sa 12:00-15:00,18:00+; Su-Tu off"
+    },
+    {
+      "osm": "node/11194955529",
+      "name": "Beer Hatch",
+      "lat": 52.632674,
+      "lng": 1.297309,
+      "address": "22A Wensum Street, NR3 1HY",
+      "website": "https://www.beerhatch.com/",
+      "hours": {
+        "mon": "closed",
+        "tue": "11:00-19:00",
+        "wed": "11:00-19:00",
+        "thu": "11:00-20:30",
+        "fri": "11:00-20:30",
+        "sat": "11:00-20:30",
+        "sun": "14:00-19:00"
+      }
+    },
+    {
+      "osm": "way/119611320",
+      "name": "Ber Strete Gates",
+      "lat": 52.621331,
+      "lng": 1.301109,
+      "address": "174 Ber Street, NR1 3EN",
+      "hours": {
+        "mon": "12:00-22:00",
+        "tue": "12:00-22:00",
+        "wed": "12:00-22:00",
+        "thu": "12:00-22:00",
+        "fri": "12:00-00:00",
+        "sat": "12:00-00:00",
+        "sun": "12:00-22:00"
+      }
+    },
+    {
+      "osm": "node/8379696982",
+      "name": "Billy Wilson's Ageing Still",
+      "lat": 41.52532,
+      "lng": -72.075673,
+      "address": "57 Broadway, 06360",
+      "website": "https://www.facebook.com/Billy.Wilsons.Ageing.Still"
+    },
+    {
+      "osm": "node/9517147447",
+      "name": "Butcher Bhoy",
+      "lat": 52.630188,
+      "lng": 1.297545,
+      "address": "1 Queen Street, NR2 4SG",
+      "website": "https://thebutcherbhoy.com/"
+    },
+    {
+      "osm": "way/170338166",
+      "name": "Cactus",
+      "lat": 52.637033,
+      "lng": 1.296515,
+      "address": "102 Magdalen Street, NR3 1JD",
+      "hours": {
+        "mon": "09:30-18:00",
+        "tue": "09:30-18:00",
+        "wed": "09:30-18:00",
+        "thu": "09:30-18:00",
+        "fri": "09:30-22:00",
+        "sat": "09:30-22:00",
+        "sun": "11:00-18:00"
+      }
+    },
+    {
+      "osm": "relation/2266583",
+      "name": "Coach & Horses",
+      "lat": 52.62841,
+      "lng": 1.288871,
+      "address": "51 Bethel Street, NR2 1NR",
+      "website": "https://www.thecoachandhorsesbethelstreet.co.uk/",
+      "hours": {
+        "mon": "11:30-23:30",
+        "tue": "11:30-23:30",
+        "wed": "11:30-23:30",
+        "thu": "11:30-23:30",
+        "fri": "11:30-00:00",
+        "sat": "11:30-00:00",
+        "sun": "closed"
+      }
+    },
+    {
+      "osm": "way/170320268",
+      "name": "Coach & Horses",
+      "lat": 52.625866,
+      "lng": 1.285927,
+      "address": "1 Union Street, NR2 2SL",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-23:00",
+        "sat": "12:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/170331338",
+      "name": "Duke of Wellington",
+      "lat": 52.642274,
+      "lng": 1.29388,
+      "address": "91-93 Waterloo Road, NR3 1EG",
+      "website": "http://www.dukeofwellingtonnorwich.co.uk/",
+      "hours": {
+        "mon": "12:00-23:30",
+        "tue": "12:00-23:30",
+        "wed": "12:00-23:30",
+        "thu": "12:00-23:30",
+        "fri": "12:00-00:00",
+        "sat": "12:00-00:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "node/11065830698",
+      "name": "Epicure Brewing",
+      "lat": 41.525711,
+      "lng": -72.074399
+    },
+    {
+      "osm": "way/152298966",
+      "name": "Fat Cat & Canary",
+      "lat": 52.625378,
+      "lng": 1.321377,
+      "address": "101 Thorpe Road, NR1 1TR",
+      "website": "http://www.fatcatcanary.co.uk/",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-00:00",
+        "sat": "11:00-00:00",
+        "sun": "12:00-23:00"
+      }
+    },
+    {
+      "osm": "way/121635504",
+      "name": "Gibraltar Gardens",
+      "lat": 52.64105,
+      "lng": 1.277124,
+      "address": "288 Heigham Street, NR2 4LZ",
+      "website": "https://www.gibraltargardens.com/",
+      "hours": {
+        "mon": "09:00-23:00",
+        "tue": "09:00-23:00",
+        "wed": "09:00-23:00",
+        "thu": "09:00-23:00",
+        "fri": "09:00-23:00",
+        "sat": "09:00-23:00",
+        "sun": "09:00-23:00"
+      }
+    },
+    {
+      "osm": "node/6586004587",
+      "name": "Harp & Dragon Pub",
+      "lat": 41.524417,
+      "lng": -72.076894,
+      "address": "130 Main Street, 06360",
+      "website": "https://www.hndpub.com"
+    },
+    {
+      "osm": "way/119476679",
+      "name": "King's Arms",
+      "lat": 52.620551,
+      "lng": 1.298365,
+      "address": "33 Hall Road, NR1 3HQ",
+      "website": "http://www.kingsarmsnorwich.co.uk/",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-23:30",
+        "sat": "11:00-23:30",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/170640367",
+      "name": "Kings Head",
+      "lat": 52.63486,
+      "lng": 1.296328,
+      "address": "42 Magdalen Street, NR3 1JE",
+      "website": "http://www.kingsheadnorwich.com/",
+      "hoursText": "Mo-Sa 12:00+; Su 12:00-00:00"
+    },
+    {
+      "osm": "way/135964026",
+      "name": "Lamb Inn",
+      "lat": 52.627174,
+      "lng": 1.293996,
+      "address": "Haymarket, NR2 1QD",
+      "website": "http://www.lambinn-norwich.co.uk/",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-00:00",
+        "fri": "11:00-00:30",
+        "sat": "10:00-00:30",
+        "sun": "12:00-22:00"
+      }
+    },
+    {
+      "osm": "way/170639760",
+      "name": "Last Pub Standing",
+      "lat": 52.628775,
+      "lng": 1.299415,
+      "address": "27-29 King Street, NR1 1PD",
+      "website": "https://lpsnorwich.co.uk/",
+      "hours": {
+        "mon": "closed",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-00:00",
+        "sat": "12:00-00:00",
+        "sun": "12:00-18:00"
+      }
+    },
+    {
+      "osm": "way/166345378",
+      "name": "Lollards Pit",
+      "lat": 52.632233,
+      "lng": 1.309383,
+      "address": "Bridge House, 69-71 Riverside Road, NR1 1SR",
+      "website": "https://www.lollardspit.com/",
+      "hours": {
+        "mon": "16:00-23:00",
+        "tue": "16:00-23:00",
+        "wed": "16:00-23:00",
+        "thu": "16:00-23:00",
+        "fri": "16:00-00:00",
+        "sat": "12:00-01:00",
+        "sun": "13:00-23:00"
+      }
+    },
+    {
+      "osm": "way/171371220",
+      "name": "Louis Marchesi",
+      "lat": 52.631755,
+      "lng": 1.298337,
+      "address": "17 Tombland, NR3 1HF",
+      "website": "https://www.norfolkpubs.co.uk/norwich/lnorwich/nclom.htm",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-23:00",
+        "sat": "11:00-23:00",
+        "sun": "11:00-23:00"
+      }
+    },
+    {
+      "osm": "way/1112144119",
+      "name": "Malt and Mardle",
+      "lat": 52.638528,
+      "lng": 1.297039,
+      "address": "163 Magdalen Street, NR3 1NF",
+      "website": "https://maltandmardle.co.uk/"
+    },
+    {
+      "osm": "way/170794274",
+      "name": "Marlborough Arms",
+      "lat": 52.639426,
+      "lng": 1.299738,
+      "address": "43 Spencer Street, NR3 4PB",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-23:00",
+        "sat": "12:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "node/12737823052",
+      "name": "Norwich Pub",
+      "lat": 43.714842,
+      "lng": -72.309627
+    },
+    {
+      "osm": "way/170761255",
+      "name": "Pear Tree Inn",
+      "lat": 52.625404,
+      "lng": 1.278378,
+      "address": "79 Unthank Road, NR2 2PE",
+      "website": "https://www.peartreeinnnorwich.com/",
+      "hours": {
+        "mon": "11:00-00:30",
+        "tue": "11:00-00:30",
+        "wed": "11:00-00:30",
+        "thu": "11:00-00:30",
+        "fri": "11:00-00:30",
+        "sat": "10:00-00:00",
+        "sun": "10:00-00:00"
+      }
+    },
+    {
+      "osm": "way/136090709",
+      "name": "Pig & Whistle",
+      "lat": 52.625738,
+      "lng": 1.295094,
+      "address": "2-8 All Saints Green, NR1 3NA",
+      "website": "https://www.craftunionpubs.com/pig-and-whistle-norwich",
+      "hours": {
+        "mon": "11:30-23:00",
+        "tue": "11:30-23:00",
+        "wed": "11:30-23:00",
+        "thu": "11:30-00:00",
+        "fri": "11:00-02:00",
+        "sat": "11:00-02:00",
+        "sun": "11:30-23:00"
+      }
+    },
+    {
+      "osm": "way/171202245",
+      "name": "Plasterers Arms",
+      "lat": 52.636714,
+      "lng": 1.298259,
+      "address": "43 Cowgate, NR3 1SZ",
+      "website": "https://theplasterersarms.co.uk/",
+      "hoursText": "Mo-Th 12:00-00:00; Fr 12:00-01:00, Sa 10:00-01:00, Su 10:00-00:00"
+    },
+    {
+      "osm": "way/119559987",
+      "name": "Pogue Mahon's",
+      "lat": 52.629289,
+      "lng": 1.302472,
+      "address": "72 Prince of Wales Road, NR1 1LT",
+      "website": "https://poguemahons.co.uk/"
+    },
+    {
+      "osm": "node/13910935548",
+      "name": "Redwell Brewery Taproom",
+      "lat": 52.614505,
+      "lng": 1.312359,
+      "address": "REDWELL BREWERY, 7 The Arches, NR1 2EF",
+      "website": "https://www.redwellbrewing.com/taproom/",
+      "hours": {
+        "mon": "closed",
+        "tue": "closed",
+        "wed": "closed",
+        "thu": "closed",
+        "fri": "12:00-21:00",
+        "sat": "12:00-21:00",
+        "sun": "12:00-17:00"
+      }
+    },
+    {
+      "osm": "way/122732861",
+      "name": "Rose Tavern",
+      "lat": 52.623906,
+      "lng": 1.281909,
+      "address": "88 Rupert Street, NR2 2AT",
+      "website": "http://www.rosetavern.co.uk/",
+      "hours": {
+        "mon": "12:00-23:30",
+        "tue": "12:00-23:30",
+        "wed": "12:00-23:30",
+        "thu": "12:00-23:30",
+        "fri": "12:00-00:00",
+        "sat": "12:00-00:00",
+        "sun": "12:00-23:30"
+      }
+    },
+    {
+      "osm": "way/366714569",
+      "name": "Shoe Makers",
+      "lat": 52.607308,
+      "lng": 1.289236,
+      "address": "The Lastings, 1 Sandy Lane, NR4 6EF",
+      "website": "https://www.hungryhorse.co.uk/pubs/norfolk/shoe-makers/",
+      "hours": {
+        "mon": "09:00-23:00",
+        "tue": "09:00-23:00",
+        "wed": "09:00-23:00",
+        "thu": "09:00-23:00",
+        "fri": "09:00-23:00",
+        "sat": "09:00-23:00",
+        "sun": "09:00-22:00"
+      }
+    },
+    {
+      "osm": "way/123035165",
+      "name": "St Andrews Brewhouse",
+      "lat": 52.630727,
+      "lng": 1.295435,
+      "address": "41 Saint Andrews Street, NR2 4TP",
+      "website": "https://www.standrewsbrewhouse.com/",
+      "hours": {
+        "mon": "10:00-00:00",
+        "tue": "10:00-00:00",
+        "wed": "10:00-00:00",
+        "thu": "10:00-00:00",
+        "fri": "10:00-00:00",
+        "sat": "10:00-00:00",
+        "sun": "11:00-23:00"
+      }
+    },
+    {
+      "osm": "node/6586004392",
+      "name": "Strange Brew Pub",
+      "lat": 41.524066,
+      "lng": -72.078338
+    },
+    {
+      "osm": "way/171373184",
+      "name": "Temple Bar",
+      "lat": 52.629056,
+      "lng": 1.284854,
+      "address": "2 Unthank Road, NR2 2RA",
+      "hours": {
+        "mon": "12:00-01:00",
+        "tue": "12:00-01:00",
+        "wed": "12:00-01:00",
+        "thu": "12:00-01:00",
+        "fri": "12:00-01:00",
+        "sat": "12:00-01:00",
+        "sun": "12:00-00:00"
+      }
+    },
+    {
+      "osm": "way/169957628",
+      "name": "The Adam And Eve",
+      "lat": 52.633801,
+      "lng": 1.303197,
+      "address": "17 Bishopgate, NR3 1RZ",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-23:00",
+        "sat": "11:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/169959573",
+      "name": "The Angel Gardens",
+      "lat": 52.643938,
+      "lng": 1.29219,
+      "address": "96 Angel Road, NR3 3HT",
+      "website": "https://www.norwichinns.com/2-16",
+      "hours": {
+        "mon": "11:00-00:00",
+        "tue": "11:00-00:00",
+        "wed": "11:00-00:00",
+        "thu": "11:00-00:00",
+        "fri": "11:00-00:00",
+        "sat": "11:00-01:00",
+        "sun": "12:00-23:30"
+      }
+    },
+    {
+      "osm": "way/169960093",
+      "name": "The Artichoke",
+      "lat": 52.638967,
+      "lng": 1.296903,
+      "address": "1 Magdalen Road, NR3 4LW",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-23:00",
+        "sat": "12:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/115093428",
+      "name": "The Beehive",
+      "lat": 52.617494,
+      "lng": 1.267579,
+      "address": "30 Leopold Road, NR4 7PJ",
+      "website": "http://www.beehivepubnorwich.co.uk/",
+      "hours": {
+        "mon": "15:00-22:00",
+        "tue": "15:00-22:00",
+        "wed": "15:00-22:00",
+        "thu": "15:00-23:00",
+        "fri": "12:00-23:00",
+        "sat": "12:00-23:00",
+        "sun": "12:00-22:00"
+      }
+    },
+    {
+      "osm": "way/119768749",
+      "name": "The Belgian Monk",
+      "lat": 52.629941,
+      "lng": 1.292482,
+      "address": "7 Pottergate, NR2 1DS",
+      "website": "https://www.thebelgianmonk.com/",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-23:00",
+        "sat": "11:00-23:00",
+        "sun": "12:00-22:00"
+      }
+    },
+    {
+      "osm": "way/1036300491",
+      "name": "The Bell Hotel",
+      "lat": 52.627314,
+      "lng": 1.295176,
+      "address": "5 Orford Hill, NR1 3QB",
+      "website": "https://www.jdwetherspoon.com/pubs/the-bell-hotel-norwich/",
+      "hours": {
+        "mon": "08:00-00:00",
+        "tue": "08:00-00:00",
+        "wed": "08:00-00:00",
+        "thu": "08:00-00:00",
+        "fri": "08:00-00:00",
+        "sat": "08:00-00:00",
+        "sun": "08:00-00:00"
+      }
+    },
+    {
+      "osm": "way/135775324",
+      "name": "The Belle Vue",
+      "lat": 52.632545,
+      "lng": 1.274871,
+      "address": "46 Saint Philips Road, NR2 3BL",
+      "website": "https://www.goldthorpepubs.co.uk/the-belle-vue",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-23:00",
+        "sat": "12:00-23:00",
+        "sun": "12:00-22:00"
+      }
+    },
+    {
+      "osm": "way/169980891",
+      "name": "The Black Horse",
+      "lat": 52.630557,
+      "lng": 1.278535,
+      "address": "50 Earlham Road, NR2 3DE",
+      "website": "http://theblackhorsenorwich.com/",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-23:00",
+        "sat": "11:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/120694315",
+      "name": "The Boundary",
+      "lat": 52.656039,
+      "lng": 1.277154,
+      "address": "414 Aylsham Road, NR3 2SA",
+      "website": "https://www.craftunionpubs.com/the-boundary-pub-norwich",
+      "hours": {
+        "mon": "10:00-23:00",
+        "tue": "10:00-23:00",
+        "wed": "10:00-23:00",
+        "thu": "10:00-23:00",
+        "fri": "10:00-00:00",
+        "sat": "10:00-00:00",
+        "sun": "10:00-23:00"
+      }
+    },
+    {
+      "osm": "way/137381657",
+      "name": "The Brewery Tap",
+      "lat": 52.643421,
+      "lng": 1.30033,
+      "address": "98-100 Lawson Road, NR3 4LF",
+      "website": "http://www.fatcattap.co.uk/",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-00:00",
+        "sat": "11:00-00:00",
+        "sun": "11:00-22:30"
+      }
+    },
+    {
+      "osm": "way/93447444",
+      "name": "The Brickmakers",
+      "lat": 52.651539,
+      "lng": 1.309841,
+      "address": "The Brickmakers Live Music Venue, 496 Sprowston Road, NR3 4DY",
+      "website": "https://www.thebrickmakers.com/",
+      "hours": {
+        "mon": "12:00-00:30",
+        "tue": "12:00-00:30",
+        "wed": "12:00-00:30",
+        "thu": "12:00-00:30",
+        "fri": "12:00-01:30",
+        "sat": "12:00-01:30",
+        "sun": "12:00-00:30"
+      }
+    },
+    {
+      "osm": "way/123870345",
+      "name": "The Castle Inn",
+      "lat": 52.634784,
+      "lng": 1.310025,
+      "address": "1 Spitalfields, NR1 4EY",
+      "website": "https://www.thecastle-pub.com/",
+      "hours": {
+        "mon": "14:00-00:00",
+        "tue": "14:00-00:00",
+        "wed": "14:00-00:00",
+        "thu": "14:00-02:00",
+        "fri": "14:00-02:00",
+        "sat": "14:00-04:00",
+        "sun": "14:00-00:00"
+      }
+    },
+    {
+      "osm": "way/103273686",
+      "name": "The Catherine Wheel",
+      "lat": 52.638351,
+      "lng": 1.291732,
+      "address": "61 St Augustines Street, NR3 3BG",
+      "website": "http://www.inthewheel.co.uk/",
+      "hours": {
+        "mon": "closed",
+        "tue": "17:00-00:00",
+        "wed": "17:00-00:00",
+        "thu": "17:00-00:00",
+        "fri": "17:00-03:00",
+        "sat": "17:00-03:00",
+        "sun": "17:00-00:00"
+      }
+    },
+    {
+      "osm": "way/71297151",
+      "name": "The Cellar House",
+      "lat": 52.608949,
+      "lng": 1.25279,
+      "address": "The Cellar House, 2 Eaton Street, NR4 7AB",
+      "website": "https://www.thecellarhouse.co.uk/",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-00:00",
+        "sat": "12:00-21:00",
+        "sun": "09:30-22:00"
+      }
+    },
+    {
+      "osm": "way/170315605",
+      "name": "The Champion",
+      "lat": 52.624292,
+      "lng": 1.289819,
+      "address": "101 Chapelfield Road, NR2 1SE",
+      "website": "http://www.championpub.co.uk/",
+      "hours": {
+        "mon": "11:00-11:00",
+        "tue": "11:00-11:00",
+        "wed": "11:00-11:00",
+        "thu": "11:00-11:00",
+        "fri": "11:00-11:00",
+        "sat": "11:00-00:00",
+        "sun": "11:00-18:00"
+      }
+    },
+    {
+      "osm": "way/118612230",
+      "name": "The Cherry Tree",
+      "lat": 52.641101,
+      "lng": 1.236135,
+      "address": "Dereham Road, NR5 8TD",
+      "website": "https://www.cherrytreepubnorwich.co.uk/",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-00:30",
+        "sat": "11:00-00:30",
+        "sun": "11:00-23:00"
+      }
+    },
+    {
+      "osm": "way/116120896",
+      "name": "The Coach and Horses",
+      "lat": 52.627004,
+      "lng": 1.310992,
+      "address": "82 Thorpe Road, NR1 1BA",
+      "website": "https://www.thecoachthorperoad.co.uk/",
+      "hours": {
+        "mon": "11:00-00:00",
+        "tue": "11:00-00:00",
+        "wed": "11:00-00:00",
+        "thu": "11:00-00:00",
+        "fri": "11:00-01:00",
+        "sat": "11:00-01:00",
+        "sun": "11:00-00:00"
+      }
+    },
+    {
+      "osm": "way/119331012",
+      "name": "The Coachmakers Arms",
+      "lat": 52.623829,
+      "lng": 1.289844,
+      "address": "9 St Stephens Road, NR1 3SP",
+      "website": "https://coachmakers-arms-norwich.co.uk/",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-23:00",
+        "sat": "11:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/124952109",
+      "name": "The Compleat Angler",
+      "lat": 52.628159,
+      "lng": 1.305421,
+      "address": "120 Prince of Wales Road, NR1 1NS",
+      "website": "https://www.greeneking.co.uk/pubs/norfolk/compleat-angler",
+      "hoursText": "Mo-Th 11:00-00:00; Fr 11:00-01:00; Sa 11:00-01:30; Su 11:00-22:30; \"Closed for refirb 22 July-2 Aug 2019\""
+    },
+    {
+      "osm": "way/170325077",
+      "name": "The Cottage",
+      "lat": 52.637475,
+      "lng": 1.302701,
+      "address": "9 Silver Road, NR3 4TB",
+      "website": "http://www.thecottagenorwich.co.uk/",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-23:00",
+        "sat": "12:00-23:00",
+        "sun": "12:00-23:00"
+      }
+    },
+    {
+      "osm": "way/138504756",
+      "name": "The Drawing Rooms",
+      "lat": 52.630154,
+      "lng": 1.291663,
+      "address": "23 Pottergate, NR2 1DS",
+      "website": "https://www.drawingroomsnorwich.co.uk/"
+    },
+    {
+      "osm": "way/114791476",
+      "name": "The Eagle",
+      "lat": 52.620399,
+      "lng": 1.283668,
+      "address": "33 Newmarket Road, NR2 2HN",
+      "website": "https://www.theeaglepub.co.uk/",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-23:00",
+        "sat": "09:00-23:00",
+        "sun": "09:00-23:00"
+      }
+    },
+    {
+      "osm": "way/127573682",
+      "name": "The Earlham",
+      "lat": 52.63088,
+      "lng": 1.279893,
+      "address": "41 Earlham Road, NR2 3AD",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:30",
+        "fri": "11:00-24:00",
+        "sat": "11:00-24:00",
+        "sun": "09:00-22:30"
+      }
+    },
+    {
+      "osm": "way/168293483",
+      "name": "The Eaton Cottage",
+      "lat": 52.622487,
+      "lng": 1.275397,
+      "address": "75 Mount Pleasant, NR2 2DQ",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-00:00",
+        "sat": "12:00-00:00",
+        "sun": "12:00-23:00"
+      }
+    },
+    {
+      "osm": "way/116597787",
+      "name": "The Edith Cavell",
+      "lat": 52.631177,
+      "lng": 1.29877,
+      "address": "7 Tombland, NR3 1HF",
+      "website": "https://www.the-edithcavell.co.uk/"
+    },
+    {
+      "osm": "way/105854403",
+      "name": "The Farmhouse",
+      "lat": 52.621187,
+      "lng": 1.263579,
+      "address": "50 Colman Road, NR4 7EH",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-23:00",
+        "sat": "12:00-24:00",
+        "sun": "12:00-24:00"
+      }
+    },
+    {
+      "osm": "way/108609314",
+      "name": "The Fat Cat",
+      "lat": 52.635107,
+      "lng": 1.2756,
+      "address": "49 West End Street, NR2 4NA",
+      "website": "https://www.fatcatpub.co.uk/",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-00:00",
+        "fri": "12:00-00:00",
+        "sat": "11:00-00:00",
+        "sun": "12:00-23:00"
+      }
+    },
+    {
+      "osm": "way/103025547",
+      "name": "The Fiveways",
+      "lat": 52.629271,
+      "lng": 1.248579,
+      "address": "The Fiveways, Gipsy Lane, NR5 8AZ",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-23:00",
+        "sat": "12:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/129538556",
+      "name": "The Freemasons Arms",
+      "lat": 52.620487,
+      "lng": 1.298828,
+      "address": "27 Hall Road, NR1 3HQ",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-01:00",
+        "sat": "11:00-01:00",
+        "sun": "closed"
+      }
+    },
+    {
+      "osm": "way/116709459",
+      "name": "The Garden House",
+      "lat": 52.628193,
+      "lng": 1.275221,
+      "address": "1 Pembroke Road, NR2 3HD",
+      "website": "https://www.craftunionpubs.com/garden-house-pub-norwich",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "closed",
+        "thu": "closed",
+        "fri": "12:00-23:30",
+        "sat": "12:00-23:30",
+        "sun": "12:00-23:00"
+      }
+    },
+    {
+      "osm": "way/163413197",
+      "name": "The Garnet",
+      "lat": 52.628125,
+      "lng": 1.292852,
+      "address": "36 Market Place, NR2 1RD",
+      "website": "https://www.thegarnet.co.uk/",
+      "hours": {
+        "mon": "10:00-00:30",
+        "tue": "10:00-00:30",
+        "wed": "10:00-00:30",
+        "thu": "10:00-02:00",
+        "fri": "10:00-02:00",
+        "sat": "10:00-02:00",
+        "sun": "11:00-20:00"
+      }
+    },
+    {
+      "osm": "way/119604430",
+      "name": "The Glass House",
+      "lat": 52.632419,
+      "lng": 1.297999,
+      "address": "11-13 Wensum Street, NR3 1LA",
+      "website": "https://www.jdwetherspoon.com/pubs/the-glass-house-norwich/",
+      "hoursText": "Mo,Tu,We,Th,Su 08:00-24:00; Fr,Sa 08:00-25:00"
+    },
+    {
+      "osm": "way/135263795",
+      "name": "The Golden Star",
+      "lat": 52.633025,
+      "lng": 1.292634,
+      "address": "57 Colegate, NR3 1DD",
+      "website": "https://www.goldenstarnorwich.co.uk/",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-00:00",
+        "sat": "09:00-00:00",
+        "sun": "19:00-23:00"
+      }
+    },
+    {
+      "osm": "way/170560554",
+      "name": "The Heath House",
+      "lat": 52.643843,
+      "lng": 1.306489,
+      "address": "99 Gertrude Road, NR3 4SG",
+      "hours": {
+        "mon": "12:00-23:30",
+        "tue": "12:00-23:30",
+        "wed": "12:00-23:30",
+        "thu": "12:00-23:30",
+        "fri": "12:00-23:30",
+        "sat": "12:00-23:30",
+        "sun": "12:00-23:30"
+      }
+    },
+    {
+      "osm": "way/123870346",
+      "name": "The Jubilee",
+      "lat": 52.629125,
+      "lng": 1.311654,
+      "address": "26 Saint Leonards Road, NR1 4BL",
+      "website": "http://jubileefreehouse.co.uk/",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-24:00",
+        "sat": "12:00-24:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/170763762",
+      "name": "The Leopard",
+      "lat": 52.637321,
+      "lng": 1.299599,
+      "address": "98 Bull Close Road, NR3 1NQ",
+      "hours": {
+        "mon": "13:00-23:00",
+        "tue": "13:00-23:00",
+        "wed": "13:00-23:00",
+        "thu": "13:00-23:00",
+        "fri": "13:00-24:00",
+        "sat": "13:00-24:00",
+        "sun": "13:00-23:00"
+      }
+    },
+    {
+      "osm": "way/170764586",
+      "name": "The Lord Rosebery",
+      "lat": 52.64436,
+      "lng": 1.295255,
+      "address": "94 Rosebery Road, NR3 3AB",
+      "website": "https://www.lordrosebery.co.uk/",
+      "hours": {
+        "mon": "12:00-22:00",
+        "tue": "12:00-22:00",
+        "wed": "12:00-22:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-23:00",
+        "sat": "11:00-23:00",
+        "sun": "12:00-22:00"
+      }
+    },
+    {
+      "osm": "node/12376771559",
+      "name": "The Mad Cat",
+      "lat": 52.635042,
+      "lng": 1.276021,
+      "address": "39-41 West End Street, NR2 4NA",
+      "hours": {
+        "mon": "closed",
+        "tue": "closed",
+        "wed": "16:00-23:00",
+        "thu": "16:00-23:00",
+        "fri": "16:00-23:00",
+        "sat": "12:00-23:00",
+        "sun": "12:00-18:00"
+      }
+    },
+    {
+      "osm": "way/170795332",
+      "name": "The Marsh Harrier",
+      "lat": 52.598695,
+      "lng": 1.277646,
+      "address": "158 Ipswich Road, NR4 6DX",
+      "website": "https://www.vintageinn.co.uk/restaurants/east/themarshharriernorwich",
+      "hours": {
+        "mon": "12:00-22:00",
+        "tue": "12:00-22:00",
+        "wed": "12:00-22:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-23:00",
+        "sat": "12:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/112817872",
+      "name": "The Mischief",
+      "lat": 52.633051,
+      "lng": 1.296753,
+      "address": "8 Fye Bridge Street, NR3 1HZ",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-23:00",
+        "sat": "12:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/128738264",
+      "name": "The Murderer's",
+      "lat": 52.62689,
+      "lng": 1.29528,
+      "address": "2-4 Timberhill, NR1 3LB",
+      "website": "https://www.themurderers.co.uk/",
+      "hours": {
+        "mon": "10:00-23:30",
+        "tue": "10:00-23:30",
+        "wed": "10:00-23:30",
+        "thu": "10:00-23:30",
+        "fri": "10:00-23:30",
+        "sat": "10:00-23:30",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "node/904071475",
+      "name": "The Nelson",
+      "lat": 52.627647,
+      "lng": 1.30522,
+      "address": "Prince of Wales Road, NR1 1DX",
+      "website": "https://www.tabletable.co.uk/en-gb/locations/norfolk/the-nelson",
+      "hours": {
+        "mon": "06:30-23:00",
+        "tue": "06:30-23:00",
+        "wed": "06:30-23:00",
+        "thu": "06:30-23:00",
+        "fri": "06:30-23:00",
+        "sat": "07:00-23:30",
+        "sun": "07:00-22:30"
+      }
+    },
+    {
+      "osm": "way/139453240",
+      "name": "The Nelson",
+      "lat": 52.637675,
+      "lng": 1.276057,
+      "address": "122 Nelson Street, NR2 4DR",
+      "hours": {
+        "mon": "12:00-00:00",
+        "tue": "12:00-00:00",
+        "wed": "12:00-00:00",
+        "thu": "12:00-00:00",
+        "fri": "12:00-00:00",
+        "sat": "12:00-00:00",
+        "sun": "12:00-00:00"
+      }
+    },
+    {
+      "osm": "way/123011787",
+      "name": "The Norkie",
+      "lat": 52.637112,
+      "lng": 1.216577,
+      "address": "Norkie, Bowthorpe Main Centre, NR5 9HA",
+      "hours": {
+        "mon": "12:00-24:00",
+        "tue": "12:00-24:00",
+        "wed": "12:00-24:00",
+        "thu": "12:00-24:00",
+        "fri": "12:00-01:30",
+        "sat": "12:00-01:30",
+        "sun": "12:00-23:00"
+      }
+    },
+    {
+      "osm": "way/140516377",
+      "name": "The Oak Tree",
+      "lat": 52.611248,
+      "lng": 1.281453,
+      "address": "59 Ipswich Road, NR4 6LA",
+      "website": "https://www.oaktreenorwich.co.uk/",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-23:00",
+        "sat": "11:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/134666613",
+      "name": "The Oaks",
+      "lat": 52.667304,
+      "lng": 1.272977,
+      "address": "Delft Way, NR6 6BB",
+      "website": "https://www.brewersfayre.co.uk/brewersfayre/our-pubs/norwich/oaks.html",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-23:00",
+        "sat": "12:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/123525386",
+      "name": "The Plough",
+      "lat": 52.631138,
+      "lng": 1.288139,
+      "address": "58 Saint Benedicts Street, NR2 4AR",
+      "website": "https://www.grainbrewery.co.uk/grain-pubs/",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-24:00",
+        "sat": "12:00-24:00",
+        "sun": "12:00-23:00"
+      }
+    },
+    {
+      "osm": "way/171204863",
+      "name": "The Prince of Denmark",
+      "lat": 52.645065,
+      "lng": 1.301786,
+      "address": "140 Sprowston Road, NR3 4JQ",
+      "hoursText": "24/7 closed"
+    },
+    {
+      "osm": "way/136363795",
+      "name": "The Queen of Iceni",
+      "lat": 52.625084,
+      "lng": 1.303807,
+      "address": "Wetherspoons, 6 Wherry Road, NR1 1WX",
+      "website": "https://www.jdwetherspoon.com/pubs/the-queen-of-iceni-norwich/",
+      "hours": {
+        "mon": "08:00-23:00",
+        "tue": "08:00-23:00",
+        "wed": "08:00-23:00",
+        "thu": "08:00-23:00",
+        "fri": "08:00-01:00",
+        "sat": "08:00-01:00",
+        "sun": "08:00-23:00"
+      }
+    },
+    {
+      "osm": "way/108415768",
+      "name": "The Red Lion",
+      "lat": 52.632643,
+      "lng": 1.308386,
+      "address": "79 Bishopgate, NR1 4AA",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-23:00",
+        "sat": "11:00-23:00",
+        "sun": "11:00-23:00"
+      }
+    },
+    {
+      "osm": "way/71297069",
+      "name": "The Red Lion",
+      "lat": 52.608201,
+      "lng": 1.250528,
+      "address": "52 Eaton Street, NR4 7LD",
+      "website": "https://www.redlion-eaton.co.uk/",
+      "hours": {
+        "mon": "11:00-00:00",
+        "tue": "11:00-00:00",
+        "wed": "11:00-00:00",
+        "thu": "11:00-00:00",
+        "fri": "11:00-00:00",
+        "sat": "11:00-00:00",
+        "sun": "12:00-00:00"
+      }
+    },
+    {
+      "osm": "way/121499486",
+      "name": "The Reindeer",
+      "lat": 52.6321,
+      "lng": 1.283992,
+      "address": "10 Dereham Road, NR2 4AY",
+      "website": "http://www.thereindeerpub.co.uk/",
+      "hours": {
+        "mon": "closed",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-00:00",
+        "sat": "12:00-00:00",
+        "sun": "12:00-22:00"
+      }
+    },
+    {
+      "osm": "way/123657384",
+      "name": "The Ribs Of Beef",
+      "lat": 52.632719,
+      "lng": 1.297161,
+      "address": "Ribs of Beef, 24 Wensum Street, NR3 1HY",
+      "website": "https://ribsofbeef.co.uk/",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-00:00",
+        "sat": "11:00-00:00",
+        "sun": "11:00-23:00"
+      }
+    },
+    {
+      "osm": "way/171223674",
+      "name": "The Robin Hood",
+      "lat": 52.637138,
+      "lng": 1.305688,
+      "address": "84 Mousehold Street, NR3 1NX",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-00:00",
+        "sat": "11:00-00:00",
+        "sun": "11:00-23:00"
+      }
+    },
+    {
+      "osm": "way/119731887",
+      "name": "The Rose",
+      "lat": 52.620733,
+      "lng": 1.300881,
+      "address": "233-235 Queens Road, NR1 3AE",
+      "website": "http://www.norwichbear.com/the-rose-inn/",
+      "hours": {
+        "mon": "15:00-23:30",
+        "tue": "15:00-23:30",
+        "wed": "15:00-23:30",
+        "thu": "15:00-23:30",
+        "fri": "12:00-23:45",
+        "sat": "12:00-23:45",
+        "sun": "12:00-23:00"
+      }
+    },
+    {
+      "osm": "way/138504789",
+      "name": "The Rumsey Wells",
+      "lat": 52.630593,
+      "lng": 1.293168,
+      "address": "4 Saint Andrews Street, NR2 4AF",
+      "website": "https://www.rumseywells.co.uk/",
+      "hours": {
+        "mon": "12:00-00:00",
+        "tue": "12:00-00:00",
+        "wed": "12:00-00:00",
+        "thu": "12:00-00:00",
+        "fri": "12:00-00:00",
+        "sat": "12:00-00:00",
+        "sun": "12:00-00:00"
+      }
+    },
+    {
+      "osm": "way/171368788",
+      "name": "The Stanley",
+      "lat": 52.640713,
+      "lng": 1.296798,
+      "address": "33 Magdalen Road, NR3 4LG",
+      "hours": {
+        "mon": "12:00-00:30",
+        "tue": "12:00-00:30",
+        "wed": "12:00-00:30",
+        "thu": "12:00-00:30",
+        "fri": "12:00-00:30",
+        "sat": "12:00-00:30",
+        "sun": "12:00-23:00"
+      }
+    },
+    {
+      "osm": "way/120680941",
+      "name": "The Steam Packet",
+      "lat": 52.628185,
+      "lng": 1.299208,
+      "address": "39 Crown Road, NR1 3DT",
+      "website": "https://steampacket.info/",
+      "hours": {
+        "mon": "closed",
+        "tue": "15:00-22:00",
+        "wed": "15:00-22:00",
+        "thu": "15:00-22:00",
+        "fri": "12:00-22:30",
+        "sat": "12:00-22:30",
+        "sun": "12:00-18:00"
+      }
+    },
+    {
+      "osm": "way/138504797",
+      "name": "The Strangers Tavern",
+      "lat": 52.630609,
+      "lng": 1.291946,
+      "address": "16 Charing Cross, NR2 4AL"
+    },
+    {
+      "osm": "way/122732862",
+      "name": "The Unthank Arms",
+      "lat": 52.620987,
+      "lng": 1.279104,
+      "address": "149 Newmarket Street, NR2 2DR",
+      "website": "https://www.theunthankarms.com/",
+      "hoursText": "Mo-Th 11:00-23:00; Fr 11:00+; Sa 10:00+; Su 10:00-22:30"
+    },
+    {
+      "osm": "way/119611031",
+      "name": "The Vine Thai Cuisine",
+      "lat": 52.629401,
+      "lng": 1.293008,
+      "address": "The Vine, 7 Dove Street, NR2 1DE",
+      "website": "https://vinethai.co.uk/",
+      "hours": {
+        "mon": "12:00-00:00",
+        "tue": "12:00-00:00",
+        "wed": "12:00-00:00",
+        "thu": "12:00-00:00",
+        "fri": "12:00-00:00",
+        "sat": "12:00-00:00",
+        "sun": "12:00-00:00"
+      }
+    },
+    {
+      "osm": "way/171387268",
+      "name": "The West End Retreat",
+      "lat": 52.635032,
+      "lng": 1.279057,
+      "address": "West End Retreat, 1 Browne Street, NR2 4QY",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-23:00",
+        "sat": "12:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/117819574",
+      "name": "The Whalebone",
+      "lat": 52.644099,
+      "lng": 1.296996,
+      "address": "144 Magdalen Road, NR3 4BA",
+      "website": "https://www.whalebonefreehouse.co.uk/",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-00:00",
+        "sat": "11:00-00:00",
+        "sun": "12:00-23:00"
+      }
+    },
+    {
+      "osm": "way/112467622",
+      "name": "The White Lion",
+      "lat": 52.634944,
+      "lng": 1.289203,
+      "address": "73 Oak Street, NR3 3AQ",
+      "website": "https://www.individualpubs.co.uk/whitelion/",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-23:00",
+        "sat": "12:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/160941197",
+      "name": "The Wildman",
+      "lat": 52.629891,
+      "lng": 1.295581,
+      "address": "29 Bedford Street, NR2 1AG",
+      "website": "http://www.thewildmanpubnorwich.com/",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-24:00",
+        "sat": "12:00-24:00",
+        "sun": "12:00-23:00"
+      }
+    },
+    {
+      "osm": "way/171397557",
+      "name": "The Windmill",
+      "lat": 52.635304,
+      "lng": 1.319599,
+      "address": "Knox Road, NR1 4LQ",
+      "hours": {
+        "mon": "12:00-23:30",
+        "tue": "12:00-23:30",
+        "wed": "12:00-23:30",
+        "thu": "12:00-23:30",
+        "fri": "12:00-00:00",
+        "sat": "12:00-23:30",
+        "sun": "12:00-23:30"
+      }
+    },
+    {
+      "osm": "way/171398600",
+      "name": "The Windmill",
+      "lat": 52.647517,
+      "lng": 1.282772,
+      "address": "211 Aylsham Road, NR3 2RE",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-23:00",
+        "sat": "11:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/171401299",
+      "name": "The Wine Cellar",
+      "lat": 52.629313,
+      "lng": 1.293119,
+      "address": "8 Guildhall Hill, NR2 1JG",
+      "website": "https://www.winecellarnorwich.co.uk/",
+      "hours": {
+        "mon": "11:00-22:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-22:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-00:00",
+        "sat": "11:00-00:00",
+        "sun": "11:00-16:00"
+      }
+    },
+    {
+      "osm": "way/128738265",
+      "name": "The Woolpack Inn",
+      "lat": 52.626041,
+      "lng": 1.296926,
+      "address": "The Woolpack Inn, 9 Golden Ball Street, NR1 3EH",
+      "website": "https://www.greeneking.co.uk/pubs/norfolk/woolpack",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-23:00",
+        "sat": "11:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "node/7816088209",
+      "name": "The X Bells",
+      "lat": 52.631301,
+      "lng": 1.2875,
+      "address": "74-78 Saint Benedicts Street, NR2 4AR",
+      "hours": {
+        "mon": "12:00-01:00",
+        "tue": "12:00-01:00",
+        "wed": "12:00-01:00",
+        "thu": "12:00-01:00",
+        "fri": "12:00-01:30",
+        "sat": "12:00-01:30",
+        "sun": "12:00-00:30"
+      }
+    },
+    {
+      "osm": "way/122732863",
+      "name": "The York Tavern",
+      "lat": 52.622549,
+      "lng": 1.281829,
+      "address": "1 Leicester Street, NR2 2AS",
+      "website": "https://theyorknorwich.co.uk/",
+      "hoursText": "24/7 closed"
+    },
+    {
+      "osm": "node/8326629751",
+      "name": "These Guys Brewing Company",
+      "lat": 41.52601,
+      "lng": -72.074279,
+      "address": "78 Franklin Street, 06360",
+      "website": "https://www.theseguysbrewing.com/"
+    },
+    {
+      "osm": "way/128989763",
+      "name": "Trafford Arms",
+      "lat": 52.620582,
+      "lng": 1.290958,
+      "address": "61 Grove Road, NR1 3RL",
+      "website": "https://traffordarms.co.uk/",
+      "hours": {
+        "mon": "11:00-23:00",
+        "tue": "11:00-23:00",
+        "wed": "11:00-23:00",
+        "thu": "11:00-23:00",
+        "fri": "11:00-23:30",
+        "sat": "11:00-23:30",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/170764996",
+      "name": "Warwick Arms",
+      "lat": 52.624007,
+      "lng": 1.275624,
+      "address": "2 Warwick Street, NR2 3LD",
+      "website": "http://www.themadmoose.co.uk/",
+      "hours": {
+        "mon": "12:00-00:00",
+        "tue": "12:00-00:00",
+        "wed": "12:00-00:00",
+        "thu": "12:00-00:00",
+        "fri": "12:00-00:30",
+        "sat": "12:00-00:30",
+        "sun": "12:00-00:00"
+      }
+    },
+    {
+      "osm": "way/112467632",
+      "name": "Weavers Arms",
+      "lat": 52.633253,
+      "lng": 1.293282,
+      "address": "2 Muspole Street, NR3 1DJ",
+      "website": "https://www.theweaversarms.com/",
+      "hours": {
+        "mon": "12:00-23:00",
+        "tue": "12:00-23:00",
+        "wed": "12:00-23:00",
+        "thu": "12:00-23:00",
+        "fri": "12:00-23:00",
+        "sat": "12:00-23:00",
+        "sun": "12:00-22:30"
+      }
+    },
+    {
+      "osm": "way/171391061",
+      "name": "Wig And Pen",
+      "lat": 52.633386,
+      "lng": 1.300018,
+      "address": "6 Saint Martin at Palace Plain, NR3 1RN",
+      "website": "https://www.thewigandpen.com/",
+      "hours": {
+        "mon": "11:30-23:00",
+        "tue": "11:30-23:00",
+        "wed": "11:30-23:00",
+        "thu": "11:30-23:00",
+        "fri": "11:30-00:00",
+        "sat": "11:30-00:00",
+        "sun": "11:30-18:00"
+      }
+    },
+    {
+      "osm": "way/119476456",
+      "name": "William and Florence",
+      "lat": 52.624558,
+      "lng": 1.277441,
+      "address": "111 Unthank Road, NR2 2PE",
+      "website": "https://williamandflorence.co.uk/",
+      "hours": {
+        "mon": "09:00-23:00",
+        "tue": "09:00-23:00",
+        "wed": "09:00-23:00",
+        "thu": "09:00-23:00",
+        "fri": "09:00-23:00",
+        "sat": "09:00-00:00",
+        "sun": "09:00-22:30"
+      }
+    },
+    {
+      "osm": "way/123870347",
+      "name": "William IV",
+      "lat": 52.630353,
+      "lng": 1.314816,
+      "address": "Quebec Road, NR1 4AU",
+      "website": "https://www.william-iv.com/",
+      "hours": {
+        "mon": "11:00-00:00",
+        "tue": "11:00-00:00",
+        "wed": "11:00-00:00",
+        "thu": "11:00-00:00",
+        "fri": "11:00-00:00",
+        "sat": "11:00-00:00",
+        "sun": "12:00-00:00"
+      }
+    }
+  ]
+}
