@@ -159,6 +159,31 @@ export function createPubMap(container, rb) {
     card.innerHTML = html;
     card.hidden = false;
     card.querySelector(".map-card-close").addEventListener("click", closeCard);
+    // add to / remove from "your crawl"
+    const row = card.querySelector(".share-row");
+    const add = document.createElement("button");
+    add.type = "button";
+    add.className = "share-btn";
+    const link = document.createElement("a");
+    link.className = "read-link map-card-crawl-link";
+    link.href = "#crawl";
+    const label = () => {
+      const on = rb.selection.has(pub.id);
+      add.textContent = on ? "Added to crawl ✓" : "Add to crawl";
+      add.classList.toggle("added", on);
+      add.setAttribute("aria-pressed", String(on));
+      const n = rb.selection.ids().length;
+      link.innerHTML = `View your crawl (${n}) &rarr;`;
+      link.hidden = !n;
+    };
+    add.addEventListener("click", () => {
+      if (rb.selection.has(pub.id)) rb.selection.remove(pub.id);
+      else if (!rb.selection.add(pub.id)) { rb.toast(`Your crawl is full (${rb.selection.max} pubs).`); return; }
+      label();
+    });
+    label();
+    row.appendChild(add);
+    card.appendChild(link);
     map.easeTo({ center: [pub.lng, pub.lat], offset: [0, -card.offsetHeight / 2], duration: rb.reduceMotion() ? 0 : 400 });
   }
   function closeCard() { card.hidden = true; }

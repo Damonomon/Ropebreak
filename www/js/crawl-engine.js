@@ -93,8 +93,8 @@ export function generateCrawl(pubs, options) {
 
   // pool: reviewed pubs with a location, the minimum rating and every all/none rule
   const pool = pubs.filter((p) =>
-    p.review && typeof p.lat === "number" &&
-    scoreValue(p.review.overall) >= (options.minRating || 0) &&
+    (p.review || options.includeUnreviewed) && typeof p.lat === "number" &&
+    (!options.minRating || (p.review && scoreValue(p.review.overall) >= options.minRating)) &&
     hard.every((r) => (r.quantity === "all") === matches(p, r))
   );
 
@@ -112,8 +112,10 @@ export function generateCrawl(pubs, options) {
       const options_ = pool
         .filter((p) => !chosen.includes(p))
         .map((p) => ({ p, walk: walkMinutes(at, p) }))
-        .filter(({ p, walk }) => openFor(p, options.dayIndex, clock + walk, stay) !== false)
-        .sort((a, b) => a.walk - b.walk);
+        .map((o) => Object.assign(o, { open: openFor(o.p, options.dayIndex, clock + o.walk, stay) }))
+        .filter((o) => o.open !== false)
+        // unknown opening times count as an extra 8 minutes' walk, so known ones win when close
+        .sort((a, b) => (a.walk + (a.open === null ? 8 : 0)) - (b.walk + (b.open === null ? 8 : 0)));
       const stillNeeded = need(chosen);
       // a pick is safe if every counted rule can still be met with the slots left
       const safe = options_.find(({ p }) => counted.every((r, i) => stillNeeded[i] - (matches(p, r) ? 1 : 0) <= slotsAfter));
@@ -181,12 +183,14 @@ export function generateCrawl(pubs, options) {
   if (!candidates.length) {
     return { stops: [], totalWalk: 0, unmetRules: rules.slice(), shortBy: n, notes: poolNotes(pool.length) };
   }
-  // rank: most pubs, fewest unmet rules, then least walking
+  // rank: most pubs, fewest unmet rules, fewest unknown opening times, then least walking
+  const unknown = (c) => c.stops.filter((s) => s.open === null).length;
   candidates.sort((a, b) =>
-    b.stops.length - a.stops.length || a.unmetRules.length - b.unmetRules.length || a.totalWalk - b.totalWalk);
+    b.stops.length - a.stops.length || a.unmetRules.length - b.unmetRules.length || unknown(a) - unknown(b) || a.totalWalk - b.totalWalk);
   // "variety" lets Shuffle pick among the good options instead of always the best
   const top = candidates.filter((c) =>
     c.stops.length === candidates[0].stops.length && c.unmetRules.length === candidates[0].unmetRules.length &&
+    unknown(c) === unknown(candidates[0]) &&
     c.totalWalk <= candidates[0].totalWalk * 1.6 + 5);
   const unique = [];
   for (const c of top) {
@@ -197,4 +201,48 @@ export function generateCrawl(pubs, options) {
   return Object.assign(chosen, { shortBy: n - chosen.stops.length, notes: poolNotes(pool.length), options: unique.length });
 
   function poolNotes(size) { return size < n ? [`Only ${size} reviewed pubs match your rating and must-haves.`] : []; }
+}
+
+// ---- plan a route through pubs the user picked ----
+// Finds the order with the fewest pubs closed on arrival, then the shortest
+// walk. keepOrder uses the order they were picked in.
+export function planRoute(picked, options) {
+  const stay = ASSUMPTIONS.minutesPerPub;
+  function evaluate(order) {
+    let clock = options.startMinutes, totalWalk = 0;
+    const stops = order.map((p, i) => {
+      const walk = i === 0 ? 0 : walkMinutes(order[i - 1], p);
+      clock += i === 0 ? 0 : stay + walk;
+      totalWalk += walk;
+      return { pub: p, walkFromPrevious: walk, arrive: clock, leave: clock + stay, open: openFor(p, options.dayIndex, clock, stay) };
+    });
+    return { stops, totalWalk, closed: stops.filter((s) => s.open === false).length };
+  }
+  const better = (a, b) => !b || a.closed < b.closed || (a.closed === b.closed && a.totalWalk < b.totalWalk);
+  if (options.keepOrder || picked.length < 3) return evaluate(picked);
+  let best = null;
+  if (picked.length <= 7) {
+    const permute = (rest, path) => {
+      if (!rest.length) { const e = evaluate(path); if (better(e, best)) best = e; return; }
+      for (let i = 0; i < rest.length; i++) permute(rest.slice(0, i).concat(rest.slice(i + 1)), path.concat(rest[i]));
+    };
+    permute(picked, []);
+    return best;
+  }
+  // larger routes: 2-opt from each starting pub
+  for (let start = 0; start < picked.length; start++) {
+    let order = [picked[start]].concat(picked.filter((_, i) => i !== start)), current = evaluate(order), improved = true;
+    while (improved) {
+      improved = false;
+      for (let i = 0; i < order.length - 1; i++) {
+        for (let j = i + 1; j < order.length; j++) {
+          const trial = order.slice(0, i).concat(order.slice(i, j + 1).reverse(), order.slice(j + 1));
+          const e = evaluate(trial);
+          if (better(e, current)) { order = trial; current = e; improved = true; }
+        }
+      }
+    }
+    if (better(current, best)) best = current;
+  }
+  return best;
 }

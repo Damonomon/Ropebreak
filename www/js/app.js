@@ -616,6 +616,7 @@
       if (base) list[list.indexOf(base)] = merged;
       else list.push(merged);
     });
+    list.forEach(function (p) { p.id = p.osm || (p.review && p.review.slug ? "review/" + p.review.slug : p.name); });
     return list;
   }
 
@@ -688,9 +689,28 @@
     });
   }
 
+  // ---- "your crawl": pubs picked on the map or the crawl page (kept on this device) ----
+  var SELECTION_KEY = "ropebreak.crawlSelection";
+  var crawlSelection = [];
+  try { crawlSelection = JSON.parse(localStorage.getItem(SELECTION_KEY)) || []; } catch (e) { crawlSelection = []; }
+  function saveSelection() {
+    try { localStorage.setItem(SELECTION_KEY, JSON.stringify(crawlSelection)); } catch (e) { /* storage unavailable */ }
+    var btn = document.querySelector(".map-crawl-btn");
+    if (btn) btn.innerHTML = crawlSelection.length ? "Your crawl (" + crawlSelection.length + ") &rarr;" : "Create a Crawl &rarr;";
+  }
+  var selection = {
+    max: 10,
+    ids: function () { return crawlSelection.slice(); },
+    has: function (id) { return crawlSelection.indexOf(id) !== -1; },
+    add: function (id) { if (!selection.has(id) && crawlSelection.length < selection.max) { crawlSelection.push(id); saveSelection(); } return selection.has(id); },
+    remove: function (id) { crawlSelection = crawlSelection.filter(function (x) { return x !== id; }); saveSelection(); }
+  };
+  saveSelection();
+
   var mapHelpers = {
     esc: esc, scoreText: scoreText, reduceMotion: reduceMotion,
-    highlights: highlights, todayHours: todayHours, getPosition: getPosition, toast: toast
+    highlights: highlights, todayHours: todayHours, getPosition: getPosition, toast: toast,
+    selection: selection
   };
 
   // ---- native app wiring ----

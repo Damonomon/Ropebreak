@@ -198,11 +198,24 @@
         <span class="stack" aria-hidden="true"><span></span><span></span><span></span></span>
         <h2>Create a Crawl</h2>
       </div>
-      <p class="note">Tell us what you're after. We'll pick the pubs and the route.</p>
     </div>
+    <div class="crawl-modes" role="tablist" aria-label="How to build your crawl">
+      <button type="button" role="tab" data-mode="picks">Ropebreak picks</button>
+      <button type="button" role="tab" data-mode="surprise">Surprise me</button>
+      <button type="button" role="tab" data-mode="own">Plan my own</button>
+    </div>
+    <p class="crawl-mode-intro"></p>
     <p class="crawl-demo-banner" hidden></p>
     <form class="crawl-form">
-      <div class="crawl-field">
+      <div class="crawl-field" data-for="own">
+        <span class="crawl-label">Your pubs</span>
+        <ol class="crawl-picked" hidden></ol>
+        <p class="crawl-picked-empty">No pubs yet. Search below, or tap pubs on the <a href="#map">map</a> and choose "Add to crawl".</p>
+        <input type="search" class="control-select crawl-search" placeholder="Search Norwich pubs" aria-label="Search Norwich pubs" autocomplete="off">
+        <ul class="crawl-search-results" hidden></ul>
+        <label class="crawl-check"><input type="checkbox" name="keepOrder"> Keep the order I picked</label>
+      </div>
+      <div class="crawl-field" data-for="picks surprise">
         <span class="crawl-label">How many pubs</span>
         <div class="stepper">
           <button type="button" data-count-down aria-label="Fewer pubs">&minus;</button>
@@ -210,7 +223,7 @@
           <button type="button" data-count-up aria-label="More pubs">+</button>
         </div>
       </div>
-      <label class="crawl-field">
+      <label class="crawl-field" data-for="picks">
         <span class="crawl-label">Minimum rating</span>
         <select name="minRating" class="control-select">
           <option value="0">Any</option>
@@ -227,7 +240,7 @@
           <input type="time" name="time" class="control-select" aria-label="Start time" step="900" required>
         </div>
       </div>
-      <div class="crawl-field crawl-field-rules">
+      <div class="crawl-field crawl-field-rules" data-for="picks">
         <span class="crawl-label">Must-haves</span>
         <div class="crawl-rules"></div>
         <button type="button" class="link-btn" data-add-rule>+ Add a must-have</button>
