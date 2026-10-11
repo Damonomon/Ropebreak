@@ -16,20 +16,28 @@ const AREAS = [
 const queryFor = (a) => `[out:json][timeout:90];${a.filter}nwr["amenity"="pub"]${a.scope};out center tags;`;
 // GitHub shows these lines as notes on the run, which keeps failures readable
 const note = (level, msg) => console.log(process.env.GITHUB_ACTIONS ? `::${level}::${msg}` : msg);
-const ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"];
+const ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.private.coffee/api/interpreter", "https://overpass.kumi.systems/api/interpreter"];
+const WAITS = [0, 30, 90]; // seconds between rounds; the free servers are often briefly overloaded
+const sleep = (s) => new Promise((r) => setTimeout(r, s * 1000));
 
 async function fetchOverpass(query) {
   let lastError;
-  for (const url of ENDPOINTS) {
-    try {
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded", "User-Agent": "Ropebreak pub list updater (github.com/Damonomon/Ropebreak)" },
-        body: "data=" + encodeURIComponent(query)
-      });
-      if (!res.ok) throw new Error(`${url}: HTTP ${res.status} ${(await res.text()).slice(0, 200).replace(/\s+/g, " ")}`);
-      return await res.json();
-    } catch (e) { lastError = e; note("warning", `${url}: ${e.message}${e.cause ? " (" + (e.cause.code || e.cause.message) + ")" : ""}`); }
+  for (const wait of WAITS) {
+    if (wait) { note("notice", `All servers busy; trying again in ${wait}s`); await sleep(wait); }
+    for (const url of ENDPOINTS) {
+      try {
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded", "User-Agent": "Ropebreak pub list updater (github.com/Damonomon/Ropebreak)" },
+          body: "data=" + encodeURIComponent(query)
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return await res.json();
+      } catch (e) {
+        lastError = e;
+        note("warning", `${url}: ${e.message.slice(0, 120)}${e.cause ? " (" + (e.cause.code || e.cause.message) + ")" : ""}`);
+      }
+    }
   }
   throw lastError;
 }
