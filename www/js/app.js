@@ -731,6 +731,19 @@
     selection: selection
   };
 
+  // ---- hero video: show the still frame instead for people who prefer reduced motion ----
+  (function () {
+    var video = document.querySelector(".tt-photo-img");
+    if (!video || !window.matchMedia) return;
+    var mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function apply() {
+      if (mq.matches) { video.removeAttribute("autoplay"); video.pause(); video.currentTime = 0; video.load(); }
+      else if (video.paused) { video.play().catch(function () {}); }
+    }
+    apply();
+    if (mq.addEventListener) mq.addEventListener("change", apply);
+  })();
+
   // ---- native app wiring ----
   if (isNative()) {
     document.documentElement.classList.add("native-app");

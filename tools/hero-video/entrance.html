@@ -1,0 +1,329 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>@font-face{font-family:"Karla";font-weight:700;src:url(../../www/fonts/karla-700.woff2) format("woff2")}html,body{margin:0;background:#000}canvas{display:block}</style></head>
+<body><canvas id="c" width="1280" height="720"></canvas>
+<img id="stage" src="stage.png" style="display:none">
+<script>
+// Ropebreak entrance: a seamless 8-second loop built on the stage still.
+// Everything is a pure function of t (0..T), so frame 0 and frame T match.
+const W = 1280, H = 720, T = 8, TAU = Math.PI * 2;
+const c = document.getElementById("c"), ctx = c.getContext("2d");
+const img = document.getElementById("stage");
+
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const ease = (x) => x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x);
+// time since `at`, wrapping round the loop (robust to floating-point rounding)
+const wrapDist = (t, at) => { let d = t - at; d -= Math.floor(d / T) * T; return d > T - 1e-6 ? 0 : d; };
+const pulse = (t, at, len) => { const d = wrapDist(t, at); return d < len ? 1 - d / len : 0; }; // sharp attack, linear decay
+
+// ---- the show's timeline ----
+const HIT = 2.2, HIT2 = 5.6;
+// arena brightness: dim build-up before the hit, bright after, easing back for the loop
+function arenaLight(t) {
+  const build = ease((t - 0.6) / (HIT - 0.6));             // creeping dark before the hit
+  const after = ease((t - HIT) / 0.25);                    // bang up at the hit
+  const settle = ease((t - 6.6) / 1.4);                    // fade back to the starting level
+  let dark = 0.28 + 0.44 * build;                          // 0.28 -> 0.72 just before the hit
+  dark = dark * (1 - after) + after * (0.04 + 0.24 * settle); // then bright, easing back to 0.28
+  return dark;                                             // amount of black over the scene
+}
+
+// ---- seeded content ----
+const R = rng(7);
+const beamSources = [
+  { x: 400, y: 70, col: [90, 150, 255], base: 1.95, amp: 0.38, n: 1, ph: 0.2 },
+  { x: 550, y: 90, col: [80, 160, 255], base: 1.55, amp: 0.42, n: 2, ph: 1.7 },
+  { x: 855, y: 110, col: [255, 120, 50], base: 1.62, amp: 0.40, n: 1, ph: 3.1 },
+  { x: 1185, y: 45, col: [90, 170, 255], base: 2.05, amp: 0.35, n: 2, ph: 0.9 },
+  { x: 230, y: 20, col: [140, 190, 255], base: 1.15, amp: 0.30, n: 1, ph: 4.0 },
+  { x: 1030, y: 30, col: [120, 180, 255], base: 1.95, amp: 0.45, n: 1, ph: 2.4 }
+];
+const floorLights = [205, 335, 395, 460, 545, 615, 745, 810, 860, 970, 1105].map((x, i) => ({ x, y: 585, col: i % 2 ? [90, 170, 255] : [255, 140, 60], ph: R() * TAU }));
+const trussLeft = [40, 128, 228, 336, 448, 556].map((y) => ({ x: 118, y }));
+const trussRight = [45, 80, 170, 270, 365, 455, 560].map((y) => ({ x: 1200, y }));
+const phones = Array.from({ length: 46 }, () => ({ x: R() * W, y: 650 + R() * 70, at: R() * T, len: 0.08 + R() * 0.12, size: 6 + R() * 10 }));
+const haze = Array.from({ length: 9 }, (_, i) => ({ y: 120 + R() * 520, r: 180 + R() * 220, speed: (R() < 0.5 ? -1 : 1) * (1 + Math.floor(R() * 2)), ph: R(), a: 0.05 + R() * 0.06, col: i % 3 === 0 ? [200, 160, 130] : [100, 150, 255] }));
+// pyro: two fountains at the stage front, plus a spark waterfall from the roof truss
+const smoke = Array.from({ length: 12 }, () => ({ y: 470 + R() * 260, r: 220 + R() * 200, speed: (R() < 0.5 ? -1 : 1), ph: R(), a: 0.18 + R() * 0.14 }));
+// welding-style spark bursts off the truss
+const welds = [[0.8, 118, 228], [4.1, 1200, 170], [6.8, 118, 448], [3.3, 1200, 455]].map(([at, x, y]) => ({ at, x, y, sparks: Array.from({ length: 70 }, () => ({ vx: (R() - 0.5) * 420, vy: -R() * 260, life: 0.25 + R() * 0.45 })) }));
+const fountains = [{ x: 215, y: 592 }, { x: 1070, y: 592 }];
+const fountainSparks = [];
+for (const f of fountains) for (let i = 0; i < 160; i++) fountainSparks.push({ x: f.x, y: f.y, at: HIT + R() * 0.9, vx: (R() - 0.5) * 220, vy: -(380 + R() * 420), life: 0.7 + R() * 0.8, hue: R() });
+const waterfall = Array.from({ length: 260 }, () => ({ x: 170 + R() * 980, at: HIT + 0.15 + R() * 1.8, vy: 40 + R() * 80, life: 1.2 + R() * 1.0, wob: R() * TAU }));
+const grain = Array.from({ length: 4 }, () => { const g = document.createElement("canvas"); g.width = 256; g.height = 256; const gx = g.getContext("2d"), id = gx.createImageData(256, 256); for (let i = 0; i < id.data.length; i += 4) { const v = R() * 255; id.data[i] = id.data[i + 1] = id.data[i + 2] = v; id.data[i + 3] = 255; } gx.putImageData(id, 0, 0); return g; });
+
+// ---- camera ----
+function camera(t) {
+  return { s: 1.06, x: 0, y: 0 };   // locked off: the frame never moves
+}
+
+function glow(x, y, r, col, a) {
+  const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+  g.addColorStop(0, `rgba(${col},${a})`); g.addColorStop(1, `rgba(${col},0)`);
+  ctx.fillStyle = g; ctx.fillRect(x - r, y - r, r * 2, r * 2);
+}
+function beam(x, y, ang, len, width, col, a) {
+  const ex = x + Math.cos(ang) * len, ey = y + Math.sin(ang) * len;
+  const nx = -Math.sin(ang) * width, ny = Math.cos(ang) * width;
+  const g = ctx.createLinearGradient(x, y, ex, ey);
+  g.addColorStop(0, `rgba(${col},${a})`); g.addColorStop(0.6, `rgba(${col},${a * 0.35})`); g.addColorStop(1, `rgba(${col},0)`);
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.moveTo(x - nx * 0.04, y - ny * 0.04); ctx.lineTo(x + nx * 0.04, y + ny * 0.04); ctx.lineTo(ex + nx, ey + ny); ctx.lineTo(ex - nx, ey - ny); ctx.closePath(); ctx.fill();
+}
+
+function render(t) {
+  t -= Math.floor(t / T) * T;
+  const cam = camera(t), dark = arenaLight(t);
+  const hit = pulse(t, HIT, 0.6), hit2 = pulse(t, HIT2, 0.45);
+  const beat = 0.5 + 0.5 * Math.cos(TAU * t * 2);  // 120 bpm pulse (16 beats per loop)
+
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.globalCompositeOperation = "source-over"; ctx.filter = "none"; ctx.globalAlpha = 1;
+  ctx.fillStyle = "#000"; ctx.fillRect(0, 0, W, H);
+  ctx.setTransform(cam.s, 0, 0, cam.s, W / 2 - cam.s * W / 2 + cam.x, H / 2 - cam.s * H / 2 + cam.y);
+
+  // stage photo, cooled towards blue
+  ctx.drawImage(stageCool, 0, 0);
+
+  // logo glitch on the screen around the hits
+  const g1 = wrapDist(t, HIT - 0.12), g2 = wrapDist(t, HIT2 - 0.05);
+  const glitching = g1 < 0.55 || g2 < 0.3;
+  if (glitching) {
+    const k = g1 < 0.55 ? 1 - g1 / 0.55 : 0.6 * (1 - g2 / 0.3);
+    const gr = rng(Math.floor(t * 30) + 99);
+    // torn slices of the lettering, shifted sideways
+    for (let i = 0; i < 9; i++) {
+      const sy = 225 + gr() * 245, sh = 4 + gr() * 26, dx = (gr() - 0.5) * 110 * k;
+      ctx.drawImage(logo, 0, sy, W, sh, dx, sy, W, sh);
+    }
+    // colour split on the letters
+    ctx.globalCompositeOperation = "lighter"; ctx.globalAlpha = 0.5 * k;
+    ctx.drawImage(logoRed, 10 * k, 0); ctx.drawImage(logoCyan, -10 * k, 0);
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+  }
+
+  // arena darkness (the logo screen stays lit, like a real arena)
+  ctx.fillStyle = `rgba(0,0,0,${dark})`; ctx.fillRect(-60, -60, W + 120, H + 120);
+  ctx.globalCompositeOperation = "lighter";
+  ctx.globalAlpha = dark * 0.85;
+  ctx.drawImage(logo, 0, 0);
+  ctx.globalAlpha = 1;
+
+  // logo glow, breathing on the beat and blazing at the hits
+  const logoGlow = 0.10 + 0.08 * beat + 0.55 * hit + 0.3 * hit2;
+  ctx.filter = "blur(12px)"; ctx.globalAlpha = Math.min(1, logoGlow);
+  ctx.drawImage(logo, 0, 0);
+  ctx.filter = "none"; ctx.globalAlpha = 1;
+  // a failing LED wall: the letters stutter now and then
+  const fr = rng(Math.floor(t * 30) * 7 + 3)();
+  const flicker = fr < 0.06 ? 0.5 : fr < 0.15 ? 0.25 : 0;
+  if (flicker) { ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = flicker; ctx.drawImage(logoDark, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = "lighter"; }
+
+  // haze drifting across, wrapping seamlessly
+  for (const h of haze) {
+    const x = ((h.ph + h.speed * t / T) % 1 + 1) % 1 * (W + 2 * h.r) - h.r;
+    glow(x, h.y, h.r, h.col, h.a * (1 - dark * 0.6));
+  }
+
+  // thick dark smoke rolling along the stage and crowd
+  ctx.globalCompositeOperation = "source-over";
+  for (const sm of smoke) {
+    const x = ((sm.ph + sm.speed * t / T) % 1 + 1) % 1 * (W + 2 * sm.r) - sm.r;
+    const y = sm.y + 12 * Math.sin(TAU * t / T + sm.ph * 9);
+    glow(x, y, sm.r, "26,24,22", sm.a);
+  }
+  ctx.globalCompositeOperation = "lighter";
+
+  // roof beams sweeping (whole cycles per loop so they line up)
+  const beamLevel = 0.16 + 0.10 * beat + 0.35 * hit + 0.2 * hit2 - dark * 0.18;
+  for (const b of beamSources) {
+    const ang = b.base + b.amp * Math.sin(TAU * b.n * t / T + b.ph);
+    beam(b.x, b.y, ang, 900, 120, b.col.join(","), Math.max(0, beamLevel));
+    glow(b.x, b.y, 38, "255,255,255", Math.max(0, 0.5 + 0.4 * beat - dark * 0.4));
+  }
+
+  // floor movers fire upwards at the hits
+  const floorLevel = 0.06 + 0.5 * hit + 0.35 * hit2;
+  floorLights.forEach((f, i) => {
+    const ang = -Math.PI / 2 + 0.45 * Math.sin(TAU * t / T * 2 + f.ph);
+    glow(f.x, f.y, 26, f.col.join(","), 0.25 + 0.6 * hit);
+  });
+
+  // truss LEDs chasing up and down
+  [...trussLeft.map((p, i) => [p, i, i % 2 ? "120,170,255" : "230,170,120"]), ...trussRight.map((p, i) => [p, i, "110,180,255"])].forEach(([p, i, col]) => {
+    const chase = 0.5 + 0.5 * Math.sin(TAU * (t * 2 - i / 6));
+    glow(p.x, p.y, 34 + 10 * chase, col, Math.max(0, 0.25 + 0.55 * chase + 0.4 * hit - dark * 0.3));
+  });
+
+  // pyro: spark waterfall from the roof truss
+  for (const s of waterfall) {
+    const d = t - s.at;
+    if (d < 0 || d > s.life) continue;
+    const x = s.x + 6 * Math.sin(s.wob + d * 6), y = 40 + s.vy * d + 0.5 * 220 * d * d;
+    const fade = 1 - d / s.life;
+    ctx.fillStyle = `rgba(255,220,160,${0.85 * fade})`;
+    ctx.fillRect(x, y, 2, 5);
+  }
+  { const d = wrapDist(t, HIT + 0.15); if (d < 2) { ctx.fillStyle = `rgba(255,200,140,${0.25 * (1 - d / 2)})`; ctx.fillRect(160, 32, 1000, 6); } }
+
+  for (const w of welds) {
+    const d0 = t - w.at;
+    if (d0 < 0 || d0 > 0.75) continue;
+    glow(w.x, w.y, 60, "255,230,190", 0.6 * (1 - d0 / 0.75));
+    for (const sp of w.sparks) { if (d0 > sp.life) continue; const f = 1 - d0 / sp.life; ctx.fillStyle = `rgba(255,${210 + 40 * f | 0},170,${f})`; ctx.fillRect(w.x + sp.vx * d0, w.y + sp.vy * d0 + 450 * d0 * d0, 2, 2); }
+  }
+
+  // crowd phone flashes
+  for (const p of phones) {
+    const d = wrapDist(t, p.at);
+    if (d < p.len) glow(p.x, p.y, p.size * 2.2, "235,245,255", 0.9 * (1 - d / p.len));
+  }
+
+  // strobes
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.globalCompositeOperation = "source-over";
+  let strobe = 0;
+  // photosafe: at most 2 flashes within any second, softened, and short
+  for (const [at, levels] of [[HIT, [0.62, 0.42]], [HIT2, [0.45]]]) levels.forEach((lv, i) => { const d = wrapDist(t, at + i * 0.4); if (d < 2 / 30) strobe = Math.max(strobe, lv * (1 - d * 15)); });
+  if (strobe) { ctx.fillStyle = `rgba(255,255,255,${strobe})`; ctx.fillRect(0, 0, W, H); }
+
+  // industrial grade: crushed, desaturated, dirty sodium-and-steel
+  bufx.setTransform(1, 0, 0, 1, 0, 0); bufx.globalCompositeOperation = "copy"; bufx.drawImage(c, 0, 0);
+  ctx.globalCompositeOperation = "copy";
+  ctx.filter = "contrast(1.3) saturate(0.8) brightness(1.04) sepia(0.05)";
+  ctx.drawImage(buffer, 0, 0);
+  ctx.filter = "none"; ctx.globalCompositeOperation = "soft-light";
+  ctx.fillStyle = "rgba(30,60,110,0.5)"; ctx.fillRect(0, 0, W, H);         // steel blue in the shadows
+  ctx.globalCompositeOperation = "multiply"; ctx.globalAlpha = 0.6;
+  ctx.drawImage(grime, 0, 0);                                                // lens and air grime
+  ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+
+  // vignette
+  const v = ctx.createRadialGradient(W / 2, H / 2, H * 0.3, W / 2, H / 2, H * 0.92);
+  v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(0,0,0,0.72)");
+  ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
+
+  // faint scanlines over the whole frame
+  ctx.fillStyle = "rgba(0,0,0,0.10)";
+  for (let y = 0; y < H; y += 3) ctx.fillRect(0, y, W, 1);
+
+  // film damage: scratches and dust, different every frame
+  const fd = rng(Math.floor(t * 30) * 13 + 5);
+  const nScratch = fd() < 0.55 ? 1 + Math.floor(fd() * 2) : 0;
+  for (let i = 0; i < nScratch; i++) {
+    const x = fd() * W, light = fd() < 0.5;
+    ctx.fillStyle = light ? `rgba(230,220,200,${0.12 + fd() * 0.2})` : `rgba(0,0,0,${0.2 + fd() * 0.25})`;
+    ctx.fillRect(x, 0, 1 + fd() * 1.2, H);
+  }
+  for (let i = 0; i < 26; i++) {
+    const light = fd() < 0.3;
+    ctx.fillStyle = light ? "rgba(225,215,195,0.5)" : "rgba(0,0,0,0.55)";
+    const r = 0.6 + fd() * 2.2; ctx.beginPath(); ctx.arc(fd() * W, fd() * H, r, 0, TAU); ctx.fill();
+  }
+  if (fd() < 0.12) { const y = fd() * H; ctx.fillStyle = "rgba(255,255,255,0.06)"; ctx.fillRect(0, y, W, 2 + fd() * 10); } // tracking line
+
+  // heavy grain
+  ctx.globalCompositeOperation = "overlay"; ctx.globalAlpha = 0.16;
+  const gc = grain[Math.floor(t * 30) % grain.length];
+  const off = Math.floor(t * 30 * 37) % 256;
+  for (let y = -256; y < H; y += 256) for (let x = -256; x < W; x += 256) ctx.drawImage(gc, x + off, y + (off * 7) % 256);
+  ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+}
+// Cut the letters out of the photo (white-ish pixels on the screen), so glow,
+// relighting and glitches follow the lettering instead of a rectangle.
+let logo, logoRed, logoCyan, logoDark, grime;
+function layer() { const k = document.createElement("canvas"); k.width = W; k.height = H; return k; }
+let baseStage;
+function buildBase() {
+  baseStage = layer();
+  const bx = baseStage.getContext("2d");
+  bx.drawImage(img, 0, 0, W, H);
+  // paint out the old tagline: per column, blend the colour above into the colour below,
+  // then add back the screen's texture (borrowed from lower down, minus its brightness)
+  const X0 = 182, X1 = 1128, Y0 = 406, Y1 = 474, TEX = 70;
+  const d = bx.getImageData(0, 0, W, H), px = d.data, idx = (x, y) => (y * W + x) * 4;
+  for (let x = X0; x <= X1; x++) {
+    const top = [0, 0, 0], bot = [0, 0, 0], mean = [0, 0, 0];
+    for (let k = 0; k < 3; k++) for (let j = 0; j < 3; j++) { top[k] += px[idx(x, Y0 - 3 + j) + k] / 3; bot[k] += px[idx(x, Y1 + 1 + j) + k] / 3; }
+    for (let y = Y0 + TEX; y <= Y1 + TEX; y++) for (let k = 0; k < 3; k++) mean[k] += px[idx(x, y) + k] / (Y1 - Y0 + 1);
+    const xEdge = Math.min(1, (x - X0) / 12, (X1 - x) / 12);              // soften the left and right ends
+    for (let y = Y0; y <= Y1; y++) {
+      const edge = xEdge * Math.min(1, (y - Y0 + 1) / 7, (Y1 - y + 1) / 7); // and the top and bottom
+      const f = (y - Y0) / (Y1 - Y0), i = idx(x, y), j = idx(x, y + TEX);
+      for (let k = 0; k < 3; k++) {
+        const fill = top[k] * (1 - f) + bot[k] * f + 0.9 * (px[j + k] - mean[k]);
+        px[i + k] = px[i + k] * (1 - edge) + Math.max(0, Math.min(255, fill)) * edge;
+      }
+    }
+  }
+  bx.putImageData(d, 0, 0);
+  // the new tagline: two lines, bigger, lit like the logo (no shadow), then bent to
+  // follow the curved screen exactly as the ROPEBREAK lettering does
+  const lines = ["TANGENTIAL THOUGHTS FROM A", "TANGENTIAL KIND OF PERSON."];
+  const flat = layer(), fx = flat.getContext("2d"), CY = 200;   // flat block, centred on row CY
+  fx.font = '700 31px "Karla"'; fx.letterSpacing = "5px"; fx.textAlign = "center"; fx.textBaseline = "middle";
+  const widest = Math.max(...lines.map((l) => fx.measureText(l).width));
+  fx.shadowColor = "rgba(255,250,240,0.45)"; fx.shadowBlur = 7;
+  fx.fillStyle = "#F3F0EA";
+  lines.forEach((l, i) => fx.fillText(l, 655, CY + (i - 0.5) * 42));
+  fx.fillRect(655 - widest / 2 - 74, CY - 1.5, 50, 3); fx.fillRect(655 + widest / 2 + 24, CY - 1.5, 50, 3);
+  // the logo's measured top and bottom edges across the screen (quadratic fits)
+  const top = (x) => 196.6 + 0.24548 * x - 0.00016140 * x * x;
+  const bot = (x) => 303.9 + 0.18566 * x - 0.00012299 * x * x;
+  const mid = (x) => (top(x) + bot(x)) / 2, hgt = (x) => bot(x) - top(x);
+  const scale = (x) => hgt(x) / hgt(655), GAP = 124;            // tagline centre sits GAP below the logo's centre at x=655
+  for (let x = 0; x < W; x++) {
+    const sc = scale(x), cy = mid(x) + GAP * sc;
+    bx.drawImage(flat, x, 0, 1, H, x, cy - CY * sc, 1, H * sc);
+  }
+}
+function prepare() {
+  const base = baseStage, bx = base.getContext("2d");
+  const src = bx.getImageData(0, 0, W, H);
+  const make = (fn) => { const k = layer(), kx = k.getContext("2d"), out = kx.createImageData(W, H); for (let i = 0; i < src.data.length; i += 4) fn(src.data, out.data, i); kx.putImageData(out, 0, 0); return k; };
+  const mask = new Float32Array(W * H);
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    if (y < 225 || y > 500 || x < 190 || x > 1125) continue;           // the screen's lettering only
+    const i = (y * W + x) * 4, d = src.data, m = Math.min(d[i], d[i + 1], d[i + 2]);
+    mask[y * W + x] = Math.max(0, Math.min(1, (m - 125) / 70));
+  }
+  const at = (i) => mask[i / 4];
+  logo = make((d, o, i) => { o[i] = d[i]; o[i + 1] = d[i + 1]; o[i + 2] = d[i + 2]; o[i + 3] = 255 * at(i); });
+  logoRed = make((d, o, i) => { o[i] = 255; o[i + 1] = 40; o[i + 2] = 30; o[i + 3] = 255 * at(i); });
+  logoCyan = make((d, o, i) => { o[i] = 30; o[i + 1] = 220; o[i + 2] = 255; o[i + 3] = 255 * at(i); });
+  logoDark = make((d, o, i) => { o[i] = 8; o[i + 1] = 8; o[i + 2] = 10; o[i + 3] = 255 * at(i); });
+  // grime: soft blotches at two scales, in dirty brown, for multiplying over everything
+  grime = layer();
+  const gx = grime.getContext("2d"), G = rng(31);
+  gx.fillStyle = "#fff"; gx.fillRect(0, 0, W, H);
+  for (const [cols, rows, a] of [[10, 6, 0.55], [40, 22, 0.35], [160, 90, 0.25]]) {
+    const small = document.createElement("canvas"); small.width = cols; small.height = rows;
+    const sx = small.getContext("2d"), sd = sx.createImageData(cols, rows);
+    for (let i = 0; i < sd.data.length; i += 4) { const v = 120 + G() * 135; sd.data[i] = v * 0.95; sd.data[i + 1] = v * 0.97; sd.data[i + 2] = v; sd.data[i + 3] = 255; }
+    sx.putImageData(sd, 0, 0);
+    gx.globalCompositeOperation = "multiply"; gx.globalAlpha = a; gx.imageSmoothingQuality = "high";
+    gx.drawImage(small, 0, 0, W, H);
+  }
+  gx.globalAlpha = 1; gx.globalCompositeOperation = "source-over";
+}
+const buffer = layer(), bufx = buffer.getContext("2d");
+let stageCool;
+function coolStage() {
+  stageCool = layer();
+  const k = stageCool.getContext("2d");
+  k.drawImage(baseStage, 0, 0);
+  const d = k.getImageData(0, 0, W, H), p = d.data;
+  for (let i = 0; i < p.length; i += 4) {
+    const r = p[i], g = p[i + 1], b = p[i + 2], lum = 0.3 * r + 0.59 * g + 0.11 * b;
+    const warm = Math.max(0, r - b) / 255, mix = Math.min(1, 0.65 * warm);   // the more orange, the more it's cooled
+    p[i] = r * (1 - mix) + lum * 0.82 * mix;
+    p[i + 1] = g * (1 - mix) + lum * 0.95 * mix;
+    p[i + 2] = b * (1 - mix) + Math.min(255, lum * 1.35) * mix;
+  }
+  k.putImageData(d, 0, 0);
+}
+
+window.render = render;
+window.ready = new Promise((res) => { if (img.complete && img.naturalWidth) res(); else img.onload = res; }).then(() => document.fonts.load('700 31px "Karla"')).then(buildBase).then(prepare).then(coolStage);
+</script>
+</body></html>
