@@ -33,7 +33,7 @@ The owner will paste a claude.ai artifact link. It's a **single self-contained H
 5. Embedded media (base64 images and video) become files: photos in `content/images/`, site media in `www/media/`.
 6. Tell the owner which changes need a new app build: anything outside `content/` does. Content alone reaches installed apps automatically.
 
-Last ported artifact version: `1791628877-b707` (11 Oct 2026: hero video, tagline removed, card banners).
+Last ported artifact version: `1793728767-50a4` (3 Nov 2026: Backdrop rename and drop logo; its still-photo hero with a CSS word was kept as the titantron video instead).
 
 ## Feature work in progress
 - Create-a-Crawl (Norwich pub crawls): see `docs/crawl-plan.md` for decisions and the topic order. The owner wants one topic at a time, with short replies under clear headings.
