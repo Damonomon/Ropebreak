@@ -175,46 +175,110 @@
     return lines;
   }
 
+  // 4-axis radar, turned 45deg so the labels sit above/below the corners and the shape can be big
   function radarSVG(axesLabels, scores) {
-    var size = 380, cx = size / 2, cy = size / 2, radius = 82;
-    var n = axesLabels.length;
-    var step = (2 * Math.PI) / n;
-    var start = -Math.PI / 2;
-    var lineHeight = 12;
-    function pt(i, r) {
-      var a = start + i * step;
-      return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
-    }
-    var grid = "";
-    [0.25, 0.5, 0.75, 1].forEach(function (f) {
-      var pts = [];
-      for (var i = 0; i < n; i++) pts.push(pt(i, radius * f).join(","));
-      grid += '<polygon points="' + pts.join(" ") + '" class="radar-grid"/>';
+    var cx = 190, cy = 190, R = 168, k = Math.SQRT1_2;
+    var dirs = [[k, -k], [k, k], [-k, k], [-k, -k]];
+    function pt(i, f) { return [cx + dirs[i][0] * R * f, cy + dirs[i][1] * R * f]; }
+    function poly(f) { return [0, 1, 2, 3].map(function (i) { return pt(i, f).join(","); }).join(" "); }
+    var vals = [0, 1, 2, 3].map(function (i) { return Number(scores[i]) || 0; });
+    var out = "";
+    [0.25, 0.5, 0.75, 1].forEach(function (f) { out += '<polygon points="' + poly(f) + '" class="radar-grid"/>'; });
+    [[0, 2], [1, 3]].forEach(function (pair) {
+      var a = pt(pair[0], 1), b = pt(pair[1], 1);
+      out += '<line x1="' + a[0] + '" y1="' + a[1] + '" x2="' + b[0] + '" y2="' + b[1] + '" class="radar-grid"/>';
     });
-    var axes = "";
-    for (var i = 0; i < n; i++) {
-      var p = pt(i, radius);
-      axes += '<line x1="' + cx + '" y1="' + cy + '" x2="' + p[0] + '" y2="' + p[1] + '" class="radar-axis"/>';
-    }
-    var dataPts = [];
-    for (var j = 0; j < n; j++) dataPts.push(pt(j, radius * ((Number(scores[j]) || 0) / 10)).join(","));
-    var labels = "";
-    for (var k = 0; k < n; k++) {
-      var lp = pt(k, radius + 26);
-      var lines = wrapLabel(axesLabels[k], 12);
-      var anchor = k === 1 ? "start" : k === 3 ? "end" : "middle";
-      var startDy;
-      if (k === 0) startDy = -(lines.length - 1) * lineHeight;
-      else if (k === 2) startDy = 0;
-      else startDy = -((lines.length - 1) * lineHeight) / 2;
-      lines.forEach(function (line, li) {
-        var y = lp[1] + startDy + li * lineHeight;
-        labels += '<text x="' + lp[0] + '" y="' + y + '" class="radar-label" text-anchor="' + anchor + '">' + esc(line) + "</text>";
-      });
-    }
-    return '<svg viewBox="0 0 ' + size + ' ' + size + '" width="' + size + '" height="' + size + '" class="radar-svg" role="img" aria-label="Score radar">' +
-      grid + axes + '<polygon points="' + dataPts.join(" ") + '" class="radar-data"/>' + labels + "</svg>";
+    out += '<polygon points="' + [0, 1, 2, 3].map(function (i) { return pt(i, vals[i] / 10).join(","); }).join(" ") + '" class="radar-data"/>';
+    axesLabels.forEach(function (name, i) {
+      var corner = pt(i, 1), lines = wrapLabel(name, 12), above = i === 0 || i === 3;
+      out += '<text text-anchor="middle" class="chart-label">' + lines.map(function (ln, n) {
+        var y = above ? corner[1] - 14 - (lines.length - 1 - n) * 17 : corner[1] + 27 + n * 17;
+        return '<tspan x="' + corner[0] + '" y="' + y + '">' + esc(ln) + "</tspan>";
+      }).join("") + "</text>";
+    });
+    var label = "Breakdown: " + axesLabels.map(function (a, i) { return a + " " + vals[i] + " out of 10"; }).join(", ");
+    return '<svg viewBox="0 0 380 380" role="img" aria-label="' + esc(label) + '">' + out + "</svg>";
   }
+
+  // ---- emotion-meter: rows are feelings, columns are start / middle / end ----
+  // A review's "meter" is three numbers (start, middle, end) pointing into RUNGS: 0 = Nirvana ... 4 = The abyss
+  var RUNGS = ["Nirvana", "Aroused", "Interested", "Meh", "The abyss"];
+  var METER_COLS = ["Start", "Middle", "End"];
+
+  function hasMeter(r) {
+    return Array.isArray(r.meter) && r.meter.length === 3 && r.meter.every(function (v) { return RUNGS[v] !== undefined; });
+  }
+
+  function meterSVG(path) {
+    var colX = [165, 245, 325], rowY = [85, 150, 215, 280, 345], out = "";
+    METER_COLS.forEach(function (c, i) { out += '<text x="' + colX[i] + '" y="28" text-anchor="middle" class="chart-sub">' + c + "</text>"; });
+    colX.forEach(function (x) { out += '<line x1="' + x + '" y1="46" x2="' + x + '" y2="364" class="meter-grid"/>'; });
+    RUNGS.forEach(function (name, i) {
+      out += '<line x1="118" y1="' + rowY[i] + '" x2="372" y2="' + rowY[i] + '" class="meter-grid meter-rung"/>' +
+        '<text x="6" y="' + (rowY[i] + 5) + '" text-anchor="start" class="chart-label">' + name + "</text>";
+    });
+    var pts = path.map(function (rung, i) { return [colX[i], rowY[rung]]; });
+    out += '<polyline points="' + pts.map(function (p) { return p.join(","); }).join(" ") + '" class="meter-line"/>';
+    pts.forEach(function (p) { out += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="17" class="meter-dot"/>'; });
+    var names = path.map(function (i) { return RUNGS[i]; });
+    return '<svg viewBox="0 0 380 380" role="img" aria-label="Emotion-meter: starts ' + names[0] + ", middle " + names[1] + ", ends " + names[2] + '">' + out + "</svg>";
+  }
+
+  // one-line caption under the meter. Add  "meterNote": "..."  to a review to write your own.
+  function meterCaption(r) {
+    if (r.meterNote) return r.meterNote;
+    var n = r.meter.map(function (i) { return RUNGS[i].replace(/^The /, "the "); });
+    if (n[0] === n[1] && n[1] === n[2]) return "Stayed in " + n[0] + " the whole way.";
+    return "Started in " + n[0] + ", ended in " + n[2] + ".";
+  }
+
+  // breakdown radar, plus the emotion-meter as a second swipeable slide when the review has one
+  function breakdownHTML(r) {
+    var meter = hasMeter(r);
+    var radarSlide =
+      '<section class="car-slide"' + (meter ? ' role="group" aria-roledescription="slide" aria-label="Breakdown, 1 of 2"' : "") + ">" +
+        '<h4 class="car-heading">How it breaks down</h4>' +
+        '<p class="car-sub">Scored out of 10 on four things</p>' +
+        '<div class="chart-holder">' + radarSVG(CATEGORY_AXES[r.category], r.radar || []) + "</div>" +
+        (meter ? '<p class="car-caption spacer" aria-hidden="true">&nbsp;</p>' : "") +
+      "</section>";
+    if (!meter) return '<div class="radar-box"><div class="car-viewport">' + radarSlide + "</div></div>";
+    return '<div class="radar-box car-wrap">' +
+      '<div class="car-tabs"><button type="button" class="car-tab" aria-current="true">Breakdown</button>' +
+        '<button type="button" class="car-tab" aria-current="false">Emotion-meter</button></div>' +
+      '<div class="car-viewport" tabindex="0" aria-label="Swipe sideways for the emotion-meter">' + radarSlide +
+        '<section class="car-slide" role="group" aria-roledescription="slide" aria-label="Emotion-meter, 2 of 2">' +
+          '<h4 class="car-heading">The emotion-meter</h4>' +
+          '<p class="car-sub">My state of mind, from start to finish</p>' +
+          '<div class="chart-holder">' + meterSVG(r.meter) + "</div>" +
+          '<p class="car-caption">' + esc(meterCaption(r)) + "</p>" +
+        "</section>" +
+      "</div>" +
+      '<div class="car-dots" aria-hidden="true"><span class="car-dot" aria-current="true"></span><span class="car-dot" aria-current="false"></span></div>' +
+      '<button type="button" class="car-hint">Swipe or tap for the emotion-meter →</button>' +
+    "</div>";
+  }
+
+  var syncCarousel = null; // the review page's carousel, re-synced on resize
+  function wireCarousel(root) {
+    var vp = root.querySelector(".car-viewport"), hint = root.querySelector(".car-hint");
+    if (!vp || !hint) { syncCarousel = null; return; }
+    var tabs = [].slice.call(root.querySelectorAll(".car-tab")), dots = [].slice.call(root.querySelectorAll(".car-dot"));
+    function idx() { return vp.clientWidth ? Math.round(vp.scrollLeft / vp.clientWidth) : 0; }
+    function go(i) { vp.scrollTo({ left: i * vp.clientWidth, behavior: reduceMotion() ? "auto" : "smooth" }); }
+    function sync() {
+      if (!vp.clientWidth) return;
+      var i = idx();
+      tabs.forEach(function (t, k) { t.setAttribute("aria-current", k === i ? "true" : "false"); });
+      dots.forEach(function (d, k) { d.setAttribute("aria-current", k === i ? "true" : "false"); });
+      hint.textContent = i === 0 ? "Swipe or tap for the emotion-meter →" : "← Back to the breakdown";
+    }
+    vp.addEventListener("scroll", function () { window.requestAnimationFrame(sync); }, { passive: true });
+    tabs.forEach(function (t, k) { t.addEventListener("click", function () { go(k); }); });
+    hint.addEventListener("click", function () { go(idx() === 0 ? 1 : 0); });
+    syncCarousel = sync;
+  }
+  window.addEventListener("resize", function () { if (syncCarousel) syncCarousel(); });
 
   function formatReviewDate(iso) {
     if (!iso) return "";
@@ -378,8 +442,7 @@
             '<div class="' + circleClass + '">' + fx + '<span class="score-value">' + esc(r.overall) + maxSpan + "</span></div>" +
             '<p class="score-verdict">' + esc(r.verdict) + "</p>" +
           "</div></div>" +
-          '<div class="radar-box"><h4 class="box-heading box-heading-sub">How it breaks down</h4>' +
-            '<div class="radar-svg-holder">' + radarSVG(CATEGORY_AXES[r.category], r.radar || []) + "</div></div>" +
+          breakdownHTML(r) +
           '<div class="receipt-wrap"><div class="receipt">' +
             '<div class="receipt-header"><div class="brand">BACKDROP</div><div class="sub">' + esc(shortTitle(r)) + '</div><div class="date">' + formatReviewDate(r.date) + "</div></div>" +
             '<div class="receipt-ropes" aria-hidden="true"><span></span><span></span><span></span></div>' +
@@ -394,6 +457,8 @@
           "</div></div>" +
         "</div>" +
       "</div>";
+
+    wireCarousel(el);
 
     var img = el.querySelector(".media-photo");
     if (img) {
