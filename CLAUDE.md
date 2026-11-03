@@ -1,6 +1,8 @@
-# Ropebreak — notes for Claude
+# Backdrop — notes for Claude
 
-Ropebreak is a personal review blog (coffee, coffee shops, pubs, beer, wildcards). This repo is the **master copy** and builds both the website (GitHub Pages) and the Android/iOS app (Capacitor). Human-facing setup steps are in `README.md`.
+Backdrop is a personal review blog (coffee, coffee shops, pubs, beer, wildcards). This repo is the **master copy** and builds both the website (GitHub Pages) and the Android/iOS app (Capacitor). Human-facing setup steps are in `README.md`.
+
+The brand was renamed from Ropebreak to Backdrop. Everything visible says Backdrop (logo: "Backdr" + the orange `#drop-icon` + "p"). Internal names deliberately stay `ropebreak`: the repo and `siteUrl`, the app ID, `ROPEBREAK_CONFIG`, localStorage keys (renaming them would drop users' saved data) and workflow artifact names.
 
 ## Owner's ground rules
 - **Never purchase, subscribe to or sign up for anything**, and never trigger anything that could cost money. Ask before publishing anything new (store submissions, new services, new hosting).

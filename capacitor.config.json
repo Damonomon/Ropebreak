@@ -1,6 +1,6 @@
 {
   "appId": "com.ropebreak.reviews",
-  "appName": "Ropebreak",
+  "appName": "Backdrop",
   "webDir": "www",
   "plugins": {
     "SplashScreen": {
