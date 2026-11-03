@@ -381,7 +381,7 @@
           '<div class="radar-box"><h4 class="box-heading box-heading-sub">How it breaks down</h4>' +
             '<div class="radar-svg-holder">' + radarSVG(CATEGORY_AXES[r.category], r.radar || []) + "</div></div>" +
           '<div class="receipt-wrap"><div class="receipt">' +
-            '<div class="receipt-header"><div class="brand">ROPEBREAK</div><div class="sub">' + esc(shortTitle(r)) + '</div><div class="date">' + formatReviewDate(r.date) + "</div></div>" +
+            '<div class="receipt-header"><div class="brand">BACKDROP</div><div class="sub">' + esc(shortTitle(r)) + '</div><div class="date">' + formatReviewDate(r.date) + "</div></div>" +
             '<div class="receipt-ropes" aria-hidden="true"><span></span><span></span><span></span></div>' +
             receipt +
             '<div class="receipt-total"><span>Verdict</span><span>' + (r.overall === "00" ? "00" : esc(r.overall) + " / 10") + "</span></div>" +
@@ -473,8 +473,8 @@
     var r = REVIEWS[slug];
     if (!r) return;
     var url = reviewLink(slug);
-    var title = r.title + " — Ropebreak";
-    var text = r.title + " — " + scoreText(r.overall) + " on Ropebreak. “" + r.verdict + "”";
+    var title = r.title + " — Backdrop";
+    var text = r.title + " — " + scoreText(r.overall) + " on Backdrop. “" + r.verdict + "”";
     var Share = plugin("Share");
     if (Share) {
       var opts = { title: title, text: text, dialogTitle: "Share this review" };

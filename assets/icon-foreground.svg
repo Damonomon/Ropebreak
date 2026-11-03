@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <g transform="translate(362 300) scale(12.5)" fill="#FFFFFF">
-    <path d="M12 2c-.6 0-1 .4-1 1v.4C8.7 3.9 7 6 7 8.5V13l-2 3v1h14v-1l-2-3V8.5c0-2.5-1.7-4.6-4-5.1V3c0-.6-.4-1-1-1z"/>
-    <path d="M9.5 19c0 1.4 1.1 2.5 2.5 2.5s2.5-1.1 2.5-2.5h-5z"/>
+  <g transform="translate(412 300) scale(10)" fill="#FFFFFF">
+    <path d="M10 1C10 1 1.5 11 1.5 16.5a8.5 8.5 0 0 0 17 0C18.5 11 10 1 10 1Z"/>
   </g>
   <rect x="352" y="600" width="320" height="15" rx="7.5" fill="#FFFFFF"/>
   <rect x="352" y="630" width="320" height="11" rx="5.5" fill="#14151A" opacity="0.55"/>

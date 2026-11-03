@@ -1,5 +1,5 @@
 // Pub map: every Norwich pub on an OpenFreeMap street map, recoloured in the
-// Ropebreak palette. Loaded only when the Map page is first opened.
+// Backdrop palette. Loaded only when the Map page is first opened.
 import * as maplibregl from "../vendor/maplibre/maplibre-gl.js";
 
 const STYLE_URL = "https://tiles.openfreemap.org/styles/positron";
@@ -148,7 +148,7 @@ export function createPubMap(container, rb) {
     } else {
       html +=
         `<div class="map-card-head"><h3>${esc(pub.name)}</h3></div>` +
-        `<p class="map-card-note map-card-unreviewed">Not yet Ropebreak'd</p>` +
+        `<p class="map-card-note map-card-unreviewed">Not reviewed yet</p>` +
         (pub.address ? `<p class="map-card-address">${esc(pub.address)}</p>` : "") +
         hoursLine +
         '<div class="share-row">' +
@@ -208,7 +208,7 @@ export function createPubMap(container, rb) {
         map.flyTo({ center: here, zoom: Math.max(map.getZoom(), 15), duration: rb.reduceMotion() ? 0 : 800 });
       }
     } catch (e) {
-      rb.toast(e && e.denied ? "Location is turned off for Ropebreak. You can allow it in your phone's settings." : "Couldn't find your location just now.");
+      rb.toast(e && e.denied ? "Location is turned off for Backdrop. You can allow it in your phone's settings." : "Couldn't find your location just now.");
     } finally {
       locateBtn.disabled = false;
     }

@@ -1,6 +1,6 @@
 // Create-a-Crawl page: three ways to build a crawl, the result and the
 // assumptions box.
-//   picks    – Ropebreak picks from reviewed pubs, with must-haves
+//   picks    – Backdrop picks from reviewed pubs, with must-haves
 //   surprise – any Norwich pub, just how many and when
 //   own      – pubs the user chose (search or map), put in the best order
 import { ASSUMPTIONS, generateCrawl, makeMatcher, planRoute } from "./crawl-engine.js";
@@ -160,7 +160,7 @@ export function createCrawlPage(section, rb) {
         <span class="crawl-num" aria-hidden="true">${i + 1}</span>
         <div class="crawl-stop-body">
           ${i ? `<p class="crawl-walk">${st.walkFromPrevious} min walk</p>` : ""}
-          <div class="crawl-stop-head"><h4>${esc(p.name)}</h4>${r ? `<span class="crawl-score">${esc(rb.scoreText(r.overall))}</span>` : '<span class="crawl-unreviewed">Not yet Ropebreak\'d</span>'}</div>
+          <div class="crawl-stop-head"><h4>${esc(p.name)}</h4>${r ? `<span class="crawl-score">${esc(rb.scoreText(r.overall))}</span>` : '<span class="crawl-unreviewed">Not reviewed yet</span>'}</div>
           <p class="crawl-time">${clock(st.arrive)} – ${clock(st.leave)} ${hoursNote}</p>
           ${tags ? `<div class="chip-row">${tags}</div>` : ""}
           ${r && r.slug ? `<p><a class="read-link" href="#review-${esc(r.slug)}">Read the review &rarr;</a></p>` : ""}
@@ -259,7 +259,7 @@ export function createCrawlPage(section, rb) {
     ];
     const byMode = {
       picks: [
-        "Only pubs Ropebreak has reviewed and put on the map are used.",
+        "Only pubs Backdrop has reviewed and put on the map are used.",
         "The route starts at whichever pub gives the shortest total walk.",
         '"At least half" rounds up, so half of 5 pubs is 3.',
         'Levels like "Toilets: at least What you\'d expect" also include anything better.',
