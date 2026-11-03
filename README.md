@@ -37,6 +37,8 @@ Open `www/content/reviews.json` and add an entry to the `reviews` list. Copy an 
   "teaser": "One-line hook shown on the card.",
   "chips": ["tag one", "tag two"],
   "radar": [8, 7, 9, 6],                  // the 4 radar scores, in the category's axis order
+  "meter": [2, 1, 0],                     // optional emotion-meter: start, middle, end (0 Nirvana, 1 Aroused, 2 Interested, 3 Meh, 4 The abyss)
+  "meterNote": "Your own caption.",      // optional: replaces the automatic "Started in …, ended in …" line
   "overall": 8,                           // 0–10, or "00" for a special kind of disaster
   "verdict": "The line under the big score.",
   "characteristics": ["Cosy"],            // from the category's filter list
@@ -64,6 +66,8 @@ Then change `"updated"` at the top of the file to today's date. Photos go in `ww
 | pub | Pint quality | Atmosphere | Would bring a mate? | Toilet cleanliness |
 | beer | Taste | Drinkability | Value for money | Would order again? |
 | wildcard | Would recommend? | Felt illicit? | Mental health boost? | Felt attractive? |
+
+With a `meter`, the review page's breakdown card gets a second swipeable slide, the emotion-meter. Without one, it shows just the breakdown.
 
 Commit the change to GitHub and the website workflow republishes the site within a minute or two.
 

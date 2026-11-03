@@ -228,20 +228,34 @@
   .detail-side { display: flex; flex-direction: column; gap: 1.5rem; align-self: start; }
   .radar-box { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 1rem; }
   .box-heading { text-align: center; font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; margin: 0 0 0.6rem; color: var(--text); }
-  .verdict-heading { font-size: 1.65rem; margin-top: 0.5rem; }
+  .verdict-heading { font-size: 1.9rem; line-height: 1.1; margin-top: 0.5rem; }
+
+  /* breakdown / emotion-meter carousel */
+  .car-tabs { display: flex; width: fit-content; margin: 0 auto 0.9rem; gap: 0.2rem; padding: 0.2rem; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); }
+  .car-tab { font: inherit; font-weight: 700; font-size: 0.85rem; padding: 0.4rem 0.95rem; border-radius: 999px; border: 0; background: transparent; color: var(--text-muted); cursor: pointer; }
+  .car-tab[aria-current="true"] { background: var(--text); color: var(--bg); }
+  .car-viewport { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
+  .car-viewport::-webkit-scrollbar { display: none; }
+  .car-viewport:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+  .car-slide { flex: 0 0 100%; scroll-snap-align: start; scroll-snap-stop: always; display: flex; flex-direction: column; }
+  .car-heading { text-align: center; font-family: var(--font-display); font-weight: 800; font-size: 1.9rem; line-height: 1.1; margin: 0.2rem 0 0.2rem; color: var(--text); }
+  .car-sub { text-align: center; margin: 0 0 0.35rem; font-size: 0.98rem; font-weight: 500; color: var(--text-muted); line-height: 1.35; text-wrap: balance; }
+  .chart-holder { width: 100%; aspect-ratio: 1 / 1; }
+  .chart-holder svg { width: 100%; height: 100%; display: block; }
+  .chart-label { font-size: 14px; font-weight: 700; fill: var(--text); font-family: var(--font-body); }
+  .chart-sub { font-size: 14px; font-weight: 700; fill: var(--text-muted); font-family: var(--font-body); }
+  .car-caption { text-align: center; font-weight: 700; font-size: 0.98rem; color: var(--text-muted); margin: 0.1rem 0 0; }
+  .car-caption.spacer { visibility: hidden; }
+  .car-dots { display: flex; justify-content: center; gap: 0.45rem; margin-top: 0.9rem; }
+  .car-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); transition: background 0.2s, transform 0.2s; }
+  .car-dot[aria-current="true"] { background: var(--text); transform: scale(1.25); }
+  .car-hint { display: block; margin: 0.5rem auto 0; font: inherit; font-size: 0.85rem; font-weight: 700; color: var(--orange); background: none; border: 0; cursor: pointer; padding: 0.2rem 0.4rem; }
   .mini-divider { display: flex; flex-direction: column; gap: 2px; width: 3rem; margin: 1.5rem auto 1rem; }
   .mini-divider span { display: block; height: 2px; border-radius: 1px; }
   .mini-divider span:nth-child(1) { background: var(--orange-bright); }
   .mini-divider span:nth-child(2) { background: var(--text-muted); }
   .mini-divider span:nth-child(3) { background: var(--navy); }
-  .radar-svg-holder { width: 100%; aspect-ratio: 1 / 1; margin: 0 auto; }
-  .radar-svg { width: 100%; height: 100%; display: block; }
-  .radar-grid { fill: none; stroke: var(--text-muted); stroke-opacity: 0.4; }
-  .radar-axis { stroke: var(--text-muted); stroke-opacity: 0.4; }
-  .radar-data { fill: var(--orange-bright); fill-opacity: 0.32; stroke: var(--orange); stroke-width: 2; }
-  .radar-label { font-size: 13px; font-weight: 700; fill: var(--text); font-family: var(--font-body); }
 
-  .box-heading-sub { margin-top: 2.2rem; font-size: 1.5rem; }
 
   .score-hero { text-align: center; }
   .score-circle { position: relative; display: flex; align-items: center; justify-content: center; width: 8.5rem; height: 8.5rem; margin: 0 auto; border-radius: 50%; background: var(--cat-pop); color: #fff; }
@@ -609,10 +623,7 @@
         <div class="radar-box">
           <div class="score-hero" id="score-black-sheep-coffee" data-overall="black-sheep-coffee"></div>
         </div>
-        <div class="radar-box">
-          <h4 class="box-heading box-heading-sub">How it breaks down</h4>
-          <div class="radar-svg-holder" data-radar="black-sheep-coffee"></div>
-        </div>
+        <div class="radar-box" data-carousel="black-sheep-coffee"></div>
         <div class="receipt-wrap">
           <div class="receipt">
             <div class="receipt-header">
@@ -671,10 +682,7 @@
         <div class="radar-box">
           <div class="score-hero" id="score-millers-arms" data-overall="millers-arms"></div>
         </div>
-        <div class="radar-box">
-          <h4 class="box-heading box-heading-sub">How it breaks down</h4>
-          <div class="radar-svg-holder" data-radar="millers-arms"></div>
-        </div>
+        <div class="radar-box" data-carousel="millers-arms"></div>
         <div class="receipt-wrap">
           <div class="receipt">
             <div class="receipt-header">
@@ -740,10 +748,7 @@
         <div class="radar-box">
           <div class="score-hero" id="score-gogo-juice-chip-coffee" data-overall="gogo-juice-chip-coffee"></div>
         </div>
-        <div class="radar-box">
-          <h4 class="box-heading box-heading-sub">How it breaks down</h4>
-          <div class="radar-svg-holder" data-radar="gogo-juice-chip-coffee"></div>
-        </div>
+        <div class="radar-box" data-carousel="gogo-juice-chip-coffee"></div>
         <div class="receipt-wrap">
           <div class="receipt">
             <div class="receipt-header">
@@ -802,10 +807,7 @@
         <div class="radar-box">
           <div class="score-hero" id="score-wrestlemania-weekend" data-overall="wrestlemania-weekend"></div>
         </div>
-        <div class="radar-box">
-          <h4 class="box-heading box-heading-sub">How it breaks down</h4>
-          <div class="radar-svg-holder" data-radar="wrestlemania-weekend"></div>
-        </div>
+        <div class="radar-box" data-carousel="wrestlemania-weekend"></div>
         <div class="receipt-wrap">
           <div class="receipt">
             <div class="receipt-header">
@@ -873,10 +875,7 @@
         <div class="radar-box">
           <div class="score-hero" id="score-cherry-coke-newtown-brewery" data-overall="cherry-coke-newtown-brewery"></div>
         </div>
-        <div class="radar-box">
-          <h4 class="box-heading box-heading-sub">How it breaks down</h4>
-          <div class="radar-svg-holder" data-radar="cherry-coke-newtown-brewery"></div>
-        </div>
+        <div class="radar-box" data-carousel="cherry-coke-newtown-brewery"></div>
         <div class="receipt-wrap">
           <div class="receipt">
             <div class="receipt-header">
@@ -917,6 +916,11 @@
 
 <script>
   // ---- radar chart data: each category gets its own set of axes ----
+  // emotion-meter: the feeling rungs, top to bottom. A review's "meter" is
+  // three numbers (start, middle, end) pointing into this list: 0 = Nirvana ... 4 = The abyss
+  var RUNGS = ["Nirvana", "Aroused", "Interested", "Meh", "The abyss"];
+  var METER_COLS = ["Start", "Middle", "End"];
+
   var CATEGORY_AXES = {
     coffeeshop: ["Atmosphere", "Human interaction", "Would go back?", "Value for money"],
     coffee: ["Taste", "Caffeine hit", "Value for money", "Would order again?"],
@@ -932,6 +936,7 @@
       category: "coffeeshop",
       date: "2026-09-08",
       radar: [2, 1, 1, 2],
+      meter: [2, 3, 4],
       overall: "00",
       verdict: "A cautionary tale involving an iPad, a camera, and seven and a half thousand ways to go wrong.",
       characteristics: ["Quick in-and-out"]
@@ -940,6 +945,7 @@
       category: "pub",
       date: "2026-09-10",
       radar: [8, 10, 9, 6],
+      meter: [2, 0, 0],
       overall: 10,
       verdict: "Perfect in every way. Every second I'm not there is a blight on my life.",
       characteristics: ["Cosy", "Dog-friendly", "Good for groups"]
@@ -948,6 +954,7 @@
       category: "beer",
       date: "2026-09-26",
       radar: [6, 5, 6, 7],
+      meter: [1, 3, 2],
       overall: 5,
       verdict: "Underwhelming, and I'll definitely have another.",
       characteristics: ["Fruity"]
@@ -956,6 +963,7 @@
       category: "wildcard",
       date: "2026-09-16",
       radar: [9, 7, 9, 6],
+      meter: [1, 0, 0],
       overall: 9,
       verdict: "Worth every hoarse, slightly singed moment.",
       characteristics: ["Memorable", "Worth the trip"]
@@ -964,6 +972,7 @@
       category: "coffee",
       date: "2026-09-25",
       radar: [9, 5, 7, 10],
+      meter: [2, 1, 0],
       overall: 9,
       verdict: "Cripplingly good. Financially and otherwise.",
       characteristics: ["Light", "Smooth", "Splurge-worthy"]
@@ -997,55 +1006,127 @@
     return lines;
   }
 
-  function renderRadar(container, axesLabels, scores) {
-    var size = 380, cx = size / 2, cy = size / 2, radius = 82;
-    var n = axesLabels.length;
-    var step = (2 * Math.PI) / n;
-    var start = -Math.PI / 2;
-    var lineHeight = 12;
-    function pt(i, r) {
-      var a = start + i * step;
-      return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
-    }
-    var grid = "";
-    [0.25, 0.5, 0.75, 1].forEach(function (f) {
-      var pts = [];
-      for (var i = 0; i < n; i++) pts.push(pt(i, radius * f).join(","));
-      grid += '<polygon points="' + pts.join(" ") + '" class="radar-grid"/>';
-    });
-    var axes = "";
-    for (var i = 0; i < n; i++) {
-      var p = pt(i, radius);
-      axes += '<line x1="' + cx + '" y1="' + cy + '" x2="' + p[0] + '" y2="' + p[1] + '" class="radar-axis"/>';
-    }
-    var dataPts = [];
-    for (var i = 0; i < n; i++) dataPts.push(pt(i, radius * (scores[i] / 10)).join(","));
-    var labels = "";
-    for (var i = 0; i < n; i++) {
-      var lp = pt(i, radius + 26);
-      var lines = wrapLabel(axesLabels[i], 12);
-      var anchor = i === 1 ? "start" : i === 3 ? "end" : "middle";
-      var startDy;
-      if (i === 0) startDy = -(lines.length - 1) * lineHeight;
-      else if (i === 2) startDy = 0;
-      else startDy = -((lines.length - 1) * lineHeight) / 2;
-      lines.forEach(function (line, li) {
-        var y = lp[1] + startDy + li * lineHeight;
-        labels += '<text x="' + lp[0] + '" y="' + y + '" class="radar-label" text-anchor="' + anchor + '">' + line + "</text>";
-      });
-    }
-    container.innerHTML =
-      '<svg viewBox="0 0 ' + size + ' ' + size + '" width="' + size + '" height="' + size + '" class="radar-svg" role="img" aria-label="Score radar">' +
-      grid + axes +
-      '<polygon points="' + dataPts.join(" ") + '" class="radar-data"/>' +
-      labels + "</svg>";
+  // ---- breakdown radar + emotion-meter, shown as a swipeable carousel ----
+  function svgEl(name, attrs, text) {
+    var n = document.createElementNS("http://www.w3.org/2000/svg", name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
   }
 
-  function renderAllRadars() {
-    document.querySelectorAll("[data-radar]").forEach(function (el) {
-      var key = el.getAttribute("data-radar");
-      var rev = REVIEWS[key];
-      if (rev) renderRadar(el, CATEGORY_AXES[rev.category], rev.radar);
+  // 4-axis radar, turned 45deg so the labels sit above/below the corners and the shape can be big
+  function drawRadar(axes, vals) {
+    var svg = svgEl("svg", { viewBox: "0 0 380 380", role: "img", "aria-label": "Breakdown: " + axes.map(function (a, i) { return a + " " + vals[i] + " out of 10"; }).join(", ") });
+    var cx = 190, cy = 190, R = 168, k = Math.SQRT1_2;
+    var dirs = [[k, -k], [k, k], [-k, k], [-k, -k]];
+    function pt(i, f) { return [cx + dirs[i][0] * R * f, cy + dirs[i][1] * R * f]; }
+    function poly(f) { return [0, 1, 2, 3].map(function (i) { return pt(i, f).join(","); }).join(" "); }
+    [0.25, 0.5, 0.75, 1].forEach(function (f) {
+      svg.appendChild(svgEl("polygon", { points: poly(f), fill: "none", stroke: "var(--line)", "stroke-width": 1.2 }));
+    });
+    [[0, 2], [1, 3]].forEach(function (pair) {
+      var a = pt(pair[0], 1), b = pt(pair[1], 1);
+      svg.appendChild(svgEl("line", { x1: a[0], y1: a[1], x2: b[0], y2: b[1], stroke: "var(--line)", "stroke-width": 1.2 }));
+    });
+    svg.appendChild(svgEl("polygon", { points: [0, 1, 2, 3].map(function (i) { return pt(i, vals[i] / 10).join(","); }).join(" "), fill: "var(--orange)", "fill-opacity": 0.3, stroke: "var(--orange)", "stroke-width": 2.5, "stroke-linejoin": "round" }));
+    axes.forEach(function (name, i) {
+      var corner = pt(i, 1), lines = wrapLabel(name, 12), above = i === 0 || i === 3;
+      var t = svgEl("text", { "text-anchor": "middle", "class": "chart-label" });
+      lines.forEach(function (ln, n) {
+        var y = above ? corner[1] - 14 - (lines.length - 1 - n) * 17 : corner[1] + 27 + n * 17;
+        t.appendChild(svgEl("tspan", { x: corner[0], y: y }, ln));
+      });
+      svg.appendChild(t);
+    });
+    return svg;
+  }
+
+  // emotion-meter: rows are feelings, columns are start / middle / end
+  function drawMeter(path) {
+    var names = path.map(function (i) { return RUNGS[i]; });
+    var svg = svgEl("svg", { viewBox: "0 0 380 380", role: "img", "aria-label": "Emotion-meter: starts " + names[0] + ", middle " + names[1] + ", ends " + names[2] });
+    var colX = [165, 245, 325], rowY = [85, 150, 215, 280, 345];
+    METER_COLS.forEach(function (c, i) { svg.appendChild(svgEl("text", { x: colX[i], y: 28, "text-anchor": "middle", "class": "chart-sub" }, c)); });
+    colX.forEach(function (x) { svg.appendChild(svgEl("line", { x1: x, y1: 46, x2: x, y2: 364, stroke: "var(--line)", "stroke-width": 1.2 })); });
+    RUNGS.forEach(function (name, i) {
+      svg.appendChild(svgEl("line", { x1: 118, y1: rowY[i], x2: 372, y2: rowY[i], stroke: "var(--line)", "stroke-width": 1.2, "stroke-dasharray": "3 6" }));
+      svg.appendChild(svgEl("text", { x: 6, y: rowY[i] + 5, "text-anchor": "start", "class": "chart-label" }, name));
+    });
+    var pts = path.map(function (rung, i) { return [colX[i], rowY[rung]]; });
+    svg.appendChild(svgEl("polyline", { points: pts.map(function (p) { return p.join(","); }).join(" "), fill: "none", stroke: "var(--orange)", "stroke-width": 3.5, "stroke-linejoin": "round", "stroke-linecap": "round" }));
+    pts.forEach(function (p) { svg.appendChild(svgEl("circle", { cx: p[0], cy: p[1], r: 17, fill: "var(--orange)", stroke: "var(--surface)", "stroke-width": 3 })); });
+    return svg;
+  }
+
+  // one-line caption under the meter. Add  meterNote: "..."  to a review to write your own.
+  function meterCaption(rev) {
+    if (rev.meterNote) return rev.meterNote;
+    var n = rev.meter.map(function (i) { return RUNGS[i].replace(/^The /, "the "); });
+    if (n[0] === n[1] && n[1] === n[2]) return "Stayed in " + n[0] + " the whole way.";
+    return "Started in " + n[0] + ", ended in " + n[2] + ".";
+  }
+
+  function buildCarousel(host, rev) {
+    var hasMeter = Array.isArray(rev.meter) && rev.meter.length === 3;
+    var html = '<div class="car-wrap">';
+    if (hasMeter) {
+      html += '<div class="car-tabs"><button type="button" class="car-tab" aria-current="true">Breakdown</button>' +
+              '<button type="button" class="car-tab" aria-current="false">Emotion-meter</button></div>';
+    }
+    html += '<div class="car-viewport"' + (hasMeter ? ' tabindex="0" aria-label="Swipe sideways for the emotion-meter"' : '') + '>' +
+      '<section class="car-slide"' + (hasMeter ? ' role="group" aria-roledescription="slide" aria-label="Breakdown, 1 of 2"' : '') + '>' +
+        '<h4 class="car-heading">How it breaks down</h4>' +
+        '<p class="car-sub">Scored out of 10 on four things</p>' +
+        '<div class="chart-holder" data-slot="radar"></div>' +
+        (hasMeter ? '<p class="car-caption spacer" aria-hidden="true">&nbsp;</p>' : '') +
+      '</section>';
+    if (hasMeter) {
+      html += '<section class="car-slide" role="group" aria-roledescription="slide" aria-label="Emotion-meter, 2 of 2">' +
+        '<h4 class="car-heading">The emotion-meter</h4>' +
+        '<p class="car-sub">My state of mind, from start to finish</p>' +
+        '<div class="chart-holder" data-slot="meter"></div>' +
+        '<p class="car-caption">' + meterCaption(rev) + '</p>' +
+      '</section>';
+    }
+    html += '</div>';
+    if (hasMeter) {
+      html += '<div class="car-dots" aria-hidden="true"><span class="car-dot" aria-current="true"></span><span class="car-dot" aria-current="false"></span></div>' +
+              '<button type="button" class="car-hint">Swipe or tap for the emotion-meter \u2192</button>';
+    }
+    html += '</div>';
+    host.innerHTML = html;
+    host.querySelector('[data-slot="radar"]').appendChild(drawRadar(CATEGORY_AXES[rev.category], rev.radar));
+    if (hasMeter) {
+      host.querySelector('[data-slot="meter"]').appendChild(drawMeter(rev.meter));
+      wireCarousel(host);
+    }
+  }
+
+  function wireCarousel(root) {
+    var vp = root.querySelector(".car-viewport"),
+        tabs = [].slice.call(root.querySelectorAll(".car-tab")),
+        dots = [].slice.call(root.querySelectorAll(".car-dot")),
+        hint = root.querySelector(".car-hint"),
+        reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function idx() { return vp.clientWidth ? Math.round(vp.scrollLeft / vp.clientWidth) : 0; }
+    function go(i) { vp.scrollTo({ left: i * vp.clientWidth, behavior: reduce ? "auto" : "smooth" }); }
+    function sync() {
+      if (!vp.clientWidth) return;
+      var i = idx();
+      tabs.forEach(function (t, k) { t.setAttribute("aria-current", k === i ? "true" : "false"); });
+      dots.forEach(function (t, k) { t.setAttribute("aria-current", k === i ? "true" : "false"); });
+      hint.textContent = i === 0 ? "Swipe or tap for the emotion-meter \u2192" : "\u2190 Back to the breakdown";
+    }
+    vp.addEventListener("scroll", function () { window.requestAnimationFrame(sync); }, { passive: true });
+    tabs.forEach(function (t, k) { t.addEventListener("click", function () { go(k); }); });
+    hint.addEventListener("click", function () { go(idx() === 0 ? 1 : 0); });
+    window.addEventListener("resize", sync);
+  }
+
+  function renderAllCarousels() {
+    document.querySelectorAll("[data-carousel]").forEach(function (host) {
+      var rev = REVIEWS[host.getAttribute("data-carousel")];
+      if (rev) buildCarousel(host, rev);
     });
   }
 
@@ -1331,7 +1412,7 @@
     renderLadder("ladder-wildcard", RANKINGS.wildcard);
   }
 
-  renderAllRadars();
+  renderAllCarousels();
   var sortSelectEl = document.getElementById("sort-select");
   var minRatingSelectEl = document.getElementById("min-rating-select");
   if (sortSelectEl) sortSelectEl.addEventListener("change", updateGridDisplay);

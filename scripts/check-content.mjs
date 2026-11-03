@@ -26,6 +26,12 @@ for (const r of reviews) {
     }
     if (place.hoursChecked && !/^\d{4}-\d{2}-\d{2}$/.test(place.hoursChecked)) errors.push(`${r.slug}: hoursChecked should be a date like 2026-10-11`);
   }
+  if ("meter" in r) {
+    const m = r.meter;
+    if (!Array.isArray(m) || m.length !== 3 || !m.every((v) => Number.isInteger(v) && v >= 0 && v <= 4))
+      errors.push(`${r.slug}: meter should be three whole numbers from 0 (Nirvana) to 4 (The abyss), like [2, 1, 0]`);
+  }
+  if ("meterNote" in r && (typeof r.meterNote !== "string" || !r.meterNote.trim())) errors.push(`${r.slug}: meterNote should be a line of text`);
   const groups = schema[r.category];
   if (!r.attributes) continue;
   if (!groups) { errors.push(`${r.slug}: no attribute list for category "${r.category}"`); continue; }

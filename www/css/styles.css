@@ -202,20 +202,38 @@ nav[aria-label="Primary"] summary:hover .mini-ropes, nav[aria-label="Primary"] s
 .detail-side { display: flex; flex-direction: column; gap: 1.5rem; align-self: start; }
 .radar-box { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 1rem; }
 .box-heading { text-align: center; font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; margin: 0 0 0.6rem; color: var(--text); }
-.verdict-heading { font-size: 1.65rem; margin-top: 0.5rem; }
+.verdict-heading { font-size: 1.9rem; line-height: 1.1; margin-top: 0.5rem; }
 .mini-divider { display: flex; flex-direction: column; gap: 2px; width: 3rem; margin: 1.5rem auto 1rem; }
 .mini-divider span { display: block; height: 2px; border-radius: 1px; }
 .mini-divider span:nth-child(1) { background: var(--orange-bright); }
 .mini-divider span:nth-child(2) { background: var(--text-muted); }
 .mini-divider span:nth-child(3) { background: var(--navy); }
-.radar-svg-holder { width: 100%; aspect-ratio: 1 / 1; margin: 0 auto; }
-.radar-svg { width: 100%; height: 100%; display: block; }
-.radar-grid { fill: none; stroke: var(--text-muted); stroke-opacity: 0.4; }
-.radar-axis { stroke: var(--text-muted); stroke-opacity: 0.4; }
-.radar-data { fill: var(--orange-bright); fill-opacity: 0.32; stroke: var(--orange); stroke-width: 2; }
-.radar-label { font-size: 13px; font-weight: 700; fill: var(--text); font-family: var(--font-body); }
 
-.box-heading-sub { margin-top: 2.2rem; font-size: 1.5rem; }
+/* breakdown / emotion-meter carousel */
+.car-tabs { display: flex; width: fit-content; margin: 0 auto 0.9rem; gap: 0.2rem; padding: 0.2rem; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); }
+.car-tab { font: inherit; font-weight: 700; font-size: 0.85rem; padding: 0.4rem 0.95rem; border-radius: 999px; border: 0; background: transparent; color: var(--text-muted); cursor: pointer; }
+.car-tab[aria-current="true"] { background: var(--text); color: var(--bg); }
+.car-viewport { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
+.car-viewport::-webkit-scrollbar { display: none; }
+.car-viewport:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+.car-slide { flex: 0 0 100%; scroll-snap-align: start; scroll-snap-stop: always; display: flex; flex-direction: column; }
+.car-heading { text-align: center; font-family: var(--font-display); font-weight: 800; font-size: 1.9rem; line-height: 1.1; margin: 0.2rem 0 0.2rem; color: var(--text); }
+.car-sub { text-align: center; margin: 0 0 0.35rem; font-size: 0.98rem; font-weight: 500; color: var(--text-muted); line-height: 1.35; text-wrap: balance; }
+.chart-holder { width: 100%; aspect-ratio: 1 / 1; }
+.chart-holder svg { width: 100%; height: 100%; display: block; }
+.chart-label { font-size: 14px; font-weight: 700; fill: var(--text); font-family: var(--font-body); }
+.chart-sub { font-size: 14px; font-weight: 700; fill: var(--text-muted); font-family: var(--font-body); }
+.radar-grid, .meter-grid { fill: none; stroke: var(--line); stroke-width: 1.2; }
+.meter-rung { stroke-dasharray: 3 6; }
+.radar-data { fill: var(--orange); fill-opacity: 0.3; stroke: var(--orange); stroke-width: 2.5; stroke-linejoin: round; }
+.meter-line { fill: none; stroke: var(--orange); stroke-width: 3.5; stroke-linejoin: round; stroke-linecap: round; }
+.meter-dot { fill: var(--orange); stroke: var(--surface); stroke-width: 3; }
+.car-caption { text-align: center; font-weight: 700; font-size: 0.98rem; color: var(--text-muted); margin: 0.1rem 0 0; }
+.car-caption.spacer { visibility: hidden; }
+.car-dots { display: flex; justify-content: center; gap: 0.45rem; margin-top: 0.9rem; }
+.car-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); transition: background 0.2s, transform 0.2s; }
+.car-dot[aria-current="true"] { background: var(--text); transform: scale(1.25); }
+.car-hint { display: block; margin: 0.5rem auto 0; font: inherit; font-size: 0.85rem; font-weight: 700; color: var(--orange); background: none; border: 0; cursor: pointer; padding: 0.2rem 0.4rem; }
 
 .score-hero { text-align: center; }
 .score-circle { position: relative; display: flex; align-items: center; justify-content: center; width: 8.5rem; height: 8.5rem; margin: 0 auto; border-radius: 50%; background: var(--cat-pop); color: #fff; }

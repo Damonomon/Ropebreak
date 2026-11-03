@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-26",
+  "updated": "2026-11-03",
   "reviews": [
     {
       "slug": "black-sheep-coffee",
@@ -18,6 +18,11 @@
         1,
         1,
         2
+      ],
+      "meter": [
+        2,
+        3,
+        4
       ],
       "overall": "00",
       "verdict": "A cautionary tale involving an iPad, a camera, and seven and a half thousand ways to go wrong.",
@@ -79,6 +84,11 @@
         9,
         6
       ],
+      "meter": [
+        2,
+        0,
+        0
+      ],
       "overall": 10,
       "verdict": "Perfect in every way. Every second I'm not there is a blight on my life.",
       "characteristics": [
@@ -138,6 +148,11 @@
         5,
         6,
         7
+      ],
+      "meter": [
+        1,
+        3,
+        2
       ],
       "overall": 5,
       "verdict": "Underwhelming, and I'll definitely have another.",
@@ -230,6 +245,11 @@
         7,
         10
       ],
+      "meter": [
+        2,
+        1,
+        0
+      ],
       "overall": 9,
       "verdict": "Cripplingly good. Financially and otherwise.",
       "characteristics": [
@@ -310,6 +330,11 @@
         7,
         9,
         6
+      ],
+      "meter": [
+        1,
+        0,
+        0
       ],
       "overall": 9,
       "verdict": "Worth every hoarse, slightly singed moment.",
