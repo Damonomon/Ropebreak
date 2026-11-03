@@ -635,6 +635,10 @@
   function setHeaderHeight() {
     document.documentElement.style.setProperty("--header-h", document.querySelector("header").offsetHeight + "px");
   }
+  // the header is sticky: keep its height current for the map's height and the scroll offset
+  setHeaderHeight();
+  window.addEventListener("resize", setHeaderHeight);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(setHeaderHeight);
 
   function openMapPage() {
     setHeaderHeight();
