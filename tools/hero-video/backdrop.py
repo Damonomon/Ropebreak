@@ -75,7 +75,7 @@ def logo_masks(f, em, cx, cy):
     track = -0.015 * em
     dw, dh = 0.585 * em, 0.76 * em
     parts = ['B', 'a', 'c', 'k', 'd', 'r', None, 'p']
-    widths = [(f.getlength(c) + track) if c else (0.01 + 0.585 + 0.02) * em for c in parts]
+    widths = [(f.getlength(c) + track) if c else (-0.02 + 0.585 - 0.05) * em for c in parts]
     total = sum(widths)
     asc = f.getbbox('Bk', anchor='ls')[1]   # negative: top of ascenders above baseline
     xh = f.getbbox('x', anchor='ls')[1]
@@ -89,7 +89,7 @@ def logo_masks(f, em, cx, cy):
         if c:
             dl.text((x, base_y), c, font=f, fill=255, anchor='ls')
         else:
-            dd.polygon(drop_points(x + 0.01 * em, base_y + 0.04 * em, dw, dh), fill=255)
+            dd.polygon(drop_points(x - 0.02 * em, base_y + 0.04 * em, dw, dh), fill=255)
         x += w
     m = lambda im: np.asarray(im).astype(np.float32) / 255
     return m(letters), m(drop), (x_start / CW, x / CW)

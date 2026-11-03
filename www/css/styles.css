@@ -49,7 +49,7 @@ header { border-bottom: 1px solid var(--line); border-top: 4px solid var(--text)
 .header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; padding: 1.1rem 1.5rem; }
 .logo { text-decoration: none; color: var(--text); display: inline-flex; flex-direction: column; gap: 0.2rem; }
 .logo-row { display: inline-block; font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 5vw, 2.7rem); line-height: 1; letter-spacing: -0.015em; }
-.drop-o { display: inline-block; width: 0.585em; height: 0.76em; fill: var(--orange); margin: 0 0.02em 0 0.01em; vertical-align: -0.04em; }
+.drop-o { display: inline-block; width: 0.585em; height: 0.76em; fill: var(--orange); margin: 0 -0.05em 0 -0.02em; vertical-align: -0.04em; }
 nav[aria-label="Primary"] { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
 nav[aria-label="Primary"] a { position: relative; text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem; padding-bottom: 8px; }
 nav[aria-label="Primary"] a:hover, nav[aria-label="Primary"] a:focus-visible { color: var(--text); }
